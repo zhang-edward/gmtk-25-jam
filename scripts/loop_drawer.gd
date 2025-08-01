@@ -1,6 +1,8 @@
 extends Node2D
 class_name LoopDrawer
 
+signal loop_closed(_cities: Array[PhysicsBody2D])
+
 const CLOSE_LOOP_DISTANCE: float = 30.0
 const MIN_DISTANCE_BETWEEN_POINTS: float = 2.0
 
@@ -11,6 +13,8 @@ var completed_lines: Array[Line2D] = []
 var _drawing: bool = false
 var _can_close_loop: bool = false
 var _current_line_length: float = 0.0
+
+var _cities: Array[PhysicsBody2D] = []
 
 func _ready():
 	pass
@@ -38,6 +42,7 @@ func _start_drawing(pos: Vector2):
 	_drawing = true
 	current_line.clear_points()
 	current_line.add_point(pos)
+	_cities.clear()
 
 func _add_point_to_line(pos: Vector2):
 	if current_line.points.size() > 0:
@@ -56,19 +61,34 @@ func _stop_drawing():
 	_current_line_length = 0.0
 
 	if current_line.points.size() > 1:
-		var line = current_line.duplicate()
-		add_child(line)
-		completed_lines.append(line)
-
+		# var line = current_line.duplicate()
+		# add_child(line)
+		# completed_lines.append(line)
 		if _can_close_loop:
-			line.add_point(current_line.points[0]) # Close the loop by connecting last point to first
+			current_line.add_point(current_line.points[0]) # Close the loop by connecting last point to first
+			loop_closed.emit(_cities)
+		else:
+			print("Loop not closed, points are too far apart.")
+			current_line.clear_points()
 	
-	current_line.clear_points()
 	_can_close_loop = false
-
 
 func clear_all_lines():
 	for line in completed_lines:
 		line.queue_free()
 	completed_lines.clear()
 	current_line.clear_points()
+
+func on_mouse_entered_guy(entity: PhysicsBody2D):
+	if !_drawing:
+		return
+	print("Guy skewered: ", entity.name)
+	get_tree().change_scene_to_file("res://scenes/game_over.tscn")
+
+func on_mouse_entered_city(entity: PhysicsBody2D):
+	if !_drawing:
+		return
+	print("City skewered: ", entity.name)
+	entity.get_node("AnimatedSprite2D").modulate = Color(1, 0, 0, 1) # Change color to red
+
+	_cities.append(entity)

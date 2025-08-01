@@ -16,6 +16,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5vw27"]
 
 [node name="City" type="StaticBody2D"]
+input_pickable = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_272bh")

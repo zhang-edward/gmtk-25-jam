@@ -1,0 +1,1 @@
+extends PhysicsBody2D
