@@ -1,54 +1,16 @@
-[gd_scene load_steps=11 format=3 uid="uid://c4pv8emq2w6hy"]
+[gd_scene load_steps=5 format=3 uid="uid://c4pv8emq2w6hy"]
 
 [ext_resource type="Script" uid="uid://vy0s6q4ywn7k" path="res://scripts/game_manager.gd" id="1_tefeu"]
 [ext_resource type="Script" uid="uid://k7cvadgfe155" path="res://scripts/loop_drawer.gd" id="2_o6xl0"]
-[ext_resource type="Texture2D" uid="uid://bb804k26fqlkx" path="res://sprites/tile_0331.png" id="3_tipki"]
-[ext_resource type="Texture2D" uid="uid://du60buqqeqm3g" path="res://sprites/tile_0332.png" id="4_85g3d"]
-[ext_resource type="Texture2D" uid="uid://bs3pn4tsbfjjy" path="res://sprites/tile_0333.png" id="5_choun"]
-[ext_resource type="Texture2D" uid="uid://bph7hh3qqcmea" path="res://sprites/city.png" id="6_ya4ey"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_5vw27"]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_kek77"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("3_tipki")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("3_tipki")
-}, {
-"duration": 1.0,
-"texture": ExtResource("4_85g3d")
-}, {
-"duration": 1.0,
-"texture": ExtResource("5_choun")
-}],
-"loop": true,
-"name": &"move",
-"speed": 5.0
-}]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_272bh"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("6_ya4ey")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5vw27"]
+[ext_resource type="PackedScene" uid="uid://jnhlm8p5sp1x" path="res://entities/guy.tscn" id="3_jyhfs"]
+[ext_resource type="PackedScene" uid="uid://bmni7cawqjbdw" path="res://entities/city.tscn" id="4_tbgi4"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_tefeu")
+guy_scene = ExtResource("3_jyhfs")
+city_scene = ExtResource("4_tbgi4")
+map_size = Rect2(-240, -130, 480, 260)
+min_distance = 30.0
 
 [node name="LoopDrawer" type="Node2D" parent="."]
 script = ExtResource("2_o6xl0")
@@ -84,23 +46,10 @@ offset_right = -10.0
 offset_bottom = 40.0
 text = "Clear Lines"
 
-[node name="Guy" type="CharacterBody2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Guy"]
-shape = SubResource("CircleShape2D_5vw27")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Guy"]
-sprite_frames = SubResource("SpriteFrames_kek77")
-animation = &"move"
-
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
 
-[node name="City" type="StaticBody2D" parent="."]
-position = Vector2(-82, -55)
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(-288, -162)
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="City"]
-sprite_frames = SubResource("SpriteFrames_272bh")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="City"]
-shape = SubResource("RectangleShape2D_5vw27")
+[connection signal="pressed" from="UI/ClearButton" to="." method="_on_clear_button_pressed"]

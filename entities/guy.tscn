@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://jnhlm8p5sp1x"]
+
+[ext_resource type="Texture2D" uid="uid://bb804k26fqlkx" path="res://sprites/tile_0331.png" id="1_olcmt"]
+[ext_resource type="Texture2D" uid="uid://du60buqqeqm3g" path="res://sprites/tile_0332.png" id="2_g0f7e"]
+[ext_resource type="Texture2D" uid="uid://bs3pn4tsbfjjy" path="res://sprites/tile_0333.png" id="3_hr8vj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5vw27"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kek77"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_olcmt")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_olcmt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_g0f7e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_hr8vj")
+}],
+"loop": true,
+"name": &"move",
+"speed": 5.0
+}]
+
+[node name="Guy" type="CharacterBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_5vw27")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_kek77")
+animation = &"move"
