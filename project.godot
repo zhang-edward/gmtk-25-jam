@@ -11,6 +11,14 @@ config_version=5
 [application]
 
 config/name="gmtk-jam-25"
-run/main_scene="res://main.tscn"
+run/main_scene="res://scenes/main.tscn"
 config/features=PackedStringArray("4.4", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://sprites/icon.svg"
+
+[display]
+
+window/stretch/mode="canvas_items"
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
