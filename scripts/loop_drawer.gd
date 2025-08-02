@@ -25,7 +25,9 @@ func _input(event):
 		_can_close_loop = _current_line_length > CLOSE_LOOP_DISTANCE * 1.1 and current_line.points[0].distance_to(mouse_pos) < CLOSE_LOOP_DISTANCE
 
 func _process(_delta):
-	if _can_close_loop:
+	if _ship_parts.size() > ShipManager.MAX_POWERED_PARTS:
+		current_line.modulate = Color(1, 0, 0, 1) # Red if too many parts
+	elif _can_close_loop:
 		current_line.modulate = Color(1, 1, 0, 1)
 	else:
 		current_line.modulate = Color(1, 1, 1, 1)

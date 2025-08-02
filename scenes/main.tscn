@@ -1,9 +1,10 @@
-[gd_scene load_steps=20 format=3 uid="uid://c4pv8emq2w6hy"]
+[gd_scene load_steps=21 format=3 uid="uid://c4pv8emq2w6hy"]
 
 [ext_resource type="Script" uid="uid://vy0s6q4ywn7k" path="res://scripts/game_manager.gd" id="1_tefeu"]
 [ext_resource type="Script" uid="uid://k7cvadgfe155" path="res://scripts/loop_drawer.gd" id="2_o6xl0"]
 [ext_resource type="Texture2D" uid="uid://dfkpwhoq8nc7m" path="res://sprites/ship_silhouette.png" id="4_o6xl0"]
 [ext_resource type="Script" uid="uid://dyqthfxohiyaq" path="res://scripts/ship_manager.gd" id="5_tbgi4"]
+[ext_resource type="Texture2D" uid="uid://bmb3duqhip6ps" path="res://sprites/9patch_ship_part.png" id="6_85g3d"]
 [ext_resource type="Script" uid="uid://bmcm6wisrfwyy" path="res://scripts/ship_debug_ui.gd" id="6_debug"]
 [ext_resource type="Texture2D" uid="uid://crbuu1610d0ow" path="res://sprites/icons.png" id="6_tipki"]
 [ext_resource type="Script" uid="uid://cepbueidsicgu" path="res://scripts/ship_part.gd" id="7_tipki"]
@@ -136,23 +137,32 @@ script = ExtResource("5_tbgi4")
 [node name="ShipSilhouette" type="Sprite2D" parent="ShipManager"]
 texture = ExtResource("4_o6xl0")
 
-[node name="LoopDrawer" type="Node2D" parent="ShipManager"]
-position = Vector2(0, -79)
-script = ExtResource("2_o6xl0")
-
-[node name="CurrentLine" type="Line2D" parent="ShipManager/LoopDrawer"]
-width = 2.0
-joint_mode = 2
-begin_cap_mode = 2
-end_cap_mode = 2
-
 [node name="Power" type="StaticBody2D" parent="ShipManager"]
 unique_name_in_owner = true
+position = Vector2(9, 0)
 scale = Vector2(0.991565, 1)
 input_pickable = true
 
+[node name="NinePatchRect" type="NinePatchRect" parent="ShipManager/Power"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -22.0
+offset_right = 12.0
+offset_bottom = 22.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_85g3d")
+region_rect = Rect2(0, 0, 16, 16)
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShipManager/Power"]
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_o6xl0")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ShipManager/Power"]
@@ -164,6 +174,25 @@ input_pickable = true
 script = ExtResource("7_tipki")
 direction = 1
 
+[node name="NinePatchRect" type="NinePatchRect" parent="ShipManager/Shield_NE"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_85g3d")
+region_rect = Rect2(0, 0, 16, 16)
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShipManager/Shield_NE"]
 shape = SubResource("RectangleShape2D_tefeu")
 
@@ -174,6 +203,25 @@ sprite_frames = SubResource("SpriteFrames_eb6dy")
 position = Vector2(-47, -45)
 input_pickable = true
 script = ExtResource("7_tipki")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="ShipManager/Shield_NW"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_85g3d")
+region_rect = Rect2(0, 0, 16, 16)
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShipManager/Shield_NW"]
 shape = SubResource("RectangleShape2D_tefeu")
@@ -187,6 +235,25 @@ input_pickable = true
 script = ExtResource("7_tipki")
 direction = 3
 
+[node name="NinePatchRect" type="NinePatchRect" parent="ShipManager/Shield_SE"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_85g3d")
+region_rect = Rect2(0, 0, 16, 16)
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShipManager/Shield_SE"]
 shape = SubResource("RectangleShape2D_tefeu")
 
@@ -199,6 +266,25 @@ input_pickable = true
 script = ExtResource("7_tipki")
 direction = 3
 
+[node name="NinePatchRect" type="NinePatchRect" parent="ShipManager/Shield_SW"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_85g3d")
+region_rect = Rect2(0, 0, 16, 16)
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShipManager/Shield_SW"]
 shape = SubResource("RectangleShape2D_tefeu")
 
@@ -206,11 +292,30 @@ shape = SubResource("RectangleShape2D_tefeu")
 sprite_frames = SubResource("SpriteFrames_eb6dy")
 
 [node name="Turret_NE" type="StaticBody2D" parent="ShipManager"]
-position = Vector2(61, 99)
+position = Vector2(56, -35)
 input_pickable = true
 script = ExtResource("7_tipki")
 ship_part_type = 1
 direction = 1
+
+[node name="NinePatchRect" type="NinePatchRect" parent="ShipManager/Turret_NE"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_85g3d")
+region_rect = Rect2(0, 0, 16, 16)
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShipManager/Turret_NE"]
 shape = SubResource("RectangleShape2D_tefeu")
@@ -219,10 +324,29 @@ shape = SubResource("RectangleShape2D_tefeu")
 sprite_frames = SubResource("SpriteFrames_o6xl0")
 
 [node name="Turret_NW" type="StaticBody2D" parent="ShipManager"]
-position = Vector2(-32, 112)
+position = Vector2(-38, -25)
 input_pickable = true
 script = ExtResource("7_tipki")
 ship_part_type = 1
+
+[node name="NinePatchRect" type="NinePatchRect" parent="ShipManager/Turret_NW"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_85g3d")
+region_rect = Rect2(0, 0, 16, 16)
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShipManager/Turret_NW"]
 shape = SubResource("RectangleShape2D_tefeu")
@@ -231,11 +355,30 @@ shape = SubResource("RectangleShape2D_tefeu")
 sprite_frames = SubResource("SpriteFrames_o6xl0")
 
 [node name="Turrent_SE" type="StaticBody2D" parent="ShipManager"]
-position = Vector2(83, 180)
+position = Vector2(55, 37)
 input_pickable = true
 script = ExtResource("7_tipki")
 ship_part_type = 1
 direction = 3
+
+[node name="NinePatchRect" type="NinePatchRect" parent="ShipManager/Turrent_SE"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_85g3d")
+region_rect = Rect2(0, 0, 16, 16)
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShipManager/Turrent_SE"]
 shape = SubResource("RectangleShape2D_tefeu")
@@ -244,11 +387,30 @@ shape = SubResource("RectangleShape2D_tefeu")
 sprite_frames = SubResource("SpriteFrames_o6xl0")
 
 [node name="Turrent_SW" type="StaticBody2D" parent="ShipManager"]
-position = Vector2(-71, 184)
+position = Vector2(-37, 15)
 input_pickable = true
 script = ExtResource("7_tipki")
 ship_part_type = 1
 direction = 3
+
+[node name="NinePatchRect" type="NinePatchRect" parent="ShipManager/Turrent_SW"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_85g3d")
+region_rect = Rect2(0, 0, 16, 16)
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShipManager/Turrent_SW"]
 shape = SubResource("RectangleShape2D_tefeu")
@@ -257,10 +419,29 @@ shape = SubResource("RectangleShape2D_tefeu")
 sprite_frames = SubResource("SpriteFrames_o6xl0")
 
 [node name="Engine" type="StaticBody2D" parent="ShipManager"]
-position = Vector2(-17, 152)
+position = Vector2(-15, -2)
 input_pickable = true
 script = ExtResource("7_tipki")
 ship_part_type = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="ShipManager/Engine"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_85g3d")
+region_rect = Rect2(0, 0, 16, 16)
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShipManager/Engine"]
 shape = SubResource("RectangleShape2D_tefeu")
@@ -269,15 +450,44 @@ shape = SubResource("RectangleShape2D_tefeu")
 sprite_frames = SubResource("SpriteFrames_jkv2x")
 
 [node name="LifeSupport" type="StaticBody2D" parent="ShipManager"]
-position = Vector2(44, 152)
+position = Vector2(41, 0)
 input_pickable = true
 script = ExtResource("7_tipki")
 ship_part_type = 3
+
+[node name="NinePatchRect" type="NinePatchRect" parent="ShipManager/LifeSupport"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_85g3d")
+region_rect = Rect2(0, 0, 16, 16)
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShipManager/LifeSupport"]
 shape = SubResource("RectangleShape2D_tefeu")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ShipManager/LifeSupport"]
 sprite_frames = SubResource("SpriteFrames_muem4")
+
+[node name="LoopDrawer" type="Node2D" parent="ShipManager"]
+position = Vector2(0, -79)
+script = ExtResource("2_o6xl0")
+
+[node name="CurrentLine" type="Line2D" parent="ShipManager/LoopDrawer"]
+width = 2.0
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
 
 [connection signal="pressed" from="UI/ClearButton" to="." method="_on_clear_button_pressed"]
