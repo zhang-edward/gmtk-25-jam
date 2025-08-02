@@ -65,11 +65,6 @@ func _stop_drawing():
 		if _can_close_loop:
 			current_line.add_point(current_line.points[0]) # Close the loop by connecting last point to first
 			loop_closed.emit(_ship_parts)
-			# Erase previous completed line
-			if _completed_line:
-				_completed_line.queue_free()
-			_completed_line = current_line.duplicate()
-			add_child(_completed_line)
 		else:
 			print("Loop not closed, points are too far apart.")
 			current_line.clear_points()
@@ -95,3 +90,18 @@ func on_mouse_entered_ship_part(ship_part: ShipPart):
 	print("Ship part skewered: ", ship_part.name)
 	ship_part.highlighted = 1
 	_ship_parts.append(ship_part)
+
+func confirm_loop():
+	# Erase previous completed line
+	if _completed_line:
+		_completed_line.queue_free()
+	_completed_line = current_line.duplicate()
+	add_child(_completed_line)
+
+func cancel_loop():
+	# Reset current line and clear points
+	reset_current_line()
+	_can_close_loop = false
+	_drawing = false
+	_current_line_length = 0.0
+	print("Loop drawing cancelled.")

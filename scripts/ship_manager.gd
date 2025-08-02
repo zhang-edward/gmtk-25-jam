@@ -1,6 +1,8 @@
 class_name ShipManager
 extends Node2D
 
+const MAX_POWERED_PARTS: int = 3
+
 signal ship_status_changed()
 
 enum ShipPartDirection {
@@ -35,11 +37,15 @@ func _ready() -> void:
 	_loop_drawer.loop_closed.connect(on_loop_closed)
 
 func on_loop_closed(powered_ship_parts: Array[ShipPart]) -> void:
-	reset_all_power()
-	for ship_part in powered_ship_parts:
-		on_ship_part_powered(ship_part)
-	ship_status_changed.emit()
-
+	if powered_ship_parts.size() > MAX_POWERED_PARTS:
+		_loop_drawer.cancel_loop()
+		return
+	else:
+		_loop_drawer.confirm_loop()
+		reset_all_power()
+		for ship_part in powered_ship_parts:
+			on_ship_part_powered(ship_part)
+		ship_status_changed.emit()
 			
 func on_ship_part_powered(ship_part: ShipPart) -> void:
 	if ship_part.ship_part_type == ShipPart.ShipPartType.SHIELD:
@@ -54,55 +60,6 @@ func on_ship_part_powered(ship_part: ShipPart) -> void:
 	elif ship_part.ship_part_type == ShipPart.ShipPartType.LIFE_SUPPORT:
 		print("Life support part powered")
 		life_support_powered = true
-
-# ==== Debug functions for testing
-func _input(event: InputEvent) -> void:
-	if event is InputEventKey and event.pressed:
-		match event.keycode:
-			KEY_1:
-				toggle_engine_power()
-			KEY_2:
-				toggle_life_support_power()
-			KEY_3:
-				toggle_next_shield_power()
-			KEY_4:
-				toggle_next_turret_power()
-			KEY_R:
-				reset_all_power()
-
-func toggle_engine_power() -> void:
-	engine_powered = !engine_powered
-	print("Engine power: ", engine_powered)
-	ship_status_changed.emit()
-
-func toggle_life_support_power() -> void:
-	life_support_powered = !life_support_powered
-	print("Life support power: ", life_support_powered)
-	ship_status_changed.emit()
-
-func toggle_next_shield_power() -> void:
-	if shield_powered.size() > 0:
-		for i in range(shield_powered.size()):
-			if not shield_powered[i]:
-				shield_powered[i] = true
-				print("Shield ", i + 1, " powered on")
-				return
-		# If all are powered, turn off the first one
-		shield_powered[0] = false
-		print("Shield 1 powered off")
-	ship_status_changed.emit()
-
-func toggle_next_turret_power() -> void:
-	if turret_powered.size() > 0:
-		for i in range(turret_powered.size()):
-			if not turret_powered[i]:
-				turret_powered[i] = true
-				print("Turret ", i + 1, " powered on")
-				return
-		# If all are powered, turn off the first one
-		turret_powered[0] = false
-		print("Turret 1 powered off")
-	ship_status_changed.emit()
 
 func reset_all_power() -> void:
 	engine_powered = false
