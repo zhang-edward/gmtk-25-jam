@@ -68,6 +68,7 @@ func stop_drawing():
 	plug_sprite.visible = false
 
 	if current_line.points.size() > 1:
+		print(_ship_parts)
 		loop_closed.emit(_ship_parts)
 
 	can_close_loop = false

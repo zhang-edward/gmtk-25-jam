@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bk8w4xnfuw6da"]
+
+[ext_resource type="Script" uid="uid://qx53ie0if3kc" path="res://scripts/asteroid.gd" id="1_ur7k4"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_pelp5"]
+load_path = "res://.godot/imported/icon.svg-964d8c66fbd3bda40c44ca195472a8e1.ctex"
+
+[node name="Asteroid" type="Node2D"]
+script = ExtResource("1_ur7k4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+texture = SubResource("CompressedTexture2D_pelp5")

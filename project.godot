@@ -23,6 +23,10 @@ window/size/window_width_override=960
 window/size/window_height_override=1280
 window/stretch/mode="canvas_items"
 
+[editor]
+
+movie_writer/movie_file="/Users/davidzhang/Desktop/game-dev/gmtk-2025/mockups/top-screen.mp4"
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0

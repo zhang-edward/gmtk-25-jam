@@ -1,9 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://jnhlm8p5sp1x"]
+[gd_scene load_steps=6 format=3 uid="uid://jnhlm8p5sp1x"]
 
 [ext_resource type="Texture2D" uid="uid://bb804k26fqlkx" path="res://sprites/tile_0331.png" id="1_olcmt"]
 [ext_resource type="Texture2D" uid="uid://du60buqqeqm3g" path="res://sprites/tile_0332.png" id="2_g0f7e"]
 [ext_resource type="Texture2D" uid="uid://bs3pn4tsbfjjy" path="res://sprites/tile_0333.png" id="3_hr8vj"]
-[ext_resource type="Script" uid="uid://ddjq6lfp4cn22" path="res://core/state_machine.gd" id="4_g0f7e"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5vw27"]
 radius = 3.0
@@ -46,5 +45,3 @@ animation = &"move"
 [node name="Node" type="Node" parent="."]
 
 [node name="StateMachine" type="Node" parent="Node"]
-script = ExtResource("4_g0f7e")
-metadata/_custom_type_script = "uid://ddjq6lfp4cn22"
