@@ -1,16 +1,26 @@
 class_name Projectile
 extends Node2D
 
-signal on_hit
+@onready var area_2d = $Area2D
+var fire_tween: Tween
 
 func fire_towards(target: Vector2):
 	var direction = target - global_position
 	rotation = direction.angle()
-	var tween = create_tween()
-	tween.tween_property(self, "global_position", target, 0.5)
-	tween.finished.connect(on_hit_target)
+	fire_tween = create_tween()
+	fire_tween.tween_property(self, "global_position", target, 0.5)
+	area_2d.area_entered.connect(on_area_entered)
 
-func on_hit_target():
-	on_hit.emit()
-	queue_free()
-	
+func on_area_entered(other_area: Area2D):
+	if other_area.get_parent() is Shield:
+		var shield = other_area.get_parent() as Shield
+		shield.take_damage(25)
+		queue_free()
+	elif other_area.get_parent() is Spaceship:
+		var spaceship = other_area.get_parent() as Spaceship
+		spaceship.take_damage(5)
+		queue_free()
+	elif other_area.get_parent() is EnemyShip:
+		var enemy_ship = other_area.get_parent() as EnemyShip
+		enemy_ship.take_damage(40)
+		queue_free()

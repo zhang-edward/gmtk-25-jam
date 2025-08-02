@@ -6,7 +6,7 @@ enum AsteroidDirection { N, S, E, W }
 
 @onready var spaceship = $Spaceship as Spaceship
 @onready var healthbar = $Healthbar as ProgressBar
-@export var spawn_interval_sec := 5
+@export var spawn_interval_sec := 15
 @export var enemy_ship_scene: PackedScene
 @export var asteroid_scene: PackedScene
 @export var ship_manager: ShipManager
@@ -49,12 +49,6 @@ func generate_asteroid():
 	asteroid.top_screen = self
 	add_child(asteroid)
 	asteroid.spawn_from_direction(rand_direction)
-
-func handle_asteroid_collision():
-	pass
-
-func handle_enemy_laser_hit():
-	pass
 
 func on_ship_status_changed():
 	spaceship.set_shield_state(ship_manager.shield_powered)
