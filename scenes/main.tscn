@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://vy0s6q4ywn7k" path="res://scripts/game_manager.gd" id="1_tefeu"]
 [ext_resource type="Script" uid="uid://k7cvadgfe155" path="res://scripts/loop_drawer.gd" id="2_o6xl0"]
-[ext_resource type="PackedScene" path="res://scenes/top_screen.tscn" id="2_ya4ey"]
-[ext_resource type="Script" path="res://scripts/highlight_on_hover.gd" id="5_eb6dy"]
+[ext_resource type="PackedScene" uid="uid://cp4quj1xdmxj4" path="res://scenes/top_screen.tscn" id="2_ya4ey"]
+[ext_resource type="Script" uid="uid://ddiogh2nu387t" path="res://scripts/highlight_on_hover.gd" id="5_eb6dy"]
 [ext_resource type="Script" uid="uid://dyqthfxohiyaq" path="res://scripts/ship_manager.gd" id="5_tbgi4"]
 [ext_resource type="Script" uid="uid://bmcm6wisrfwyy" path="res://scripts/ship_debug_ui.gd" id="6_debug"]
 [ext_resource type="Script" uid="uid://cepbueidsicgu" path="res://scripts/ship_part.gd" id="7_tipki"]

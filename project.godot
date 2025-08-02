@@ -27,6 +27,14 @@ window/stretch/mode="canvas_items"
 
 movie_writer/movie_file="/Users/davidzhang/Desktop/game-dev/gmtk-2025/mockups/top-screen.mp4"
 
+[layer_names]
+
+2d_physics/layer_1="Shields"
+2d_physics/layer_2="Asteroids"
+2d_physics/layer_3="Lasers"
+2d_physics/layer_4="Spaceship"
+2d_physics/layer_5="Enemy"
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0

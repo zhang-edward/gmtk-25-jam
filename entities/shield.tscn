@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://bcmb1c058f5e1"]
+
+[ext_resource type="Script" uid="uid://ch48unkhixi5a" path="res://scripts/shield.gd" id="1_x0awu"]
+[ext_resource type="Texture2D" uid="uid://222fsuqpxusb" path="res://sprites/shield-section.png" id="2_vc80v"]
+[ext_resource type="PackedScene" uid="uid://cmdk8fl75lwse" path="res://entities/health_bar.tscn" id="3_vc80v"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vc80v"]
+bg_color = Color(0.266667, 0.411765, 0.666667, 1)
+
+[node name="Shield" type="Node2D"]
+script = ExtResource("1_x0awu")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.392157)
+texture = ExtResource("2_vc80v")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 6
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(-25, -30, -9, -29, 7, -21, 20, -8, 27, 5, 30, 16, 30, 24, -25, 24)
+
+[node name="Healthbar" parent="." instance=ExtResource("3_vc80v")]
+offset_left = -21.0
+offset_top = -38.0
+offset_right = 20.0
+offset_bottom = -34.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_vc80v")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://g517drv1ral4"]
+[gd_scene load_steps=6 format=3 uid="uid://g517drv1ral4"]
 
 [ext_resource type="PackedScene" uid="uid://cmdk8fl75lwse" path="res://entities/health_bar.tscn" id="1_0dh01"]
 [ext_resource type="Script" uid="uid://chwg3kmdwblyl" path="res://scripts/enemy_ship.gd" id="1_tbr2v"]
@@ -6,6 +6,9 @@
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_pelp5"]
 load_path = "res://.godot/imported/icon.svg-964d8c66fbd3bda40c44ca195472a8e1.ctex"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tbr2v"]
+size = Vector2(16, 16)
 
 [node name="EnemyShip" type="Node2D"]
 script = ExtResource("1_tbr2v")
@@ -20,3 +23,10 @@ offset_bottom = -11.0
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.125, 0.125)
 texture = SubResource("CompressedTexture2D_pelp5")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_tbr2v")

@@ -34,7 +34,7 @@ func spawn_from_direction(_direction: TopScreen.EnemyShipDirection):
 	global_position = start_pos
 	show()
 	var tween = create_tween()
-	tween.tween_property(self, "global_position", end_pos, 1.5)
+	tween.tween_property(self, "global_position", end_pos, 3)
 	tween.finished.connect(fire_laser)
 
 func fire_laser():
@@ -42,9 +42,9 @@ func fire_laser():
 		firing_timer.queue_free()
 	var projectile = projectile_scene.instantiate() as Projectile
 	top_screen.add_child(projectile)
+	(projectile.area_2d as Area2D).set_collision_mask_value(5, false)
 	projectile.global_position = Vector2(global_position.x, global_position.y)
 	projectile.fire_towards(top_screen.spaceship.global_position)
-	projectile.on_hit.connect(top_screen.handle_enemy_laser_hit)
 	firing_timer = Timer.new()
 	firing_timer.autostart = true
 	firing_timer.wait_time = randi_range(5, 10) / 10.0
