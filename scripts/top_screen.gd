@@ -11,6 +11,9 @@ enum AsteroidDirection { N, S, E, W }
 @export var asteroid_scene: PackedScene
 
 var ships_to_direction = {}
+var top_left_pos
+static var VIEWPORT_WIDTH = 240
+static var VIEWPORT_HEIGHT = 160
 
 func _ready() -> void:
 	var timer = Timer.new()
@@ -19,6 +22,7 @@ func _ready() -> void:
 	timer.timeout.connect(generate_random_event)
 	add_child(timer)
 	healthbar.value = 100
+	top_left_pos = Vector2(position.x, position.y)
 
 func generate_random_event():
 	var rand_num = randi_range(0, 1)
@@ -33,6 +37,7 @@ func generate_enemy_ship():
 		var rand_direction = directions_to_spawn.pick_random()
 		ships_to_direction[rand_direction] = []
 		var enemy_ship = enemy_ship_scene.instantiate() as EnemyShip
+		enemy_ship.top_screen = self
 		add_child(enemy_ship)
 		enemy_ship.spawn_from_direction(rand_direction)
 		ships_to_direction[rand_direction].append(enemy_ship)
@@ -40,6 +45,7 @@ func generate_enemy_ship():
 func generate_asteroid():
 	var rand_direction = AsteroidDirection.values().pick_random()
 	var asteroid = asteroid_scene.instantiate() as Asteroid
+	asteroid.top_screen = self
 	add_child(asteroid)
 	asteroid.spawn_from_direction(rand_direction)
 

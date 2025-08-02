@@ -2,32 +2,33 @@ class_name EnemyShip
 extends Node2D
 
 @export var projectile_scene: PackedScene
-@onready var top_screen = get_node("/root/TopScreen") as TopScreen
 @onready var sprite = $Sprite2D as Sprite2D
 @onready var health_bar = $Healthbar as ProgressBar
 
 var firing_timer
+var top_screen
 
 func _ready() -> void:
 	hide()
 	health_bar.value = 100
 
 func spawn_from_direction(direction: TopScreen.EnemyShipDirection):
+	var top_left_pos = top_screen.top_left_pos
 	var start_pos
-	var end_pos	
+	var end_pos
 	match direction:
 		TopScreen.EnemyShipDirection.NW:
-			start_pos = Vector2(0, 0)
-			end_pos = Vector2(100, 60)
+			start_pos = Vector2(top_left_pos.x, top_left_pos.y)
+			end_pos = Vector2(start_pos.x + 50, start_pos.y + 30)
 		TopScreen.EnemyShipDirection.NE:
-			start_pos = Vector2(480, 0)
-			end_pos = Vector2(380, 60)
+			start_pos = Vector2(top_left_pos.x + TopScreen.VIEWPORT_WIDTH, top_left_pos.y)
+			end_pos = Vector2(start_pos.x - 50, top_left_pos.y + 30)
 		TopScreen.EnemyShipDirection.SW:
-			start_pos = Vector2(0, 320)
-			end_pos = Vector2(100, 260)
+			start_pos = Vector2(top_left_pos.x, top_left_pos.y + TopScreen.VIEWPORT_HEIGHT)
+			end_pos = Vector2(start_pos.x + 50, start_pos.y - 30)
 		TopScreen.EnemyShipDirection.SE:
-			start_pos = Vector2(480, 320)
-			end_pos = Vector2(380, 260)
+			start_pos = Vector2(top_left_pos.x + TopScreen.VIEWPORT_WIDTH, top_left_pos.y + TopScreen.VIEWPORT_HEIGHT)
+			end_pos = Vector2(start_pos.x - 50, start_pos.y - 30)
 	global_position = start_pos
 	show()
 	var tween = create_tween()

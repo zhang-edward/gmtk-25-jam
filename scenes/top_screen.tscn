@@ -10,13 +10,16 @@
 bg_color = Color(0, 0, 0, 1)
 
 [node name="TopScreen" type="Node2D"]
+position = Vector2(-120, -160)
 script = ExtResource("1_ggulp")
 enemy_ship_scene = ExtResource("2_waoyx")
 asteroid_scene = ExtResource("3_pelp5")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
-offset_right = 480.0
-offset_bottom = 320.0
+offset_right = 240.0
+offset_bottom = 160.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_v7odv")
 
 [node name="Healthbar" parent="." instance=ExtResource("4_gpqrb")]
@@ -25,15 +28,16 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 350.0
-offset_top = 300.0
-offset_right = 469.0
-offset_bottom = 310.0
+offset_left = 175.0
+offset_top = 150.0
+offset_right = 235.0
+offset_bottom = 155.0
 grow_horizontal = 0
 grow_vertical = 0
 size_flags_horizontal = 8
 size_flags_vertical = 8
 
 [node name="Spaceship" type="Sprite2D" parent="."]
-position = Vector2(240, 160)
+position = Vector2(120, 80)
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_v7odv")

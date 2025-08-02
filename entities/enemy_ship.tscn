@@ -10,9 +10,11 @@ script = ExtResource("1_tbr2v")
 projectile_scene = ExtResource("2_q6noe")
 
 [node name="Healthbar" parent="." instance=ExtResource("1_0dh01")]
-offset_top = -25.0
-offset_bottom = -20.0
+offset_left = -13.0
+offset_top = -13.0
+offset_right = 13.0
+offset_bottom = -11.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.25, 0.25)
+scale = Vector2(0.125, 0.125)
 texture = ExtResource("1_8d6bn")

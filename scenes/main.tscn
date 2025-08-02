@@ -1,7 +1,7 @@
 [gd_scene load_steps=23 format=3 uid="uid://c4pv8emq2w6hy"]
 
-[ext_resource type="Script" uid="uid://vy0s6q4ywn7k" path="res://scripts/game_manager.gd" id="1_tefeu"]
 [ext_resource type="Script" uid="uid://k7cvadgfe155" path="res://scripts/loop_drawer.gd" id="2_o6xl0"]
+[ext_resource type="PackedScene" uid="uid://cp4quj1xdmxj4" path="res://scenes/top_screen.tscn" id="2_ya4ey"]
 [ext_resource type="Texture2D" uid="uid://dfkpwhoq8nc7m" path="res://sprites/ship_silhouette.png" id="4_o6xl0"]
 [ext_resource type="Script" uid="uid://dyqthfxohiyaq" path="res://scripts/ship_manager.gd" id="5_tbgi4"]
 [ext_resource type="Texture2D" uid="uid://bmb3duqhip6ps" path="res://sprites/9patch_ship_part.png" id="6_85g3d"]
@@ -91,11 +91,9 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Main" type="Node2D" node_paths=PackedStringArray("loop_drawer")]
-script = ExtResource("1_tefeu")
-map_size = Rect2(-240, -130, 480, 260)
-min_distance = 30.0
-loop_drawer = NodePath("ShipManager/LoopDrawer")
+[node name="Main" type="Node2D"]
+
+[node name="TopScreen" parent="." instance=ExtResource("2_ya4ey")]
 
 [node name="UI" type="CanvasLayer" parent="."]
 visible = false
