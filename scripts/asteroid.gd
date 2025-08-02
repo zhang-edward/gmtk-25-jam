@@ -8,7 +8,7 @@ func _ready() -> void:
 	hide()
 
 func spawn_from_direction(dir: TopScreen.AsteroidDirection):
-	var spaceship_pos = top_screen.spaceship_sprite.global_position
+	var spaceship_pos = top_screen.spaceship.global_position
 	var top_left_pos = top_screen.top_left_pos
 	var start_pos
 	var end_pos

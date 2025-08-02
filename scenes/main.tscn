@@ -1,21 +1,26 @@
-[gd_scene load_steps=23 format=3 uid="uid://c4pv8emq2w6hy"]
+[gd_scene load_steps=24 format=3 uid="uid://c4pv8emq2w6hy"]
 
+[ext_resource type="Script" uid="uid://vy0s6q4ywn7k" path="res://scripts/game_manager.gd" id="1_tefeu"]
 [ext_resource type="Script" uid="uid://k7cvadgfe155" path="res://scripts/loop_drawer.gd" id="2_o6xl0"]
 [ext_resource type="PackedScene" uid="uid://cp4quj1xdmxj4" path="res://scenes/top_screen.tscn" id="2_ya4ey"]
-[ext_resource type="Texture2D" uid="uid://dfkpwhoq8nc7m" path="res://sprites/ship_silhouette.png" id="4_o6xl0"]
 [ext_resource type="Script" uid="uid://dyqthfxohiyaq" path="res://scripts/ship_manager.gd" id="5_tbgi4"]
-[ext_resource type="Texture2D" uid="uid://bmb3duqhip6ps" path="res://sprites/9patch_ship_part.png" id="6_85g3d"]
 [ext_resource type="Script" uid="uid://bmcm6wisrfwyy" path="res://scripts/ship_debug_ui.gd" id="6_debug"]
-[ext_resource type="Texture2D" uid="uid://crbuu1610d0ow" path="res://sprites/icons.png" id="6_tipki"]
 [ext_resource type="Script" uid="uid://cepbueidsicgu" path="res://scripts/ship_part.gd" id="7_tipki"]
-[ext_resource type="Texture2D" uid="uid://b67v4mw6wfhqi" path="res://sprites/wire.png" id="9_85g3d"]
-[ext_resource type="Texture2D" uid="uid://bcmtf1ari0qk5" path="res://sprites/plug.png" id="10_choun"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_tbgi4"]
+load_path = "res://.godot/imported/ship_silhouette.png-88a5cd8ae829aff431db1f3c4a27a3fa.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_tefeu"]
+load_path = "res://.godot/imported/9patch_ship_part.png-09cd0a38b6dad02a5c2e3366fc530469.ctex"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o6xl0"]
 size = Vector2(24.2042, 44)
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_o6xl0"]
+load_path = "res://.godot/imported/icons.png-559b25eaddffa571b999644fc7a08564.ctex"
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_85g3d"]
-atlas = ExtResource("6_tipki")
+atlas = SubResource("CompressedTexture2D_o6xl0")
 region = Rect2(0, 16, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_choun"]
@@ -32,7 +37,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tefeu"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ya4ey"]
-atlas = ExtResource("6_tipki")
+atlas = SubResource("CompressedTexture2D_o6xl0")
 region = Rect2(32, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_eb6dy"]
@@ -47,7 +52,7 @@ animations = [{
 }]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_trceg"]
-atlas = ExtResource("6_tipki")
+atlas = SubResource("CompressedTexture2D_o6xl0")
 region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_o6xl0"]
@@ -62,7 +67,7 @@ animations = [{
 }]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a8y0u"]
-atlas = ExtResource("6_tipki")
+atlas = SubResource("CompressedTexture2D_o6xl0")
 region = Rect2(48, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_jkv2x"]
@@ -77,7 +82,7 @@ animations = [{
 }]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jbj1t"]
-atlas = ExtResource("6_tipki")
+atlas = SubResource("CompressedTexture2D_o6xl0")
 region = Rect2(16, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_muem4"]
@@ -91,9 +96,18 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Main" type="Node2D"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_tipki"]
+load_path = "res://.godot/imported/wire.png-7d29d9ae2b38ff3e59810011f565b099.ctex"
 
-[node name="TopScreen" parent="." instance=ExtResource("2_ya4ey")]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_85g3d"]
+load_path = "res://.godot/imported/plug.png-4f5a860c04c2570220e90ef93a4c2a0b.ctex"
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_tefeu")
+
+[node name="TopScreen" parent="." node_paths=PackedStringArray("ship_manager") instance=ExtResource("2_ya4ey")]
+position = Vector2(-120, -160)
+ship_manager = NodePath("../ShipManager")
 
 [node name="UI" type="CanvasLayer" parent="."]
 visible = false
@@ -126,7 +140,7 @@ script = ExtResource("5_tbgi4")
 
 [node name="ShipSilhouette" type="Sprite2D" parent="ShipManager"]
 position = Vector2(-10, 0)
-texture = ExtResource("4_o6xl0")
+texture = SubResource("CompressedTexture2D_tbgi4")
 
 [node name="Power" type="StaticBody2D" parent="ShipManager"]
 unique_name_in_owner = true
@@ -146,7 +160,7 @@ offset_right = 12.0
 offset_bottom = 22.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("6_85g3d")
+texture = SubResource("CompressedTexture2D_tefeu")
 region_rect = Rect2(0, 0, 16, 16)
 patch_margin_left = 2
 patch_margin_top = 2
@@ -178,7 +192,7 @@ offset_right = 10.0
 offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("6_85g3d")
+texture = SubResource("CompressedTexture2D_tefeu")
 region_rect = Rect2(0, 0, 16, 16)
 patch_margin_left = 2
 patch_margin_top = 2
@@ -208,7 +222,7 @@ offset_right = 10.0
 offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("6_85g3d")
+texture = SubResource("CompressedTexture2D_tefeu")
 region_rect = Rect2(0, 0, 16, 16)
 patch_margin_left = 2
 patch_margin_top = 2
@@ -239,7 +253,7 @@ offset_right = 10.0
 offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("6_85g3d")
+texture = SubResource("CompressedTexture2D_tefeu")
 region_rect = Rect2(0, 0, 16, 16)
 patch_margin_left = 2
 patch_margin_top = 2
@@ -256,7 +270,7 @@ sprite_frames = SubResource("SpriteFrames_eb6dy")
 position = Vector2(-52, 38)
 input_pickable = true
 script = ExtResource("7_tipki")
-direction = 3
+direction = 2
 
 [node name="NinePatchRect" type="NinePatchRect" parent="ShipManager/Shield_SW"]
 anchors_preset = 8
@@ -270,7 +284,7 @@ offset_right = 10.0
 offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("6_85g3d")
+texture = SubResource("CompressedTexture2D_tefeu")
 region_rect = Rect2(0, 0, 16, 16)
 patch_margin_left = 2
 patch_margin_top = 2
@@ -302,7 +316,7 @@ offset_right = 10.0
 offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("6_85g3d")
+texture = SubResource("CompressedTexture2D_tefeu")
 region_rect = Rect2(0, 0, 16, 16)
 patch_margin_left = 2
 patch_margin_top = 2
@@ -333,7 +347,7 @@ offset_right = 10.0
 offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("6_85g3d")
+texture = SubResource("CompressedTexture2D_tefeu")
 region_rect = Rect2(0, 0, 16, 16)
 patch_margin_left = 2
 patch_margin_top = 2
@@ -365,7 +379,7 @@ offset_right = 10.0
 offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("6_85g3d")
+texture = SubResource("CompressedTexture2D_tefeu")
 region_rect = Rect2(0, 0, 16, 16)
 patch_margin_left = 2
 patch_margin_top = 2
@@ -397,7 +411,7 @@ offset_right = 10.0
 offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("6_85g3d")
+texture = SubResource("CompressedTexture2D_tefeu")
 region_rect = Rect2(0, 0, 16, 16)
 patch_margin_left = 2
 patch_margin_top = 2
@@ -428,7 +442,7 @@ offset_right = 10.0
 offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("6_85g3d")
+texture = SubResource("CompressedTexture2D_tefeu")
 region_rect = Rect2(0, 0, 16, 16)
 patch_margin_left = 2
 patch_margin_top = 2
@@ -459,7 +473,7 @@ offset_right = 10.0
 offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("6_85g3d")
+texture = SubResource("CompressedTexture2D_tefeu")
 region_rect = Rect2(0, 0, 16, 16)
 patch_margin_left = 2
 patch_margin_top = 2
@@ -479,10 +493,10 @@ script = ExtResource("2_o6xl0")
 [node name="CurrentLine" type="Line2D" parent="ShipManager/LoopDrawer"]
 position = Vector2(-2, 0)
 width = 3.0
-texture = ExtResource("9_85g3d")
+texture = SubResource("CompressedTexture2D_tipki")
 texture_mode = 2
 joint_mode = 1
 
 [node name="PlugSprite" type="Sprite2D" parent="ShipManager/LoopDrawer"]
 visible = false
-texture = ExtResource("10_choun")
+texture = SubResource("CompressedTexture2D_85g3d")

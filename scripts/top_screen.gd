@@ -4,11 +4,12 @@ extends Node2D
 enum EnemyShipDirection { NW, NE, SW, SE }
 enum AsteroidDirection { N, S, E, W }
 
-@onready var spaceship_sprite = $Spaceship as Sprite2D
+@onready var spaceship = $Spaceship as Spaceship
 @onready var healthbar = $Healthbar as ProgressBar
 @export var spawn_interval_sec := 5
 @export var enemy_ship_scene: PackedScene
 @export var asteroid_scene: PackedScene
+@export var ship_manager: ShipManager
 
 var ships_to_direction = {}
 var top_left_pos
@@ -23,6 +24,7 @@ func _ready() -> void:
 	add_child(timer)
 	healthbar.value = 100
 	top_left_pos = Vector2(position.x, position.y)
+	ship_manager.ship_status_changed.connect(on_ship_status_changed)
 
 func generate_random_event():
 	var rand_num = randi_range(0, 1)
@@ -35,12 +37,11 @@ func generate_enemy_ship():
 	var directions_to_spawn = EnemyShipDirection.values().filter(func (dir): return !ships_to_direction.has(dir))
 	if !directions_to_spawn.is_empty():
 		var rand_direction = directions_to_spawn.pick_random()
-		ships_to_direction[rand_direction] = []
 		var enemy_ship = enemy_ship_scene.instantiate() as EnemyShip
 		enemy_ship.top_screen = self
 		add_child(enemy_ship)
 		enemy_ship.spawn_from_direction(rand_direction)
-		ships_to_direction[rand_direction].append(enemy_ship)
+		ships_to_direction[rand_direction] = enemy_ship
 
 func generate_asteroid():
 	var rand_direction = AsteroidDirection.values().pick_random()
@@ -54,3 +55,6 @@ func handle_asteroid_collision():
 
 func handle_enemy_laser_hit():
 	pass
+
+func on_ship_status_changed():
+	spaceship.set_shield_state(ship_manager.shield_powered)

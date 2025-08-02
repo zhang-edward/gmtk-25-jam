@@ -41,7 +41,7 @@ func fire_laser():
 	var projectile = projectile_scene.instantiate() as Projectile
 	top_screen.add_child(projectile)
 	projectile.global_position = Vector2(global_position.x, global_position.y)
-	projectile.fire_towards(top_screen.spaceship_sprite.global_position)
+	projectile.fire_towards(top_screen.spaceship.global_position)
 	projectile.on_hit.connect(top_screen.handle_enemy_laser_hit)
 	firing_timer = Timer.new()
 	firing_timer.autostart = true
