@@ -4,7 +4,7 @@ class_name LoopDrawer
 signal loop_closed(_cities: Array[PhysicsBody2D])
 
 const CLOSE_LOOP_DISTANCE: float = 30.0
-const MIN_DISTANCE_BETWEEN_POINTS: float = 2.0
+const MIN_DISTANCE_BETWEEN_POINTS: float = 4.0
 
 var can_close_loop: bool = false
 var drawing: bool = false
@@ -65,13 +65,13 @@ func stop_drawing():
 		return
 	drawing = false
 	_current_line_length = 0.0
-	plug_sprite.visible = false
 
 	if current_line.points.size() > 1:
 		print(_ship_parts)
 		loop_closed.emit(_ship_parts)
 
 	can_close_loop = false
+	plug_sprite.visible = false
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 func clear_all_lines():
@@ -85,6 +85,9 @@ func reset_current_line():
 		ship_part.highlight(false)
 	_ship_parts.clear()
 	current_line.clear_points()
+
+	plug_sprite.visible = false
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 func on_mouse_entered_ship_part(ship_part: ShipPart):
 	if not drawing or ship_part in _ship_parts:
