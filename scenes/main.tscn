@@ -1,27 +1,36 @@
-[gd_scene load_steps=5 format=3 uid="uid://c4pv8emq2w6hy"]
+[gd_scene load_steps=9 format=3 uid="uid://c4pv8emq2w6hy"]
 
 [ext_resource type="Script" uid="uid://vy0s6q4ywn7k" path="res://scripts/game_manager.gd" id="1_tefeu"]
 [ext_resource type="Script" uid="uid://k7cvadgfe155" path="res://scripts/loop_drawer.gd" id="2_o6xl0"]
-[ext_resource type="PackedScene" uid="uid://jnhlm8p5sp1x" path="res://entities/guy.tscn" id="3_jyhfs"]
-[ext_resource type="PackedScene" uid="uid://bmni7cawqjbdw" path="res://entities/city.tscn" id="4_tbgi4"]
+[ext_resource type="Script" uid="uid://dyqthfxohiyaq" path="res://scripts/ship_manager.gd" id="5_tbgi4"]
+[ext_resource type="Script" uid="uid://bmcm6wisrfwyy" path="res://scripts/ship_debug_ui.gd" id="6_debug"]
+[ext_resource type="Texture2D" uid="uid://bph7hh3qqcmea" path="res://sprites/city.png" id="6_ya4ey"]
+[ext_resource type="Script" uid="uid://cepbueidsicgu" path="res://scripts/ship_part.gd" id="7_tipki"]
 
-[node name="Main" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tefeu"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o6xl0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_ya4ey")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Main" type="Node2D" node_paths=PackedStringArray("loop_drawer")]
 script = ExtResource("1_tefeu")
-guy_scene = ExtResource("3_jyhfs")
-city_scene = ExtResource("4_tbgi4")
 map_size = Rect2(-240, -130, 480, 260)
 min_distance = 30.0
-
-[node name="LoopDrawer" type="Node2D" parent="."]
-script = ExtResource("2_o6xl0")
-
-[node name="CurrentLine" type="Line2D" parent="LoopDrawer"]
-width = 2.0
-joint_mode = 2
-begin_cap_mode = 2
-end_cap_mode = 2
+loop_drawer = NodePath("ShipManager/LoopDrawer")
 
 [node name="UI" type="CanvasLayer" parent="."]
+
+[node name="ShipDebugUI" type="Label" parent="UI" node_paths=PackedStringArray("ship_manager")]
+script = ExtResource("6_debug")
+ship_manager = NodePath("../../ShipManager")
 
 [node name="Instructions" type="Label" parent="UI"]
 anchors_preset = 2
@@ -51,5 +60,31 @@ zoom = Vector2(2, 2)
 
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(-288, -162)
+
+[node name="ShipManager" type="Node2D" parent="."]
+position = Vector2(0, 79)
+script = ExtResource("5_tbgi4")
+
+[node name="LoopDrawer" type="Node2D" parent="ShipManager"]
+position = Vector2(0, -79)
+script = ExtResource("2_o6xl0")
+
+[node name="CurrentLine" type="Line2D" parent="ShipManager/LoopDrawer"]
+width = 2.0
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Shield_NE" type="StaticBody2D" parent="ShipManager"]
+position = Vector2(36, -23)
+input_pickable = true
+script = ExtResource("7_tipki")
+direction = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShipManager/Shield_NE"]
+shape = SubResource("RectangleShape2D_tefeu")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ShipManager/Shield_NE"]
+sprite_frames = SubResource("SpriteFrames_o6xl0")
 
 [connection signal="pressed" from="UI/ClearButton" to="." method="_on_clear_button_pressed"]
