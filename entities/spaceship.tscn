@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://jn4bno1d5h3b"]
+[gd_scene load_steps=7 format=3 uid="uid://jn4bno1d5h3b"]
 
 [ext_resource type="Script" uid="uid://dbhxy4uqhdk64" path="res://scripts/spaceship.gd" id="1_7e7db"]
-[ext_resource type="Texture2D" uid="uid://dtd1c0p2orca0" path="res://sprites/icon.svg" id="2_nlpgf"]
-[ext_resource type="PackedScene" uid="uid://ccvesh57mibxl" path="res://entities/turret.tscn" id="2_x171k"]
+[ext_resource type="PackedScene" path="res://entities/turret.tscn" id="2_x171k"]
+[ext_resource type="Texture2D" uid="uid://c0omnusotcmlt" path="res://sprites/ship_gun.png" id="3_y2u2f"]
+[ext_resource type="Texture2D" uid="uid://cdg57da7uhwse" path="res://sprites/ship.png" id="4_cg41p"]
 [ext_resource type="PackedScene" uid="uid://bcmb1c058f5e1" path="res://entities/shield.tscn" id="4_y2u2f"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x171k"]
@@ -11,20 +12,37 @@ size = Vector2(44.5, 50.5)
 [node name="Spaceship" type="Node2D"]
 script = ExtResource("1_7e7db")
 
+[node name="ShipSprite2" type="Sprite2D" parent="."]
+texture = ExtResource("4_cg41p")
+
 [node name="NWTurret" parent="." instance=ExtResource("2_x171k")]
+
+[node name="ShipGun2" type="Sprite2D" parent="NWTurret"]
+position = Vector2(22, 22)
+texture = ExtResource("3_y2u2f")
 
 [node name="NETurret" parent="." instance=ExtResource("2_x171k")]
 direction = 1
 
+[node name="ShipGun" type="Sprite2D" parent="NETurret"]
+position = Vector2(22, -22)
+texture = ExtResource("3_y2u2f")
+
 [node name="SETurret" parent="." instance=ExtResource("2_x171k")]
 direction = 3
+
+[node name="ShipGun4" type="Sprite2D" parent="SETurret"]
+position = Vector2(-18, -26)
+rotation = 3.14159
+texture = ExtResource("3_y2u2f")
 
 [node name="SWTurret" parent="." instance=ExtResource("2_x171k")]
 direction = 2
 
-[node name="ShipSprite" type="Sprite2D" parent="."]
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_nlpgf")
+[node name="ShipGun3" type="Sprite2D" parent="SWTurret"]
+position = Vector2(-18, 26)
+rotation = 3.14159
+texture = ExtResource("3_y2u2f")
 
 [node name="SWShield" parent="." instance=ExtResource("4_y2u2f")]
 visible = false
