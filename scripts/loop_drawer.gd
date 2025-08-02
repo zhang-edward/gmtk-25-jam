@@ -78,7 +78,7 @@ func reset_current_line():
 	current_line.clear_points()
 
 func on_mouse_entered_ship_part(ship_part: ShipPart):
-	if not _drawing:
+	if not _drawing or ship_part in _ship_parts:
 		return
 	print("Ship part skewered: ", ship_part.name)
 	ship_part.highlighted = 1
