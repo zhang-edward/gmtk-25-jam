@@ -1,55 +1,488 @@
-[gd_scene load_steps=5 format=3 uid="uid://c4pv8emq2w6hy"]
+[gd_scene load_steps=23 format=3 uid="uid://c4pv8emq2w6hy"]
 
 [ext_resource type="Script" uid="uid://vy0s6q4ywn7k" path="res://scripts/game_manager.gd" id="1_tefeu"]
 [ext_resource type="Script" uid="uid://k7cvadgfe155" path="res://scripts/loop_drawer.gd" id="2_o6xl0"]
-[ext_resource type="PackedScene" uid="uid://jnhlm8p5sp1x" path="res://entities/guy.tscn" id="3_jyhfs"]
-[ext_resource type="PackedScene" uid="uid://bmni7cawqjbdw" path="res://entities/city.tscn" id="4_tbgi4"]
+[ext_resource type="Texture2D" uid="uid://dfkpwhoq8nc7m" path="res://sprites/ship_silhouette.png" id="4_o6xl0"]
+[ext_resource type="Script" uid="uid://dyqthfxohiyaq" path="res://scripts/ship_manager.gd" id="5_tbgi4"]
+[ext_resource type="Texture2D" uid="uid://bmb3duqhip6ps" path="res://sprites/9patch_ship_part.png" id="6_85g3d"]
+[ext_resource type="Script" uid="uid://bmcm6wisrfwyy" path="res://scripts/ship_debug_ui.gd" id="6_debug"]
+[ext_resource type="Texture2D" uid="uid://crbuu1610d0ow" path="res://sprites/icons.png" id="6_tipki"]
+[ext_resource type="Script" uid="uid://cepbueidsicgu" path="res://scripts/ship_part.gd" id="7_tipki"]
+[ext_resource type="Texture2D" uid="uid://b67v4mw6wfhqi" path="res://sprites/wire.png" id="9_85g3d"]
+[ext_resource type="Texture2D" uid="uid://bcmtf1ari0qk5" path="res://sprites/plug.png" id="10_choun"]
 
-[node name="Main" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o6xl0"]
+size = Vector2(24.2042, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_85g3d"]
+atlas = ExtResource("6_tipki")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_choun"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_85g3d")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tefeu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ya4ey"]
+atlas = ExtResource("6_tipki")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_eb6dy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ya4ey")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_trceg"]
+atlas = ExtResource("6_tipki")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o6xl0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_trceg")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a8y0u"]
+atlas = ExtResource("6_tipki")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jkv2x"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a8y0u")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jbj1t"]
+atlas = ExtResource("6_tipki")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_muem4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jbj1t")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Main" type="Node2D" node_paths=PackedStringArray("loop_drawer")]
 script = ExtResource("1_tefeu")
-guy_scene = ExtResource("3_jyhfs")
-city_scene = ExtResource("4_tbgi4")
 map_size = Rect2(-240, -130, 480, 260)
 min_distance = 30.0
-
-[node name="LoopDrawer" type="Node2D" parent="."]
-script = ExtResource("2_o6xl0")
-
-[node name="CurrentLine" type="Line2D" parent="LoopDrawer"]
-width = 2.0
-joint_mode = 2
-begin_cap_mode = 2
-end_cap_mode = 2
+loop_drawer = NodePath("ShipManager/LoopDrawer")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="Instructions" type="Label" parent="UI"]
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 11.0
-offset_top = -60.0
-offset_right = 401.0
-offset_bottom = -10.0
-grow_vertical = 0
-text = "Left click and drag to draw lines
-Line turns red when you can close the loop"
-vertical_alignment = 2
-
-[node name="ClearButton" type="Button" parent="UI"]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -100.0
-offset_top = 10.0
-offset_right = -10.0
-offset_bottom = 40.0
-text = "Clear Lines"
+[node name="ShipDebugUI" type="Label" parent="UI" node_paths=PackedStringArray("ship_manager")]
+script = ExtResource("6_debug")
+ship_manager = NodePath("../../ShipManager")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
 
-[node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(-288, -162)
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -120.0
+offset_right = 120.0
+offset_bottom = 160.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
 
-[connection signal="pressed" from="UI/ClearButton" to="." method="_on_clear_button_pressed"]
+[node name="ShipManager" type="Node2D" parent="."]
+position = Vector2(0, 80)
+script = ExtResource("5_tbgi4")
+
+[node name="ShipSilhouette" type="Sprite2D" parent="ShipManager"]
+position = Vector2(-10, 0)
+texture = ExtResource("4_o6xl0")
+
+[node name="Power" type="StaticBody2D" parent="ShipManager"]
+unique_name_in_owner = true
+position = Vector2(-1, 0)
+scale = Vector2(0.991565, 1)
+input_pickable = true
+
+[node name="NinePatchRect" type="NinePatchRect" parent="ShipManager/Power"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -22.0
+offset_right = 12.0
+offset_bottom = 22.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_85g3d")
+region_rect = Rect2(0, 0, 16, 16)
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShipManager/Power"]
+shape = SubResource("RectangleShape2D_o6xl0")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ShipManager/Power"]
+modulate = Color(1, 1, 0, 1)
+sprite_frames = SubResource("SpriteFrames_choun")
+
+[node name="Shield_NE" type="StaticBody2D" parent="ShipManager"]
+position = Vector2(24, -47)
+input_pickable = true
+script = ExtResource("7_tipki")
+direction = 1
+
+[node name="NinePatchRect" type="NinePatchRect" parent="ShipManager/Shield_NE"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_85g3d")
+region_rect = Rect2(0, 0, 16, 16)
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShipManager/Shield_NE"]
+shape = SubResource("RectangleShape2D_tefeu")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ShipManager/Shield_NE"]
+sprite_frames = SubResource("SpriteFrames_eb6dy")
+
+[node name="Shield_NW" type="StaticBody2D" parent="ShipManager"]
+position = Vector2(-57, -45)
+input_pickable = true
+script = ExtResource("7_tipki")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="ShipManager/Shield_NW"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_85g3d")
+region_rect = Rect2(0, 0, 16, 16)
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShipManager/Shield_NW"]
+shape = SubResource("RectangleShape2D_tefeu")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ShipManager/Shield_NW"]
+sprite_frames = SubResource("SpriteFrames_eb6dy")
+
+[node name="Shield_SE" type="StaticBody2D" parent="ShipManager"]
+position = Vector2(24, 44)
+input_pickable = true
+script = ExtResource("7_tipki")
+direction = 3
+
+[node name="NinePatchRect" type="NinePatchRect" parent="ShipManager/Shield_SE"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_85g3d")
+region_rect = Rect2(0, 0, 16, 16)
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShipManager/Shield_SE"]
+shape = SubResource("RectangleShape2D_tefeu")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ShipManager/Shield_SE"]
+sprite_frames = SubResource("SpriteFrames_eb6dy")
+
+[node name="Shield_SW" type="StaticBody2D" parent="ShipManager"]
+position = Vector2(-52, 38)
+input_pickable = true
+script = ExtResource("7_tipki")
+direction = 3
+
+[node name="NinePatchRect" type="NinePatchRect" parent="ShipManager/Shield_SW"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_85g3d")
+region_rect = Rect2(0, 0, 16, 16)
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShipManager/Shield_SW"]
+shape = SubResource("RectangleShape2D_tefeu")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ShipManager/Shield_SW"]
+sprite_frames = SubResource("SpriteFrames_eb6dy")
+
+[node name="Turret_NE" type="StaticBody2D" parent="ShipManager"]
+position = Vector2(46, -35)
+input_pickable = true
+script = ExtResource("7_tipki")
+ship_part_type = 1
+direction = 1
+
+[node name="NinePatchRect" type="NinePatchRect" parent="ShipManager/Turret_NE"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_85g3d")
+region_rect = Rect2(0, 0, 16, 16)
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShipManager/Turret_NE"]
+shape = SubResource("RectangleShape2D_tefeu")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ShipManager/Turret_NE"]
+sprite_frames = SubResource("SpriteFrames_o6xl0")
+
+[node name="Turret_NW" type="StaticBody2D" parent="ShipManager"]
+position = Vector2(-48, -25)
+input_pickable = true
+script = ExtResource("7_tipki")
+ship_part_type = 1
+
+[node name="NinePatchRect" type="NinePatchRect" parent="ShipManager/Turret_NW"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_85g3d")
+region_rect = Rect2(0, 0, 16, 16)
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShipManager/Turret_NW"]
+shape = SubResource("RectangleShape2D_tefeu")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ShipManager/Turret_NW"]
+sprite_frames = SubResource("SpriteFrames_o6xl0")
+
+[node name="Turrent_SE" type="StaticBody2D" parent="ShipManager"]
+position = Vector2(45, 37)
+input_pickable = true
+script = ExtResource("7_tipki")
+ship_part_type = 1
+direction = 3
+
+[node name="NinePatchRect" type="NinePatchRect" parent="ShipManager/Turrent_SE"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_85g3d")
+region_rect = Rect2(0, 0, 16, 16)
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShipManager/Turrent_SE"]
+shape = SubResource("RectangleShape2D_tefeu")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ShipManager/Turrent_SE"]
+sprite_frames = SubResource("SpriteFrames_o6xl0")
+
+[node name="Turrent_SW" type="StaticBody2D" parent="ShipManager"]
+position = Vector2(-47, 15)
+input_pickable = true
+script = ExtResource("7_tipki")
+ship_part_type = 1
+direction = 3
+
+[node name="NinePatchRect" type="NinePatchRect" parent="ShipManager/Turrent_SW"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_85g3d")
+region_rect = Rect2(0, 0, 16, 16)
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShipManager/Turrent_SW"]
+shape = SubResource("RectangleShape2D_tefeu")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ShipManager/Turrent_SW"]
+sprite_frames = SubResource("SpriteFrames_o6xl0")
+
+[node name="Engine" type="StaticBody2D" parent="ShipManager"]
+position = Vector2(-25, -2)
+input_pickable = true
+script = ExtResource("7_tipki")
+ship_part_type = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="ShipManager/Engine"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_85g3d")
+region_rect = Rect2(0, 0, 16, 16)
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShipManager/Engine"]
+shape = SubResource("RectangleShape2D_tefeu")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ShipManager/Engine"]
+sprite_frames = SubResource("SpriteFrames_jkv2x")
+
+[node name="LifeSupport" type="StaticBody2D" parent="ShipManager"]
+position = Vector2(31, 0)
+input_pickable = true
+script = ExtResource("7_tipki")
+ship_part_type = 3
+
+[node name="NinePatchRect" type="NinePatchRect" parent="ShipManager/LifeSupport"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_85g3d")
+region_rect = Rect2(0, 0, 16, 16)
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShipManager/LifeSupport"]
+shape = SubResource("RectangleShape2D_tefeu")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ShipManager/LifeSupport"]
+sprite_frames = SubResource("SpriteFrames_muem4")
+
+[node name="LoopDrawer" type="Node2D" parent="ShipManager"]
+position = Vector2(0, -80)
+script = ExtResource("2_o6xl0")
+
+[node name="CurrentLine" type="Line2D" parent="ShipManager/LoopDrawer"]
+position = Vector2(-2, 0)
+width = 3.0
+texture = ExtResource("9_85g3d")
+texture_mode = 2
+joint_mode = 1
+
+[node name="PlugSprite" type="Sprite2D" parent="ShipManager/LoopDrawer"]
+visible = false
+texture = ExtResource("10_choun")

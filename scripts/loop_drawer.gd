@@ -6,43 +6,48 @@ signal loop_closed(_cities: Array[PhysicsBody2D])
 const CLOSE_LOOP_DISTANCE: float = 30.0
 const MIN_DISTANCE_BETWEEN_POINTS: float = 2.0
 
-var completed_lines: Array[Line2D] = []
+var can_close_loop: bool = false
+var drawing: bool = false
 
 @onready var current_line: Line2D = $CurrentLine
+@onready var plug_sprite: Sprite2D = $PlugSprite
 
-var _drawing: bool = false
-var _can_close_loop: bool = false
+var _completed_line: Line2D
 var _current_line_length: float = 0.0
 
-var _cities: Array[PhysicsBody2D] = []
+var _ship_parts: Array[ShipPart] = []
 
 func _ready():
-	pass
+	plug_sprite.visible = false
 
 func _input(event):
 	var mouse_pos = get_global_mouse_position()
-	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_LEFT && event.pressed:
-			if not _drawing:
-				_start_drawing(mouse_pos)
-			else:
-				_stop_drawing()
-	
-	elif event is InputEventMouseMotion and _drawing:
+	if event is InputEventMouseMotion and drawing:
 		_add_point_to_line(mouse_pos)
-		_can_close_loop = _current_line_length > CLOSE_LOOP_DISTANCE * 1.1 and current_line.points[0].distance_to(mouse_pos) < CLOSE_LOOP_DISTANCE
 
 func _process(_delta):
-	if _can_close_loop:
-		current_line.modulate = Color(1, 0, 0, 1)
+	if _ship_parts.size() > ShipManager.MAX_POWERED_PARTS:
+		for ship_part in _ship_parts:
+			ship_part.modulate = Color(1, 0, 0, 1) # Red highlight for too many parts
+	elif can_close_loop:
+		current_line.modulate = Color(1, 1, 0, 1)
 	else:
 		current_line.modulate = Color(1, 1, 1, 1)
 
-func _start_drawing(pos: Vector2):
-	_drawing = true
-	current_line.clear_points()
+	plug_sprite.position = get_global_mouse_position()
+
+func start_drawing(pos: Vector2):
+	drawing = true
+	reset_current_line()
 	current_line.add_point(pos)
-	_cities.clear()
+
+	if _completed_line != null:
+		_completed_line.modulate = Color(1, 1, 1, 0.5)
+	
+	plug_sprite.visible = true
+
+	# hide mouse cursor
+	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 
 func _add_point_to_line(pos: Vector2):
 	if current_line.points.size() > 0:
@@ -53,42 +58,50 @@ func _add_point_to_line(pos: Vector2):
 			current_line.add_point(pos)
 			queue_redraw()
 			_current_line_length += last_point.distance_to(pos)
+			plug_sprite.rotation = (pos - last_point).angle()
 
-func _stop_drawing():
-	if not _drawing:
+func stop_drawing():
+	if not drawing:
 		return
-	_drawing = false
+	drawing = false
 	_current_line_length = 0.0
+	plug_sprite.visible = false
 
 	if current_line.points.size() > 1:
-		# var line = current_line.duplicate()
-		# add_child(line)
-		# completed_lines.append(line)
-		if _can_close_loop:
-			current_line.add_point(current_line.points[0]) # Close the loop by connecting last point to first
-			loop_closed.emit(_cities)
-		else:
-			print("Loop not closed, points are too far apart.")
-			current_line.clear_points()
-	
-	_can_close_loop = false
+		loop_closed.emit(_ship_parts)
+
+	can_close_loop = false
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 func clear_all_lines():
-	for line in completed_lines:
-		line.queue_free()
-	completed_lines.clear()
+	if _completed_line:
+		_completed_line.queue_free()
+	_completed_line = null
+	reset_current_line()
+
+func reset_current_line():
+	for ship_part in _ship_parts:
+		ship_part.highlight(false)
+	_ship_parts.clear()
 	current_line.clear_points()
 
-func on_mouse_entered_guy(entity: PhysicsBody2D):
-	if !_drawing:
+func on_mouse_entered_ship_part(ship_part: ShipPart):
+	if not drawing or ship_part in _ship_parts:
 		return
-	print("Guy skewered: ", entity.name)
-	get_tree().change_scene_to_file("res://scenes/game_over.tscn")
+	print("Ship part skewered: ", ship_part.name)
+	ship_part.highlight(true)
+	_ship_parts.append(ship_part)
 
-func on_mouse_entered_city(entity: PhysicsBody2D):
-	if !_drawing:
-		return
-	print("City skewered: ", entity.name)
-	entity.get_node("AnimatedSprite2D").modulate = Color(1, 0, 0, 1) # Change color to red
+func confirm_loop():
+	# Erase previous completed line
+	if _completed_line:
+		_completed_line.queue_free()
+	_completed_line = current_line.duplicate()
+	add_child(_completed_line)
 
-	_cities.append(entity)
+func cancel_loop():
+	# Reset current line and clear points
+	reset_current_line()
+	drawing = false
+	_current_line_length = 0.0
+	print("Loop drawing cancelled.")
