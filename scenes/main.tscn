@@ -1,20 +1,25 @@
-[gd_scene load_steps=10 format=3 uid="uid://c4pv8emq2w6hy"]
+[gd_scene load_steps=20 format=3 uid="uid://c4pv8emq2w6hy"]
 
 [ext_resource type="Script" uid="uid://vy0s6q4ywn7k" path="res://scripts/game_manager.gd" id="1_tefeu"]
 [ext_resource type="Script" uid="uid://k7cvadgfe155" path="res://scripts/loop_drawer.gd" id="2_o6xl0"]
+[ext_resource type="Texture2D" uid="uid://dfkpwhoq8nc7m" path="res://sprites/ship_silhouette.png" id="4_o6xl0"]
 [ext_resource type="Script" uid="uid://dyqthfxohiyaq" path="res://scripts/ship_manager.gd" id="5_tbgi4"]
 [ext_resource type="Script" uid="uid://bmcm6wisrfwyy" path="res://scripts/ship_debug_ui.gd" id="6_debug"]
-[ext_resource type="Texture2D" uid="uid://bph7hh3qqcmea" path="res://sprites/city.png" id="6_ya4ey"]
+[ext_resource type="Texture2D" uid="uid://crbuu1610d0ow" path="res://sprites/icons.png" id="6_tipki"]
 [ext_resource type="Script" uid="uid://cepbueidsicgu" path="res://scripts/ship_part.gd" id="7_tipki"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o6xl0"]
-size = Vector2(28, 70)
+size = Vector2(24.2042, 44)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_o6xl0"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_85g3d"]
+atlas = ExtResource("6_tipki")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_choun"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("6_ya4ey")
+"texture": SubResource("AtlasTexture_85g3d")
 }],
 "loop": true,
 "name": &"default",
@@ -22,6 +27,66 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tefeu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ya4ey"]
+atlas = ExtResource("6_tipki")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_eb6dy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ya4ey")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_trceg"]
+atlas = ExtResource("6_tipki")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o6xl0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_trceg")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a8y0u"]
+atlas = ExtResource("6_tipki")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jkv2x"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a8y0u")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jbj1t"]
+atlas = ExtResource("6_tipki")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_muem4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jbj1t")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="Main" type="Node2D" node_paths=PackedStringArray("loop_drawer")]
 script = ExtResource("1_tefeu")
@@ -65,8 +130,11 @@ zoom = Vector2(2, 2)
 position = Vector2(-288, -162)
 
 [node name="ShipManager" type="Node2D" parent="."]
-position = Vector2(0, 79)
+position = Vector2(0, 80)
 script = ExtResource("5_tbgi4")
+
+[node name="ShipSilhouette" type="Sprite2D" parent="ShipManager"]
+texture = ExtResource("4_o6xl0")
 
 [node name="LoopDrawer" type="Node2D" parent="ShipManager"]
 position = Vector2(0, -79)
@@ -80,19 +148,18 @@ end_cap_mode = 2
 
 [node name="Power" type="StaticBody2D" parent="ShipManager"]
 unique_name_in_owner = true
+scale = Vector2(0.991565, 1)
 input_pickable = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShipManager/Power"]
-position = Vector2(0, 25)
+scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_o6xl0")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ShipManager/Power"]
-position = Vector2(3.57628e-07, 25)
-scale = Vector2(2.75, 7.25)
-sprite_frames = SubResource("SpriteFrames_o6xl0")
+sprite_frames = SubResource("SpriteFrames_choun")
 
 [node name="Shield_NE" type="StaticBody2D" parent="ShipManager"]
-position = Vector2(101, -40)
+position = Vector2(34, -47)
 input_pickable = true
 script = ExtResource("7_tipki")
 direction = 1
@@ -101,10 +168,10 @@ direction = 1
 shape = SubResource("RectangleShape2D_tefeu")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ShipManager/Shield_NE"]
-sprite_frames = SubResource("SpriteFrames_o6xl0")
+sprite_frames = SubResource("SpriteFrames_eb6dy")
 
 [node name="Shield_NW" type="StaticBody2D" parent="ShipManager"]
-position = Vector2(-97, -38)
+position = Vector2(-47, -45)
 input_pickable = true
 script = ExtResource("7_tipki")
 
@@ -112,10 +179,10 @@ script = ExtResource("7_tipki")
 shape = SubResource("RectangleShape2D_tefeu")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ShipManager/Shield_NW"]
-sprite_frames = SubResource("SpriteFrames_o6xl0")
+sprite_frames = SubResource("SpriteFrames_eb6dy")
 
 [node name="Shield_SE" type="StaticBody2D" parent="ShipManager"]
-position = Vector2(102, 59)
+position = Vector2(34, 44)
 input_pickable = true
 script = ExtResource("7_tipki")
 direction = 3
@@ -124,10 +191,10 @@ direction = 3
 shape = SubResource("RectangleShape2D_tefeu")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ShipManager/Shield_SE"]
-sprite_frames = SubResource("SpriteFrames_o6xl0")
+sprite_frames = SubResource("SpriteFrames_eb6dy")
 
 [node name="Shield_SW" type="StaticBody2D" parent="ShipManager"]
-position = Vector2(-96, 60)
+position = Vector2(-42, 38)
 input_pickable = true
 script = ExtResource("7_tipki")
 direction = 3
@@ -136,10 +203,10 @@ direction = 3
 shape = SubResource("RectangleShape2D_tefeu")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ShipManager/Shield_SW"]
-sprite_frames = SubResource("SpriteFrames_o6xl0")
+sprite_frames = SubResource("SpriteFrames_eb6dy")
 
 [node name="Turret_NE" type="StaticBody2D" parent="ShipManager"]
-position = Vector2(79, -27)
+position = Vector2(61, 99)
 input_pickable = true
 script = ExtResource("7_tipki")
 ship_part_type = 1
@@ -152,7 +219,7 @@ shape = SubResource("RectangleShape2D_tefeu")
 sprite_frames = SubResource("SpriteFrames_o6xl0")
 
 [node name="Turret_NW" type="StaticBody2D" parent="ShipManager"]
-position = Vector2(-74, -25)
+position = Vector2(-32, 112)
 input_pickable = true
 script = ExtResource("7_tipki")
 ship_part_type = 1
@@ -164,7 +231,7 @@ shape = SubResource("RectangleShape2D_tefeu")
 sprite_frames = SubResource("SpriteFrames_o6xl0")
 
 [node name="Turrent_SE" type="StaticBody2D" parent="ShipManager"]
-position = Vector2(81, 46)
+position = Vector2(83, 180)
 input_pickable = true
 script = ExtResource("7_tipki")
 ship_part_type = 1
@@ -177,7 +244,7 @@ shape = SubResource("RectangleShape2D_tefeu")
 sprite_frames = SubResource("SpriteFrames_o6xl0")
 
 [node name="Turrent_SW" type="StaticBody2D" parent="ShipManager"]
-position = Vector2(-73, 50)
+position = Vector2(-71, 184)
 input_pickable = true
 script = ExtResource("7_tipki")
 ship_part_type = 1
@@ -190,7 +257,7 @@ shape = SubResource("RectangleShape2D_tefeu")
 sprite_frames = SubResource("SpriteFrames_o6xl0")
 
 [node name="Engine" type="StaticBody2D" parent="ShipManager"]
-position = Vector2(-40, 10)
+position = Vector2(-17, 152)
 input_pickable = true
 script = ExtResource("7_tipki")
 ship_part_type = 2
@@ -199,10 +266,10 @@ ship_part_type = 2
 shape = SubResource("RectangleShape2D_tefeu")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ShipManager/Engine"]
-sprite_frames = SubResource("SpriteFrames_o6xl0")
+sprite_frames = SubResource("SpriteFrames_jkv2x")
 
 [node name="LifeSupport" type="StaticBody2D" parent="ShipManager"]
-position = Vector2(40, 12)
+position = Vector2(44, 152)
 input_pickable = true
 script = ExtResource("7_tipki")
 ship_part_type = 3
@@ -211,6 +278,6 @@ ship_part_type = 3
 shape = SubResource("RectangleShape2D_tefeu")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ShipManager/LifeSupport"]
-sprite_frames = SubResource("SpriteFrames_o6xl0")
+sprite_frames = SubResource("SpriteFrames_muem4")
 
 [connection signal="pressed" from="UI/ClearButton" to="." method="_on_clear_button_pressed"]

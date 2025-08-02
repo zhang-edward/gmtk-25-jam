@@ -26,7 +26,7 @@ func _input(event):
 
 func _process(_delta):
 	if _can_close_loop:
-		current_line.modulate = Color(1, 0, 0, 1)
+		current_line.modulate = Color(1, 1, 0, 1)
 	else:
 		current_line.modulate = Color(1, 1, 1, 1)
 
