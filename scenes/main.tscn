@@ -397,7 +397,7 @@ position = Vector2(-47, 15)
 input_pickable = true
 script = ExtResource("7_tipki")
 ship_part_type = 1
-direction = 3
+direction = 2
 
 [node name="NinePatchRect" type="NinePatchRect" parent="ShipManager/Turrent_SW"]
 anchors_preset = 8

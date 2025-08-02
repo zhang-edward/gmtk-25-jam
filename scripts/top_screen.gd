@@ -58,3 +58,4 @@ func handle_enemy_laser_hit():
 
 func on_ship_status_changed():
 	spaceship.set_shield_state(ship_manager.shield_powered)
+	spaceship.set_turret_firing_state(ship_manager.turret_powered)

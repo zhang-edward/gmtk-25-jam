@@ -6,17 +6,19 @@ extends Node2D
 @onready var health_bar = $Healthbar as ProgressBar
 
 var firing_timer
-var top_screen
+var top_screen: TopScreen
+var direction: TopScreen.EnemyShipDirection
 
 func _ready() -> void:
 	hide()
 	health_bar.value = 100
 
-func spawn_from_direction(direction: TopScreen.EnemyShipDirection):
+func spawn_from_direction(_direction: TopScreen.EnemyShipDirection):
+	direction = _direction
 	var top_left_pos = top_screen.top_left_pos
 	var start_pos
 	var end_pos
-	match direction:
+	match _direction:
 		TopScreen.EnemyShipDirection.NW:
 			start_pos = Vector2(top_left_pos.x, top_left_pos.y)
 			end_pos = Vector2(start_pos.x + 50, start_pos.y + 30)
@@ -53,4 +55,5 @@ func fire_laser():
 func take_damage(amt: int):
 	health_bar.value -= amt
 	if health_bar.value == 0:
+		top_screen.ships_to_direction.erase(direction)
 		queue_free()
