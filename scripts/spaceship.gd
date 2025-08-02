@@ -16,8 +16,11 @@ extends Node2D
 
 var shield_to_area_map = [null, null, null, null]
 var turret_to_area_map = [null, null, null, null]
+var initial_position: Vector2
 
 func _ready() -> void:
+	initial_position = position
+	
 	shield_to_area_map[ShipManager.ShipPartDirection.NE] = ne_shield
 	shield_to_area_map[ShipManager.ShipPartDirection.NW] = nw_shield
 	shield_to_area_map[ShipManager.ShipPartDirection.SE] = se_shield
@@ -29,6 +32,22 @@ func _ready() -> void:
 	turret_to_area_map[ShipManager.ShipPartDirection.NW] = nw_turret
 	turret_to_area_map[ShipManager.ShipPartDirection.SE] = se_turret
 	turret_to_area_map[ShipManager.ShipPartDirection.SW] = sw_turret
+	
+	# Parallel bobbing tweens for X and Y
+	var tween_x = create_tween()
+	tween_x.set_ease(Tween.EASE_IN_OUT)
+	tween_x.set_trans(Tween.TRANS_QUAD)
+	tween_x.set_loops()
+	tween_x.tween_method(func(x): position.x = initial_position.x + x, -6.0, 6.0, 2.5)
+	tween_x.tween_method(func(x): position.x = initial_position.x + x, 6.0, -6.0, 2.5)
+	
+	var tween_y = create_tween()
+	tween_y.set_ease(Tween.EASE_IN_OUT)
+	tween_y.set_trans(Tween.TRANS_QUAD)
+	tween_y.set_loops()
+	tween_y.tween_method(func(y): position.y = initial_position.y + y, 2.0, -2.0, 3.0)
+	tween_y.tween_method(func(y): position.y = initial_position.y + y, -2.0, 2.0, 3.0)
+
 
 func set_shield_state(shield_activation_arr):
 	for i in range(0, shield_activation_arr.size()):
