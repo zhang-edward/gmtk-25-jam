@@ -40,8 +40,8 @@ func _ready() -> void:
 
 	# Connect power signals
 	_power.input_pickable = true
-	_power.mouse_entered.connect(func(): _mouse_inside_power = true)
-	_power.mouse_exited.connect(func(): _mouse_inside_power = false)
+	_power.mouse_entered.connect(mouse_entered_power_area)
+	_power.mouse_exited.connect(mouse_exited_power_area)
 
 func _input(event):
 	var mouse_pos = get_global_mouse_position()
@@ -92,3 +92,11 @@ func reset_all_power() -> void:
 		turret_powered[i] = false
 	print("All systems powered off")
 	ship_status_changed.emit()
+
+func mouse_entered_power_area() -> void:
+	_mouse_inside_power = true
+	if _loop_drawer.drawing:
+		_loop_drawer.can_close_loop = true
+
+func mouse_exited_power_area() -> void:
+	_mouse_inside_power = false

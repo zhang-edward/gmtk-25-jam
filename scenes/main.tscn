@@ -166,6 +166,7 @@ patch_margin_bottom = 2
 shape = SubResource("RectangleShape2D_o6xl0")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ShipManager/Power"]
+modulate = Color(1, 1, 0, 1)
 sprite_frames = SubResource("SpriteFrames_choun")
 
 [node name="Shield_NE" type="StaticBody2D" parent="ShipManager"]

@@ -6,11 +6,12 @@ signal loop_closed(_cities: Array[PhysicsBody2D])
 const CLOSE_LOOP_DISTANCE: float = 30.0
 const MIN_DISTANCE_BETWEEN_POINTS: float = 2.0
 
+var can_close_loop: bool = false
+var drawing: bool = false
+
 @onready var current_line: Line2D = $CurrentLine
 
 var _completed_line: Line2D
-var _drawing: bool = false
-var _can_close_loop: bool = false
 var _current_line_length: float = 0.0
 
 var _ship_parts: Array[ShipPart] = []
@@ -20,20 +21,19 @@ func _ready():
 
 func _input(event):
 	var mouse_pos = get_global_mouse_position()
-	if event is InputEventMouseMotion and _drawing:
+	if event is InputEventMouseMotion and drawing:
 		_add_point_to_line(mouse_pos)
-		_can_close_loop = _current_line_length > CLOSE_LOOP_DISTANCE * 1.1 and current_line.points[0].distance_to(mouse_pos) < CLOSE_LOOP_DISTANCE
 
 func _process(_delta):
 	if _ship_parts.size() > ShipManager.MAX_POWERED_PARTS:
 		current_line.modulate = Color(1, 0, 0, 1) # Red if too many parts
-	elif _can_close_loop:
+	elif can_close_loop:
 		current_line.modulate = Color(1, 1, 0, 1)
 	else:
 		current_line.modulate = Color(1, 1, 1, 1)
 
 func start_drawing(pos: Vector2):
-	_drawing = true
+	drawing = true
 	reset_current_line()
 	current_line.add_point(pos)
 
@@ -51,21 +51,15 @@ func _add_point_to_line(pos: Vector2):
 			_current_line_length += last_point.distance_to(pos)
 
 func stop_drawing():
-	if not _drawing:
+	if not drawing:
 		return
-	_drawing = false
+	drawing = false
 	_current_line_length = 0.0
 
 	if current_line.points.size() > 1:
-		if _can_close_loop:
-			current_line.add_point(current_line.points[0]) # Close the loop by connecting last point to first
-			loop_closed.emit(_ship_parts)
-		else:
-			print("Loop not closed, points are too far apart.")
-			current_line.clear_points()
-			_completed_line.modulate = Color(1, 1, 1, 1)
-	
-	_can_close_loop = false
+		loop_closed.emit(_ship_parts)
+
+	can_close_loop = false
 
 func clear_all_lines():
 	if _completed_line:
@@ -80,7 +74,7 @@ func reset_current_line():
 	current_line.clear_points()
 
 func on_mouse_entered_ship_part(ship_part: ShipPart):
-	if not _drawing or ship_part in _ship_parts:
+	if not drawing or ship_part in _ship_parts:
 		return
 	print("Ship part skewered: ", ship_part.name)
 	ship_part.highlighted = 1
@@ -96,7 +90,6 @@ func confirm_loop():
 func cancel_loop():
 	# Reset current line and clear points
 	reset_current_line()
-	_can_close_loop = false
-	_drawing = false
+	drawing = false
 	_current_line_length = 0.0
 	print("Loop drawing cancelled.")
