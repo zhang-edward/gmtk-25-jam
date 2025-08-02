@@ -4,6 +4,8 @@ extends Node2D
 @export var projectile_scene: PackedScene
 @export var direction: TopScreen.EnemyShipDirection
 
+@onready var sprite = $TurretSprite as Sprite2D
+
 var is_firing = false
 var fire_timer: Timer
 
@@ -23,7 +25,9 @@ func toggle_fire(toggle_state):
 func fire_laser():
 	var target_ship = get_target()
 	if target_ship != null:
+		sprite.look_at(target_ship.global_position)
 		var projectile = projectile_scene.instantiate() as Projectile
+		projectile.position = sprite.position
 		add_child(projectile)
 		# Prevent hitting own shields
 		(projectile.area_2d as Area2D).set_collision_mask_value(1, false)

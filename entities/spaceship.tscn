@@ -17,29 +17,29 @@ texture = ExtResource("4_cg41p")
 
 [node name="NWTurret" parent="." instance=ExtResource("2_x171k")]
 
-[node name="ShipGun2" type="Sprite2D" parent="NWTurret"]
-position = Vector2(22, 22)
+[node name="TurretSprite" type="Sprite2D" parent="NWTurret"]
+position = Vector2(-18, -26)
+rotation = 3.14159
 texture = ExtResource("3_y2u2f")
 
 [node name="NETurret" parent="." instance=ExtResource("2_x171k")]
 direction = 1
 
-[node name="ShipGun" type="Sprite2D" parent="NETurret"]
+[node name="TurretSprite" type="Sprite2D" parent="NETurret"]
 position = Vector2(22, -22)
 texture = ExtResource("3_y2u2f")
 
 [node name="SETurret" parent="." instance=ExtResource("2_x171k")]
 direction = 3
 
-[node name="ShipGun4" type="Sprite2D" parent="SETurret"]
-position = Vector2(-18, -26)
-rotation = 3.14159
+[node name="TurretSprite" type="Sprite2D" parent="SETurret"]
+position = Vector2(22, 22)
 texture = ExtResource("3_y2u2f")
 
 [node name="SWTurret" parent="." instance=ExtResource("2_x171k")]
 direction = 2
 
-[node name="ShipGun3" type="Sprite2D" parent="SWTurret"]
+[node name="TurretSprite" type="Sprite2D" parent="SWTurret"]
 position = Vector2(-18, 26)
 rotation = 3.14159
 texture = ExtResource("3_y2u2f")
