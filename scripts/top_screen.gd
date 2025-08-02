@@ -53,3 +53,9 @@ func generate_asteroid():
 func on_ship_status_changed():
 	spaceship.set_shield_state(ship_manager.shield_powered)
 	spaceship.set_turret_firing_state(ship_manager.turret_powered)
+
+func generate_asteroid_from_dir(dir: AsteroidDirection):
+	var asteroid = asteroid_scene.instantiate() as Asteroid
+	asteroid.top_screen = self
+	add_child(asteroid)
+	asteroid.spawn_from_direction(dir)

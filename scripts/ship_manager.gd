@@ -14,8 +14,6 @@ enum ShipPartDirection {
 
 var shield_powered: Array[bool] = [false, false, false, false]
 var turret_powered: Array[bool] = [false, false, false, false]
-var engine_powered: bool = false
-var life_support_powered: bool = false
 
 @onready var _loop_drawer: LoopDrawer = $LoopDrawer
 @onready var _power: StaticBody2D = %Power
@@ -57,9 +55,7 @@ func _process(_delta: float) -> void:
 	# Highlight ship parts based on their powered state
 	for ship_part in _ship_parts:
 		if ship_part.ship_part_type == ShipPart.ShipPartType.SHIELD and shield_powered[ship_part.direction] or \
-		   ship_part.ship_part_type == ShipPart.ShipPartType.TURRET and turret_powered[ship_part.direction] or \
-		   ship_part.ship_part_type == ShipPart.ShipPartType.ENGINE and engine_powered or \
-		   ship_part.ship_part_type == ShipPart.ShipPartType.LIFE_SUPPORT and life_support_powered:
+		   ship_part.ship_part_type == ShipPart.ShipPartType.TURRET and turret_powered[ship_part.direction]:
 			ship_part.set_powered(true)
 		else:
 			ship_part.set_powered(false)
@@ -82,16 +78,8 @@ func on_ship_part_powered(ship_part: ShipPart) -> void:
 	elif ship_part.ship_part_type == ShipPart.ShipPartType.TURRET:
 		print("Turret part powered: ", ship_part.direction)
 		turret_powered[ship_part.direction] = true
-	elif ship_part.ship_part_type == ShipPart.ShipPartType.ENGINE:
-		print("Engine part powered")
-		engine_powered = true
-	elif ship_part.ship_part_type == ShipPart.ShipPartType.LIFE_SUPPORT:
-		print("Life support part powered")
-		life_support_powered = true
 
 func reset_all_power() -> void:
-	engine_powered = false
-	life_support_powered = false
 	for i in range(shield_powered.size()):
 		shield_powered[i] = false
 	for i in range(turret_powered.size()):

@@ -47,7 +47,7 @@ func fire_laser():
 	projectile.fire_towards(top_screen.spaceship.global_position)
 	firing_timer = Timer.new()
 	firing_timer.autostart = true
-	firing_timer.wait_time = randi_range(5, 10) / 10.0
+	firing_timer.wait_time = randi_range(10, 15) / 10.0
 	firing_timer.one_shot = true
 	firing_timer.timeout.connect(fire_laser)
 	add_child(firing_timer)

@@ -25,11 +25,11 @@ func spawn_from_direction(dir: TopScreen.AsteroidDirection):
 			start_pos = Vector2(top_left_pos.x + TopScreen.VIEWPORT_WIDTH / 2.0, top_left_pos.y + TopScreen.VIEWPORT_HEIGHT)
 			end_pos = Vector2(spaceship_pos.x, spaceship_pos.y + 25)
 		TopScreen.AsteroidDirection.E:
-			start_pos = Vector2(top_left_pos.x, top_left_pos.y + TopScreen.VIEWPORT_HEIGHT / 2.0)
-			end_pos = Vector2(spaceship_pos.x - 25, spaceship_pos.y)
-		TopScreen.AsteroidDirection.W:
 			start_pos = Vector2(top_left_pos.x + TopScreen.VIEWPORT_WIDTH, top_left_pos.y + TopScreen.VIEWPORT_HEIGHT / 2.0)
 			end_pos = Vector2(spaceship_pos.x + 25, spaceship_pos.y)
+		TopScreen.AsteroidDirection.W:
+			start_pos = Vector2(top_left_pos.x, top_left_pos.y + TopScreen.VIEWPORT_HEIGHT / 2.0)
+			end_pos = Vector2(spaceship_pos.x - 25, spaceship_pos.y)
 	global_position = start_pos
 	show()
 	tween_pos = create_tween()

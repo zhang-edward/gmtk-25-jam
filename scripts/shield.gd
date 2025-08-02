@@ -25,6 +25,7 @@ func _ready() -> void:
 	charge_timer.autostart = true
 	charge_timer.wait_time = 0.5
 	charge_timer.timeout.connect(charge_shield)
+	add_child(charge_timer)
 
 func charge_shield():
 	if curr_shield_state == CurrShieldState.CHARGING:
