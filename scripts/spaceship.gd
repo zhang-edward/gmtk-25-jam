@@ -16,10 +16,9 @@ extends Node2D
 
 var shield_to_area_map = [null, null, null, null]
 var turret_to_area_map = [null, null, null, null]
-var initial_position: Vector2
 
 func _ready() -> void:
-	initial_position = position
+	var initial_position = position
 	
 	shield_to_area_map[ShipManager.ShipPartDirection.NE] = ne_shield
 	shield_to_area_map[ShipManager.ShipPartDirection.NW] = nw_shield

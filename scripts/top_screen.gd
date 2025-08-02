@@ -1,8 +1,8 @@
 class_name TopScreen
 extends Node2D
 
-enum EnemyShipDirection { NW, NE, SW, SE }
-enum AsteroidDirection { N, S, E, W }
+enum EnemyShipDirection {NW, NE, SW, SE}
+enum AsteroidDirection {N, S, E, W}
 
 @onready var spaceship = $Spaceship as Spaceship
 @onready var healthbar = $Healthbar as ProgressBar
@@ -35,7 +35,7 @@ func generate_random_event():
 		generate_asteroid()
 
 func generate_enemy_ship():
-	var directions_to_spawn = EnemyShipDirection.values().filter(func (dir): return !ships_to_direction.has(dir))
+	var directions_to_spawn = EnemyShipDirection.values().filter(func(dir): return !ships_to_direction.has(dir))
 	if !directions_to_spawn.is_empty():
 		var rand_direction = directions_to_spawn.pick_random()
 		var enemy_ship = enemy_ship_scene.instantiate() as EnemyShip

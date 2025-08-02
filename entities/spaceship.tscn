@@ -82,7 +82,7 @@ shape = SubResource("RectangleShape2D_x171k")
 [node name="ThrusterParticleGroup" type="Node2D" parent="."]
 
 [node name="FlameParticles" type="CPUParticles2D" parent="ThrusterParticleGroup"]
-position = Vector2(-29, -4)
+position = Vector2(-28, -4)
 amount = 20
 texture = ExtResource("6_cg41p")
 lifetime = 2.0
@@ -99,7 +99,7 @@ color_ramp = SubResource("Gradient_4qqa7")
 position = Vector2(0, 8)
 
 [node name="FlameParticles" type="CPUParticles2D" parent="ThrusterParticleGroup2"]
-position = Vector2(-29, -4)
+position = Vector2(-28, -4)
 amount = 20
 texture = ExtResource("6_cg41p")
 lifetime = 2.0
