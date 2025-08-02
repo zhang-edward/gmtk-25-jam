@@ -18,8 +18,10 @@ var engine_powered: bool = false
 var life_support_powered: bool = false
 
 @onready var _loop_drawer: LoopDrawer = $LoopDrawer
+@onready var _power: StaticBody2D = %Power
 
 var _ship_parts: Array[ShipPart] = []
+var _mouse_inside_power: bool = false
 
 func _ready() -> void:
 	# Initialize ship parts
@@ -30,11 +32,31 @@ func _ready() -> void:
 
 		_ship_parts.append(ship_part)
 
-		# Connect loop drawer signals
+		# Connect ship part signal to loop drawer
 		ship_part.mouse_entered.connect(func(): _loop_drawer.on_mouse_entered_ship_part(ship_part))
 		print("Initialized ship part: ", ship_part.name)
 
 	_loop_drawer.loop_closed.connect(on_loop_closed)
+
+	# Connect power signals
+	_power.input_pickable = true
+	_power.mouse_entered.connect(func(): _mouse_inside_power = true)
+	_power.mouse_exited.connect(func(): _mouse_inside_power = false)
+
+func _input(event):
+	var mouse_pos = get_global_mouse_position()
+	if event is InputEventMouseButton:
+		# Only handle input if mouse is inside the power area
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			if event.pressed:
+				if _mouse_inside_power:
+					_loop_drawer.start_drawing(mouse_pos)
+			else:
+				if _mouse_inside_power:
+					_loop_drawer.stop_drawing()
+				else:
+					_loop_drawer.cancel_loop()
+				
 
 func on_loop_closed(powered_ship_parts: Array[ShipPart]) -> void:
 	if powered_ship_parts.size() > MAX_POWERED_PARTS:

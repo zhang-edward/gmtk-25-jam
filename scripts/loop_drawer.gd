@@ -20,14 +20,7 @@ func _ready():
 
 func _input(event):
 	var mouse_pos = get_global_mouse_position()
-	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_LEFT && event.pressed:
-			if not _drawing:
-				_start_drawing(mouse_pos)
-			else:
-				_stop_drawing()
-	
-	elif event is InputEventMouseMotion and _drawing:
+	if event is InputEventMouseMotion and _drawing:
 		_add_point_to_line(mouse_pos)
 		_can_close_loop = _current_line_length > CLOSE_LOOP_DISTANCE * 1.1 and current_line.points[0].distance_to(mouse_pos) < CLOSE_LOOP_DISTANCE
 
@@ -37,7 +30,7 @@ func _process(_delta):
 	else:
 		current_line.modulate = Color(1, 1, 1, 1)
 
-func _start_drawing(pos: Vector2):
+func start_drawing(pos: Vector2):
 	_drawing = true
 	reset_current_line()
 	current_line.add_point(pos)
@@ -55,7 +48,7 @@ func _add_point_to_line(pos: Vector2):
 			queue_redraw()
 			_current_line_length += last_point.distance_to(pos)
 
-func _stop_drawing():
+func stop_drawing():
 	if not _drawing:
 		return
 	_drawing = false
