@@ -1,0 +1,37 @@
+[gd_scene load_steps=2 format=3 uid="uid://bdg43d8d5b7ty"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sfsyy"]
+
+[node name="WireOccluder" type="StaticBody2D"]
+input_pickable = true
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = 10
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+mouse_filter = 2
+color = Color(0.247059, 0.207843, 0.27451, 0.529412)
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+z_index = 10
+offset_left = -7.0
+offset_top = -7.0
+offset_right = 7.0
+offset_bottom = 7.0
+mouse_filter = 2
+color = Color(0.247059, 0.207843, 0.27451, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_sfsyy")
+debug_color = Color(0.968513, 0, 0.46738, 0.42)
+
+[node name="ColorRect3" type="ColorRect" parent="."]
+z_index = 10
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+mouse_filter = 2
+color = Color(0.247059, 0.207843, 0.27451, 1)
