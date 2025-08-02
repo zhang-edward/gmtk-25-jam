@@ -26,3 +26,12 @@ color = Color(0.247059, 0.207843, 0.27451, 1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_sfsyy")
 debug_color = Color(0.968513, 0, 0.46738, 0.42)
+
+[node name="ColorRect3" type="ColorRect" parent="."]
+z_index = 10
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+mouse_filter = 2
+color = Color(0.247059, 0.207843, 0.27451, 1)

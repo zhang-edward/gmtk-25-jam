@@ -53,19 +53,30 @@ func _input(event):
 			elif event.is_released():
 				_loop_drawer.stop_drawing()
 				
+func _process(_delta: float) -> void:
+	# Highlight ship parts based on their powered state
+	for ship_part in _ship_parts:
+		if ship_part.ship_part_type == ShipPart.ShipPartType.SHIELD and shield_powered[ship_part.direction] or \
+		   ship_part.ship_part_type == ShipPart.ShipPartType.TURRET and turret_powered[ship_part.direction] or \
+		   ship_part.ship_part_type == ShipPart.ShipPartType.ENGINE and engine_powered or \
+		   ship_part.ship_part_type == ShipPart.ShipPartType.LIFE_SUPPORT and life_support_powered:
+			ship_part.highlight(Color(0, 1, 1, 1)) # Cyan highlight for powered shield
+		else:
+			ship_part.highlight(Color(1, 1, 1, 1))
 
 func on_loop_closed(powered_ship_parts: Array[ShipPart]) -> void:
 	if powered_ship_parts.size() > MAX_POWERED_PARTS || !_mouse_inside_power:
 		_loop_drawer.reset_current_line()
 		return
 	else:
-		_loop_drawer.confirm_loop()
 		reset_all_power()
 		for ship_part in powered_ship_parts:
 			on_ship_part_powered(ship_part)
 		ship_status_changed.emit()
+		_loop_drawer.confirm_loop()
 			
 func on_ship_part_powered(ship_part: ShipPart) -> void:
+	ship_part.highlight(Color(0, 1, 1, 1))
 	if ship_part.ship_part_type == ShipPart.ShipPartType.SHIELD:
 		print("Shield part powered: ", ship_part.direction)
 		shield_powered[ship_part.direction] = true

@@ -13,8 +13,8 @@ var drawing: bool = false
 @onready var plug_sprite: Sprite2D = $PlugSprite
 
 var _completed_line: Line2D
-
 var _ship_parts: Array[ShipPart] = []
+var _wire_end_texture: Texture2D = preload("res://sprites/wire_hole.png")
 
 func _ready():
 	plug_sprite.visible = false
@@ -39,14 +39,18 @@ func start_drawing(pos: Vector2):
 	drawing = true
 	reset_current_line()
 	current_line.add_point(pos)
-
 	if _completed_line != null:
 		_completed_line.modulate = Color(1, 1, 1, 0.5)
 	
 	plug_sprite.visible = true
-
-	# hide mouse cursor
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
+
+	var wire_end = Sprite2D.new()
+	wire_end.texture = _wire_end_texture
+	wire_end.position = pos
+	wire_end.z_index = 1
+	wire_end.name = "WireStart"
+	current_line.add_child(wire_end)
 
 func _add_point_to_line(pos: Vector2):
 	if current_line.points.size() > 0:
@@ -70,24 +74,32 @@ func stop_drawing():
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 func reset_current_line():
-	for ship_part in _ship_parts:
-		ship_part.highlight(false)
-	_ship_parts.clear()
 	current_line.clear_points()
-
 	plug_sprite.visible = false
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+
+	if current_line.has_node("WireStart"):
+		current_line.get_node("WireStart").queue_free()
+	_ship_parts.clear()
+
 
 func on_mouse_entered_ship_part(ship_part: ShipPart):
 	if not drawing or ship_part in _ship_parts:
 		return
-	print("Ship part skewered: ", ship_part.name)
-	ship_part.highlight(true)
+	ship_part.highlight(Color(1, 1, 0, 1)) # Yellow highlight
 	_ship_parts.append(ship_part)
 
 func confirm_loop():
 	# Erase previous completed line
 	if _completed_line:
 		_completed_line.queue_free()
+
 	_completed_line = current_line.duplicate()
 	add_child(_completed_line)
+	reset_current_line()
+
+	var wire_end = Sprite2D.new()
+	wire_end.texture = _wire_end_texture
+	wire_end.position = _completed_line.points[-1]
+	wire_end.z_index = 1
+	_completed_line.add_child(wire_end)
