@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://g517drv1ral4"]
+
+[ext_resource type="PackedScene" uid="uid://cmdk8fl75lwse" path="res://entities/health_bar.tscn" id="1_0dh01"]
+[ext_resource type="Texture2D" uid="uid://dtd1c0p2orca0" path="res://sprites/icon.svg" id="1_8d6bn"]
+[ext_resource type="Script" uid="uid://chwg3kmdwblyl" path="res://scripts/enemy_ship.gd" id="1_tbr2v"]
+[ext_resource type="PackedScene" uid="uid://bge2rcppyovkc" path="res://entities/projectile.tscn" id="2_q6noe"]
+
+[node name="EnemyShip" type="Node2D"]
+script = ExtResource("1_tbr2v")
+projectile_scene = ExtResource("2_q6noe")
+
+[node name="Healthbar" parent="." instance=ExtResource("1_0dh01")]
+offset_top = -25.0
+offset_bottom = -20.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_8d6bn")

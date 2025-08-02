@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://cp4quj1xdmxj4"]
+
+[ext_resource type="Script" uid="uid://dtpbvjfgxs3rl" path="res://scripts/top_screen.gd" id="1_ggulp"]
+[ext_resource type="Texture2D" uid="uid://dtd1c0p2orca0" path="res://sprites/icon.svg" id="2_v7odv"]
+[ext_resource type="PackedScene" uid="uid://g517drv1ral4" path="res://entities/enemy_ship.tscn" id="2_waoyx"]
+[ext_resource type="PackedScene" uid="uid://bk8w4xnfuw6da" path="res://entities/asteroid.tscn" id="3_pelp5"]
+[ext_resource type="PackedScene" uid="uid://cmdk8fl75lwse" path="res://entities/health_bar.tscn" id="4_gpqrb"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v7odv"]
+bg_color = Color(0, 0, 0, 1)
+
+[node name="TopScreen" type="Node2D"]
+script = ExtResource("1_ggulp")
+enemy_ship_scene = ExtResource("2_waoyx")
+asteroid_scene = ExtResource("3_pelp5")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+offset_right = 480.0
+offset_bottom = 320.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_v7odv")
+
+[node name="Healthbar" parent="." instance=ExtResource("4_gpqrb")]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 350.0
+offset_top = 300.0
+offset_right = 469.0
+offset_bottom = 310.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="Spaceship" type="Sprite2D" parent="."]
+position = Vector2(240, 160)
+texture = ExtResource("2_v7odv")

@@ -98,12 +98,14 @@ min_distance = 30.0
 loop_drawer = NodePath("ShipManager/LoopDrawer")
 
 [node name="UI" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="ShipDebugUI" type="Label" parent="UI" node_paths=PackedStringArray("ship_manager")]
 script = ExtResource("6_debug")
 ship_manager = NodePath("../../ShipManager")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+visible = false
 zoom = Vector2(2, 2)
 
 [node name="ColorRect" type="ColorRect" parent="."]
