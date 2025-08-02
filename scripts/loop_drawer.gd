@@ -10,6 +10,7 @@ var can_close_loop: bool = false
 var drawing: bool = false
 
 @onready var current_line: Line2D = $CurrentLine
+@onready var plug_sprite: Sprite2D = $PlugSprite
 
 var _completed_line: Line2D
 var _current_line_length: float = 0.0
@@ -17,7 +18,7 @@ var _current_line_length: float = 0.0
 var _ship_parts: Array[ShipPart] = []
 
 func _ready():
-	pass
+	plug_sprite.visible = false
 
 func _input(event):
 	var mouse_pos = get_global_mouse_position()
@@ -26,11 +27,14 @@ func _input(event):
 
 func _process(_delta):
 	if _ship_parts.size() > ShipManager.MAX_POWERED_PARTS:
-		current_line.modulate = Color(1, 0, 0, 1) # Red if too many parts
+		for ship_part in _ship_parts:
+			ship_part.modulate = Color(1, 0, 0, 1) # Red highlight for too many parts
 	elif can_close_loop:
 		current_line.modulate = Color(1, 1, 0, 1)
 	else:
 		current_line.modulate = Color(1, 1, 1, 1)
+
+	plug_sprite.position = get_global_mouse_position()
 
 func start_drawing(pos: Vector2):
 	drawing = true
@@ -39,6 +43,11 @@ func start_drawing(pos: Vector2):
 
 	if _completed_line != null:
 		_completed_line.modulate = Color(1, 1, 1, 0.5)
+	
+	plug_sprite.visible = true
+
+	# hide mouse cursor
+	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 
 func _add_point_to_line(pos: Vector2):
 	if current_line.points.size() > 0:
@@ -49,17 +58,20 @@ func _add_point_to_line(pos: Vector2):
 			current_line.add_point(pos)
 			queue_redraw()
 			_current_line_length += last_point.distance_to(pos)
+			plug_sprite.rotation = (pos - last_point).angle()
 
 func stop_drawing():
 	if not drawing:
 		return
 	drawing = false
 	_current_line_length = 0.0
+	plug_sprite.visible = false
 
 	if current_line.points.size() > 1:
 		loop_closed.emit(_ship_parts)
 
 	can_close_loop = false
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 func clear_all_lines():
 	if _completed_line:
@@ -69,7 +81,7 @@ func clear_all_lines():
 
 func reset_current_line():
 	for ship_part in _ship_parts:
-		ship_part.highlighted = 0
+		ship_part.highlight(false)
 	_ship_parts.clear()
 	current_line.clear_points()
 
@@ -77,7 +89,7 @@ func on_mouse_entered_ship_part(ship_part: ShipPart):
 	if not drawing or ship_part in _ship_parts:
 		return
 	print("Ship part skewered: ", ship_part.name)
-	ship_part.highlighted = 1
+	ship_part.highlight(true)
 	_ship_parts.append(ship_part)
 
 func confirm_loop():

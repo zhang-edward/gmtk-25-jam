@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://c4pv8emq2w6hy"]
+[gd_scene load_steps=23 format=3 uid="uid://c4pv8emq2w6hy"]
 
 [ext_resource type="Script" uid="uid://vy0s6q4ywn7k" path="res://scripts/game_manager.gd" id="1_tefeu"]
 [ext_resource type="Script" uid="uid://k7cvadgfe155" path="res://scripts/loop_drawer.gd" id="2_o6xl0"]
@@ -8,6 +8,8 @@
 [ext_resource type="Script" uid="uid://bmcm6wisrfwyy" path="res://scripts/ship_debug_ui.gd" id="6_debug"]
 [ext_resource type="Texture2D" uid="uid://crbuu1610d0ow" path="res://sprites/icons.png" id="6_tipki"]
 [ext_resource type="Script" uid="uid://cepbueidsicgu" path="res://scripts/ship_part.gd" id="7_tipki"]
+[ext_resource type="Texture2D" uid="uid://b67v4mw6wfhqi" path="res://sprites/wire.png" id="9_85g3d"]
+[ext_resource type="Texture2D" uid="uid://bcmtf1ari0qk5" path="res://sprites/plug.png" id="10_choun"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o6xl0"]
 size = Vector2(24.2042, 44)
@@ -101,45 +103,34 @@ loop_drawer = NodePath("ShipManager/LoopDrawer")
 script = ExtResource("6_debug")
 ship_manager = NodePath("../../ShipManager")
 
-[node name="Instructions" type="Label" parent="UI"]
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 11.0
-offset_top = -60.0
-offset_right = 401.0
-offset_bottom = -10.0
-grow_vertical = 0
-text = "Left click and drag to draw lines
-Line turns red when you can close the loop"
-vertical_alignment = 2
-
-[node name="ClearButton" type="Button" parent="UI"]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -100.0
-offset_top = 10.0
-offset_right = -10.0
-offset_bottom = 40.0
-text = "Clear Lines"
-
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
 
-[node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(-288, -162)
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -120.0
+offset_right = 120.0
+offset_bottom = 160.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
 
 [node name="ShipManager" type="Node2D" parent="."]
 position = Vector2(0, 80)
 script = ExtResource("5_tbgi4")
 
 [node name="ShipSilhouette" type="Sprite2D" parent="ShipManager"]
+position = Vector2(-10, 0)
 texture = ExtResource("4_o6xl0")
 
 [node name="Power" type="StaticBody2D" parent="ShipManager"]
 unique_name_in_owner = true
-position = Vector2(9, 0)
+position = Vector2(-1, 0)
 scale = Vector2(0.991565, 1)
 input_pickable = true
 
@@ -170,7 +161,7 @@ modulate = Color(1, 1, 0, 1)
 sprite_frames = SubResource("SpriteFrames_choun")
 
 [node name="Shield_NE" type="StaticBody2D" parent="ShipManager"]
-position = Vector2(34, -47)
+position = Vector2(24, -47)
 input_pickable = true
 script = ExtResource("7_tipki")
 direction = 1
@@ -201,7 +192,7 @@ shape = SubResource("RectangleShape2D_tefeu")
 sprite_frames = SubResource("SpriteFrames_eb6dy")
 
 [node name="Shield_NW" type="StaticBody2D" parent="ShipManager"]
-position = Vector2(-47, -45)
+position = Vector2(-57, -45)
 input_pickable = true
 script = ExtResource("7_tipki")
 
@@ -231,7 +222,7 @@ shape = SubResource("RectangleShape2D_tefeu")
 sprite_frames = SubResource("SpriteFrames_eb6dy")
 
 [node name="Shield_SE" type="StaticBody2D" parent="ShipManager"]
-position = Vector2(34, 44)
+position = Vector2(24, 44)
 input_pickable = true
 script = ExtResource("7_tipki")
 direction = 3
@@ -262,7 +253,7 @@ shape = SubResource("RectangleShape2D_tefeu")
 sprite_frames = SubResource("SpriteFrames_eb6dy")
 
 [node name="Shield_SW" type="StaticBody2D" parent="ShipManager"]
-position = Vector2(-42, 38)
+position = Vector2(-52, 38)
 input_pickable = true
 script = ExtResource("7_tipki")
 direction = 3
@@ -293,7 +284,7 @@ shape = SubResource("RectangleShape2D_tefeu")
 sprite_frames = SubResource("SpriteFrames_eb6dy")
 
 [node name="Turret_NE" type="StaticBody2D" parent="ShipManager"]
-position = Vector2(56, -35)
+position = Vector2(46, -35)
 input_pickable = true
 script = ExtResource("7_tipki")
 ship_part_type = 1
@@ -325,7 +316,7 @@ shape = SubResource("RectangleShape2D_tefeu")
 sprite_frames = SubResource("SpriteFrames_o6xl0")
 
 [node name="Turret_NW" type="StaticBody2D" parent="ShipManager"]
-position = Vector2(-38, -25)
+position = Vector2(-48, -25)
 input_pickable = true
 script = ExtResource("7_tipki")
 ship_part_type = 1
@@ -356,7 +347,7 @@ shape = SubResource("RectangleShape2D_tefeu")
 sprite_frames = SubResource("SpriteFrames_o6xl0")
 
 [node name="Turrent_SE" type="StaticBody2D" parent="ShipManager"]
-position = Vector2(55, 37)
+position = Vector2(45, 37)
 input_pickable = true
 script = ExtResource("7_tipki")
 ship_part_type = 1
@@ -388,7 +379,7 @@ shape = SubResource("RectangleShape2D_tefeu")
 sprite_frames = SubResource("SpriteFrames_o6xl0")
 
 [node name="Turrent_SW" type="StaticBody2D" parent="ShipManager"]
-position = Vector2(-37, 15)
+position = Vector2(-47, 15)
 input_pickable = true
 script = ExtResource("7_tipki")
 ship_part_type = 1
@@ -420,7 +411,7 @@ shape = SubResource("RectangleShape2D_tefeu")
 sprite_frames = SubResource("SpriteFrames_o6xl0")
 
 [node name="Engine" type="StaticBody2D" parent="ShipManager"]
-position = Vector2(-15, -2)
+position = Vector2(-25, -2)
 input_pickable = true
 script = ExtResource("7_tipki")
 ship_part_type = 2
@@ -451,7 +442,7 @@ shape = SubResource("RectangleShape2D_tefeu")
 sprite_frames = SubResource("SpriteFrames_jkv2x")
 
 [node name="LifeSupport" type="StaticBody2D" parent="ShipManager"]
-position = Vector2(41, 0)
+position = Vector2(31, 0)
 input_pickable = true
 script = ExtResource("7_tipki")
 ship_part_type = 3
@@ -482,13 +473,16 @@ shape = SubResource("RectangleShape2D_tefeu")
 sprite_frames = SubResource("SpriteFrames_muem4")
 
 [node name="LoopDrawer" type="Node2D" parent="ShipManager"]
-position = Vector2(0, -79)
+position = Vector2(0, -80)
 script = ExtResource("2_o6xl0")
 
 [node name="CurrentLine" type="Line2D" parent="ShipManager/LoopDrawer"]
-width = 2.0
-joint_mode = 2
-begin_cap_mode = 2
-end_cap_mode = 2
+position = Vector2(-2, 0)
+width = 3.0
+texture = ExtResource("9_85g3d")
+texture_mode = 2
+joint_mode = 1
 
-[connection signal="pressed" from="UI/ClearButton" to="." method="_on_clear_button_pressed"]
+[node name="PlugSprite" type="Sprite2D" parent="ShipManager/LoopDrawer"]
+visible = false
+texture = ExtResource("10_choun")

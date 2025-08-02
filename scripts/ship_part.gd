@@ -11,12 +11,8 @@ enum ShipPartType {
 @export var ship_part_type: ShipPartType
 @export var direction: ShipManager.ShipPartDirection
 
-var highlighted: int = 0
-
-func _process(_delta: float) -> void:
-	if highlighted == 1:
-		modulate = Color(1, 1, 0, 1)
-	elif highlighted == 2:
-		modulate = Color(0, 1, 0, 1)
+func highlight(on: bool) -> void:
+	if on:
+		modulate = Color(1, 1, 0, 1) # Yellow highlight
 	else:
-		modulate = Color(1, 1, 1, 1) # Reset color
+		modulate = Color(1, 1, 1, 1) # Default
