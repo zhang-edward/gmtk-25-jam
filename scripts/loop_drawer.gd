@@ -80,13 +80,16 @@ func reset_current_line():
 
 	if current_line.has_node("WireStart"):
 		current_line.get_node("WireStart").queue_free()
+
+	for ship_part in _ship_parts:
+		ship_part.set_highlight(false)
 	_ship_parts.clear()
 
 
 func on_mouse_entered_ship_part(ship_part: ShipPart):
 	if not drawing or ship_part in _ship_parts:
 		return
-	ship_part.highlight(Color(1, 1, 0, 1)) # Yellow highlight
+	ship_part.set_highlight(true)
 	_ship_parts.append(ship_part)
 
 func confirm_loop():
