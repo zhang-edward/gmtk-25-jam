@@ -1,11 +1,12 @@
-[gd_scene load_steps=24 format=3 uid="uid://c4pv8emq2w6hy"]
+[gd_scene load_steps=25 format=3 uid="uid://c4pv8emq2w6hy"]
 
 [ext_resource type="Script" uid="uid://vy0s6q4ywn7k" path="res://scripts/game_manager.gd" id="1_tefeu"]
 [ext_resource type="Script" uid="uid://k7cvadgfe155" path="res://scripts/loop_drawer.gd" id="2_o6xl0"]
-[ext_resource type="PackedScene" uid="uid://cp4quj1xdmxj4" path="res://scenes/top_screen.tscn" id="2_ya4ey"]
+[ext_resource type="PackedScene" path="res://scenes/top_screen.tscn" id="2_ya4ey"]
 [ext_resource type="Script" uid="uid://dyqthfxohiyaq" path="res://scripts/ship_manager.gd" id="5_tbgi4"]
 [ext_resource type="Script" uid="uid://bmcm6wisrfwyy" path="res://scripts/ship_debug_ui.gd" id="6_debug"]
 [ext_resource type="Script" uid="uid://cepbueidsicgu" path="res://scripts/ship_part.gd" id="7_tipki"]
+[ext_resource type="PackedScene" uid="uid://bdg43d8d5b7ty" path="res://entities/wire_occluder.tscn" id="8_ya4ey"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_tbgi4"]
 load_path = "res://.godot/imported/ship_silhouette.png-88a5cd8ae829aff431db1f3c4a27a3fa.ctex"
@@ -170,8 +171,9 @@ patch_margin_bottom = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShipManager/Power"]
 shape = SubResource("RectangleShape2D_o6xl0")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ShipManager/Power"]
+[node name="ShipPartIcon" type="AnimatedSprite2D" parent="ShipManager/Power"]
 modulate = Color(1, 1, 0, 1)
+z_index = 10
 sprite_frames = SubResource("SpriteFrames_choun")
 
 [node name="Shield_NE" type="StaticBody2D" parent="ShipManager"]
@@ -199,10 +201,13 @@ patch_margin_top = 2
 patch_margin_right = 2
 patch_margin_bottom = 2
 
+[node name="WireOccluder" parent="ShipManager/Shield_NE" instance=ExtResource("8_ya4ey")]
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShipManager/Shield_NE"]
 shape = SubResource("RectangleShape2D_tefeu")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ShipManager/Shield_NE"]
+[node name="ShipPartIcon" type="AnimatedSprite2D" parent="ShipManager/Shield_NE"]
+z_index = 10
 sprite_frames = SubResource("SpriteFrames_eb6dy")
 
 [node name="Shield_NW" type="StaticBody2D" parent="ShipManager"]
@@ -229,10 +234,13 @@ patch_margin_top = 2
 patch_margin_right = 2
 patch_margin_bottom = 2
 
+[node name="WireOccluder" parent="ShipManager/Shield_NW" instance=ExtResource("8_ya4ey")]
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShipManager/Shield_NW"]
 shape = SubResource("RectangleShape2D_tefeu")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ShipManager/Shield_NW"]
+[node name="ShipPartIcon" type="AnimatedSprite2D" parent="ShipManager/Shield_NW"]
+z_index = 10
 sprite_frames = SubResource("SpriteFrames_eb6dy")
 
 [node name="Shield_SE" type="StaticBody2D" parent="ShipManager"]
@@ -260,10 +268,13 @@ patch_margin_top = 2
 patch_margin_right = 2
 patch_margin_bottom = 2
 
+[node name="WireOccluder" parent="ShipManager/Shield_SE" instance=ExtResource("8_ya4ey")]
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShipManager/Shield_SE"]
 shape = SubResource("RectangleShape2D_tefeu")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ShipManager/Shield_SE"]
+[node name="ShipPartIcon" type="AnimatedSprite2D" parent="ShipManager/Shield_SE"]
+z_index = 10
 sprite_frames = SubResource("SpriteFrames_eb6dy")
 
 [node name="Shield_SW" type="StaticBody2D" parent="ShipManager"]
@@ -291,10 +302,13 @@ patch_margin_top = 2
 patch_margin_right = 2
 patch_margin_bottom = 2
 
+[node name="WireOccluder" parent="ShipManager/Shield_SW" instance=ExtResource("8_ya4ey")]
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShipManager/Shield_SW"]
 shape = SubResource("RectangleShape2D_tefeu")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ShipManager/Shield_SW"]
+[node name="ShipPartIcon" type="AnimatedSprite2D" parent="ShipManager/Shield_SW"]
+z_index = 10
 sprite_frames = SubResource("SpriteFrames_eb6dy")
 
 [node name="Turret_NE" type="StaticBody2D" parent="ShipManager"]
@@ -323,10 +337,13 @@ patch_margin_top = 2
 patch_margin_right = 2
 patch_margin_bottom = 2
 
+[node name="WireOccluder" parent="ShipManager/Turret_NE" instance=ExtResource("8_ya4ey")]
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShipManager/Turret_NE"]
 shape = SubResource("RectangleShape2D_tefeu")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ShipManager/Turret_NE"]
+[node name="ShipPartIcon" type="AnimatedSprite2D" parent="ShipManager/Turret_NE"]
+z_index = 10
 sprite_frames = SubResource("SpriteFrames_o6xl0")
 
 [node name="Turret_NW" type="StaticBody2D" parent="ShipManager"]
@@ -354,10 +371,13 @@ patch_margin_top = 2
 patch_margin_right = 2
 patch_margin_bottom = 2
 
+[node name="WireOccluder" parent="ShipManager/Turret_NW" instance=ExtResource("8_ya4ey")]
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShipManager/Turret_NW"]
 shape = SubResource("RectangleShape2D_tefeu")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ShipManager/Turret_NW"]
+[node name="ShipPartIcon" type="AnimatedSprite2D" parent="ShipManager/Turret_NW"]
+z_index = 10
 sprite_frames = SubResource("SpriteFrames_o6xl0")
 
 [node name="Turrent_SE" type="StaticBody2D" parent="ShipManager"]
@@ -386,10 +406,13 @@ patch_margin_top = 2
 patch_margin_right = 2
 patch_margin_bottom = 2
 
+[node name="WireOccluder" parent="ShipManager/Turrent_SE" instance=ExtResource("8_ya4ey")]
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShipManager/Turrent_SE"]
 shape = SubResource("RectangleShape2D_tefeu")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ShipManager/Turrent_SE"]
+[node name="ShipPartIcon" type="AnimatedSprite2D" parent="ShipManager/Turrent_SE"]
+z_index = 10
 sprite_frames = SubResource("SpriteFrames_o6xl0")
 
 [node name="Turrent_SW" type="StaticBody2D" parent="ShipManager"]
@@ -418,10 +441,13 @@ patch_margin_top = 2
 patch_margin_right = 2
 patch_margin_bottom = 2
 
+[node name="WireOccluder" parent="ShipManager/Turrent_SW" instance=ExtResource("8_ya4ey")]
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShipManager/Turrent_SW"]
 shape = SubResource("RectangleShape2D_tefeu")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ShipManager/Turrent_SW"]
+[node name="ShipPartIcon" type="AnimatedSprite2D" parent="ShipManager/Turrent_SW"]
+z_index = 10
 sprite_frames = SubResource("SpriteFrames_o6xl0")
 
 [node name="Engine" type="StaticBody2D" parent="ShipManager"]
@@ -449,10 +475,13 @@ patch_margin_top = 2
 patch_margin_right = 2
 patch_margin_bottom = 2
 
+[node name="WireOccluder" parent="ShipManager/Engine" instance=ExtResource("8_ya4ey")]
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShipManager/Engine"]
 shape = SubResource("RectangleShape2D_tefeu")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ShipManager/Engine"]
+[node name="ShipPartIcon" type="AnimatedSprite2D" parent="ShipManager/Engine"]
+z_index = 10
 sprite_frames = SubResource("SpriteFrames_jkv2x")
 
 [node name="LifeSupport" type="StaticBody2D" parent="ShipManager"]
@@ -480,22 +509,26 @@ patch_margin_top = 2
 patch_margin_right = 2
 patch_margin_bottom = 2
 
+[node name="WireOccluder" parent="ShipManager/LifeSupport" instance=ExtResource("8_ya4ey")]
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShipManager/LifeSupport"]
 shape = SubResource("RectangleShape2D_tefeu")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ShipManager/LifeSupport"]
+[node name="ShipPartIcon" type="AnimatedSprite2D" parent="ShipManager/LifeSupport"]
+z_index = 10
 sprite_frames = SubResource("SpriteFrames_muem4")
 
 [node name="LoopDrawer" type="Node2D" parent="ShipManager"]
 position = Vector2(0, -80)
 script = ExtResource("2_o6xl0")
+metadata/_edit_lock_ = true
 
 [node name="CurrentLine" type="Line2D" parent="ShipManager/LoopDrawer"]
-position = Vector2(-2, 0)
 width = 3.0
 texture = SubResource("CompressedTexture2D_tipki")
 texture_mode = 2
 joint_mode = 1
+metadata/_edit_lock_ = true
 
 [node name="PlugSprite" type="Sprite2D" parent="ShipManager/LoopDrawer"]
 visible = false

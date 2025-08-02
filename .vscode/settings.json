@@ -2,5 +2,5 @@
   "files.exclude": {
     "**/*.uid": true
   },
-  "godotTools.editorPath.godot4": "/Applications/Godot_v4.4.1.app"
+  "godotTools.editorPath.godot4": "/Applications/Godot.app"
 }

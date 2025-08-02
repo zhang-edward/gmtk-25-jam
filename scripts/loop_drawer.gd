@@ -1,7 +1,7 @@
 extends Node2D
 class_name LoopDrawer
 
-signal loop_closed(_cities: Array[PhysicsBody2D])
+signal loop_closed(ship_parts: Array[PhysicsBody2D])
 
 const CLOSE_LOOP_DISTANCE: float = 30.0
 const MIN_DISTANCE_BETWEEN_POINTS: float = 4.0
@@ -13,7 +13,6 @@ var drawing: bool = false
 @onready var plug_sprite: Sprite2D = $PlugSprite
 
 var _completed_line: Line2D
-var _current_line_length: float = 0.0
 
 var _ship_parts: Array[ShipPart] = []
 
@@ -57,28 +56,18 @@ func _add_point_to_line(pos: Vector2):
 		if last_point.distance_to(pos) > MIN_DISTANCE_BETWEEN_POINTS:
 			current_line.add_point(pos)
 			queue_redraw()
-			_current_line_length += last_point.distance_to(pos)
 			plug_sprite.rotation = (pos - last_point).angle()
 
 func stop_drawing():
 	if not drawing:
 		return
 	drawing = false
-	_current_line_length = 0.0
 
-	if current_line.points.size() > 1:
-		print(_ship_parts)
-		loop_closed.emit(_ship_parts)
+	loop_closed.emit(_ship_parts)
 
 	can_close_loop = false
 	plug_sprite.visible = false
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-
-func clear_all_lines():
-	if _completed_line:
-		_completed_line.queue_free()
-	_completed_line = null
-	reset_current_line()
 
 func reset_current_line():
 	for ship_part in _ship_parts:
@@ -102,10 +91,3 @@ func confirm_loop():
 		_completed_line.queue_free()
 	_completed_line = current_line.duplicate()
 	add_child(_completed_line)
-
-func cancel_loop():
-	# Reset current line and clear points
-	reset_current_line()
-	drawing = false
-	_current_line_length = 0.0
-	print("Loop drawing cancelled.")

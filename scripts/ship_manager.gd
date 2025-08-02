@@ -48,19 +48,15 @@ func _input(event):
 	if event is InputEventMouseButton:
 		# Only handle input if mouse is inside the power area
 		if event.button_index == MOUSE_BUTTON_LEFT:
-			if event.pressed:
-				if _mouse_inside_power:
+			if event.pressed && _mouse_inside_power:
 					_loop_drawer.start_drawing(mouse_pos)
-			else:
-				if _mouse_inside_power:
-					_loop_drawer.stop_drawing()
-				else:
-					_loop_drawer.cancel_loop()
+			elif event.is_released():
+				_loop_drawer.stop_drawing()
 				
 
 func on_loop_closed(powered_ship_parts: Array[ShipPart]) -> void:
-	if powered_ship_parts.size() > MAX_POWERED_PARTS:
-		_loop_drawer.cancel_loop()
+	if powered_ship_parts.size() > MAX_POWERED_PARTS || !_mouse_inside_power:
+		_loop_drawer.reset_current_line()
 		return
 	else:
 		_loop_drawer.confirm_loop()
