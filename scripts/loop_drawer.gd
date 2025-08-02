@@ -6,7 +6,6 @@ signal loop_closed(_cities: Array[PhysicsBody2D])
 const CLOSE_LOOP_DISTANCE: float = 30.0
 const MIN_DISTANCE_BETWEEN_POINTS: float = 2.0
 
-
 @onready var current_line: Line2D = $CurrentLine
 
 var _completed_line: Line2D
