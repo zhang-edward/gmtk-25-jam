@@ -1,0 +1,124 @@
+[gd_scene load_steps=4 format=3 uid="uid://bq5awe1ftkali"]
+
+[ext_resource type="Script" uid="uid://d04ubd2ilsh3c" path="res://scripts/tutorial_card.gd" id="1_cfqc8"]
+[ext_resource type="Texture2D" uid="uid://0j3je7vbmhw3" path="res://sprites/tutorial/intro.png" id="1_mu5a8"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_38fhe"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 1, 0, 1)
+
+[node name="Tutorial_Systems_Overview" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_cfqc8")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_mu5a8")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 430.0
+offset_top = 604.0
+offset_right = 475.0
+offset_bottom = 635.0
+text = "Next"
+
+[node name="Button2" type="Button" parent="."]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 603.0
+offset_right = 50.0
+offset_bottom = 634.0
+text = "Back"
+
+[node name="PanelContainer2" type="PanelContainer" parent="."]
+layout_mode = 2
+offset_left = 128.0
+offset_top = 402.0
+offset_right = 170.0
+offset_bottom = 441.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_38fhe")
+
+[node name="PanelContainer5" type="PanelContainer" parent="."]
+layout_mode = 2
+offset_left = 101.0
+offset_top = 364.0
+offset_right = 140.0
+offset_bottom = 404.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_38fhe")
+
+[node name="PanelContainer4" type="PanelContainer" parent="."]
+layout_mode = 2
+offset_left = 187.0
+offset_top = 446.0
+offset_right = 229.0
+offset_bottom = 514.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_38fhe")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_left = 243.0
+offset_top = 434.0
+offset_right = 293.0
+offset_bottom = 524.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_38fhe")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 71.0
+offset_top = 230.0
+offset_right = 233.0
+offset_bottom = 349.0
+text = "These icons on your command console correspond to the ship's systems"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 257.0
+offset_top = 268.0
+offset_right = 419.0
+offset_bottom = 333.0
+text = "This one here is your power supply"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Line2D" type="Line2D" parent="."]
+position = Vector2(190.693, 317.521)
+scale = Vector2(1.06931, 0.752066)
+points = PackedVector2Array(-37.1202, 109.67, -42.7313, 19.2523)
+width = 2.0
+default_color = Color(0, 1, 0, 1)
+
+[node name="Line2D3" type="Line2D" parent="."]
+position = Vector2(238, 319)
+scale = Vector2(1.06931, 0.752066)
+points = PackedVector2Array(-35.537, 163.549, -80.4257, 17.2857)
+width = 2.0
+default_color = Color(0, 1, 0, 1)
+
+[node name="Line2D4" type="Line2D" parent="."]
+position = Vector2(265, 313)
+scale = Vector2(1.06931, 0.752066)
+points = PackedVector2Array(-135.601, 65.1538, -116.898, 25.2637)
+width = 2.0
+default_color = Color(0, 1, 0, 1)
+
+[node name="Line2D2" type="Line2D" parent="."]
+position = Vector2(462, 343)
+scale = Vector2(1.06931, 0.752066)
+points = PackedVector2Array(-175.814, 118.341, -140.278, -3.98901)
+width = 2.0
+default_color = Color(0, 1, 0, 1)

@@ -1,0 +1,100 @@
+[gd_scene load_steps=4 format=3 uid="uid://yhrnt2ap7b0y"]
+
+[ext_resource type="Script" uid="uid://d04ubd2ilsh3c" path="res://scripts/tutorial_card.gd" id="1_msx71"]
+[ext_resource type="Texture2D" uid="uid://cawh5rrvs1263" path="res://sprites/tutorial/connections.png" id="1_sa5ae"]
+[ext_resource type="Texture2D" uid="uid://ccbn1v380tiht" path="res://sprites/cursor_none.png" id="2_msx71"]
+
+[node name="Tutorial_Connections" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_msx71")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_sa5ae")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 430.0
+offset_top = 604.0
+offset_right = 475.0
+offset_bottom = 635.0
+text = "Next"
+
+[node name="Button2" type="Button" parent="."]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 603.0
+offset_right = 50.0
+offset_bottom = 634.0
+text = "Back"
+
+[node name="CursorNone" type="Sprite2D" parent="."]
+position = Vector2(280, 506)
+texture = ExtResource("2_msx71")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_left = 41.0
+offset_top = 394.0
+offset_right = 226.0
+offset_bottom = 504.0
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+text = "1. Connect up to 3 systems to power by drawing circuits (click and drag)"
+vertical_alignment = 1
+
+[node name="PanelContainer2" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_left = 274.0
+offset_top = 306.0
+offset_right = 459.0
+offset_bottom = 437.0
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer2"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PanelContainer2/MarginContainer"]
+layout_mode = 2
+text = "2. Power can only flow through completed circuits  that connect back to your power supply"
+vertical_alignment = 1
+
+[node name="PanelContainer3" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_left = 274.0
+offset_top = 51.0
+offset_right = 459.0
+offset_bottom = 136.0
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer3"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PanelContainer3/MarginContainer"]
+layout_mode = 2
+text = "3. Once connected, the system will activate!"
+vertical_alignment = 1

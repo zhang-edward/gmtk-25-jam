@@ -1,0 +1,67 @@
+[gd_scene load_steps=3 format=3 uid="uid://dlkn6xwd54bxv"]
+
+[ext_resource type="Script" uid="uid://d04ubd2ilsh3c" path="res://scripts/tutorial_card.gd" id="1_dxoqi"]
+[ext_resource type="Texture2D" uid="uid://cmd50bx3w31i0" path="res://sprites/tutorial/repairs.png" id="1_i8m4r"]
+
+[node name="Tutorial_Health" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dxoqi")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_i8m4r")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 430.0
+offset_top = 604.0
+offset_right = 475.0
+offset_bottom = 635.0
+text = "Next"
+
+[node name="Button2" type="Button" parent="."]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 603.0
+offset_right = 50.0
+offset_bottom = 634.0
+text = "Back"
+
+[node name="Line2D3" type="Line2D" parent="."]
+position = Vector2(367, 30)
+scale = Vector2(1.06931, 0.752066)
+points = PackedVector2Array(-36.4721, -15.956, -81.3609, -2.65934)
+width = 2.0
+default_color = Color(0, 1, 0, 1)
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="."]
+offset_left = 34.0
+offset_top = 241.0
+offset_right = 265.0
+offset_bottom = 317.0
+text = "Taking lasers and un-deflected asteroids will decrease your hull integrity"
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="."]
+offset_left = 315.0
+offset_top = 282.0
+offset_right = 466.0
+offset_bottom = 326.0
+text = "If it hits 0, you lose"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 133.0
+offset_top = 9.0
+offset_right = 282.0
+offset_bottom = 74.0
+text = "This is your ship's hull integrity"

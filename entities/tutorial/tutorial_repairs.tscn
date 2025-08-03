@@ -1,0 +1,80 @@
+[gd_scene load_steps=3 format=3 uid="uid://byq5gsfhi4tb0"]
+
+[ext_resource type="Texture2D" uid="uid://cmd50bx3w31i0" path="res://sprites/tutorial/repairs.png" id="1_rjbsm"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rjbsm"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 1, 0, 1)
+
+[node name="Tutorial_Health" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_rjbsm")
+
+[node name="Line2D3" type="Line2D" parent="TextureRect"]
+position = Vector2(249.534, 490.342)
+scale = Vector2(1.06931, 0.752066)
+points = PackedVector2Array(-31.3604, -84.224, 45.3246, -39.0152)
+width = 2.0
+default_color = Color(0, 1, 0, 1)
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 430.0
+offset_top = 604.0
+offset_right = 475.0
+offset_bottom = 635.0
+text = "Next"
+
+[node name="Button2" type="Button" parent="."]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 603.0
+offset_right = 50.0
+offset_bottom = 634.0
+text = "Back"
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 324.0
+offset_right = 263.0
+offset_bottom = 427.0
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="PanelContainer"]
+layout_mode = 2
+text = "Repair zones will appear which give you the chance to repair your hull"
+
+[node name="PanelContainer3" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_left = 41.0
+offset_top = 472.0
+offset_right = 235.0
+offset_bottom = 555.0
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="PanelContainer3"]
+layout_mode = 2
+text = "Connect 3 to fix up your ship! But be quick, because they disappear"
+
+[node name="PanelContainer2" type="PanelContainer" parent="."]
+offset_left = 300.0
+offset_top = 459.0
+offset_right = 342.0
+offset_bottom = 499.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_rjbsm")
