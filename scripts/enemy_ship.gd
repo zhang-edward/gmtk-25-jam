@@ -12,9 +12,14 @@ var firing_timer
 var top_screen: TopScreen
 var direction: TopScreen.EnemyShipDirection
 
+var _turret_target_rotation: float = 0.0
+
 func _ready() -> void:
 	hide()
 	health_bar.value = 100
+
+func _process(_delta: float) -> void:
+	turret_sprite.rotation = lerp_angle(turret_sprite.rotation, _turret_target_rotation, 0.2)
 
 func spawn_from_direction(_direction: TopScreen.EnemyShipDirection):
 	sprite.texture = textures.pick_random()
@@ -59,7 +64,8 @@ func fire_laser():
 	firing_timer.one_shot = true
 	firing_timer.timeout.connect(fire_laser)
 	add_child(firing_timer)
-	turret_sprite.look_at(top_screen.spaceship.global_position)
+	_turret_target_rotation = turret_sprite.global_position.angle_to_point(top_screen.spaceship.global_position)
+	$AudioStreamPlayer2D.play()
 
 func take_damage(amt: int):
 	health_bar.value -= amt

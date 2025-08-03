@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://g517drv1ral4"]
+[gd_scene load_steps=13 format=3 uid="uid://g517drv1ral4"]
 
 [ext_resource type="PackedScene" path="res://entities/health_bar.tscn" id="1_0dh01"]
 [ext_resource type="Script" uid="uid://chwg3kmdwblyl" path="res://scripts/enemy_ship.gd" id="1_tbr2v"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://drtsbe64efy35" path="res://sprites/enemies/enemy_1.png" id="4_81f0o"]
 [ext_resource type="Texture2D" uid="uid://caog82n40e1wi" path="res://sprites/circle-8.png" id="4_pbn3c"]
 [ext_resource type="Texture2D" uid="uid://dmbk5jx7lkwh4" path="res://sprites/enemies/enemy_turret_1.png" id="5_pbn3c"]
+[ext_resource type="AudioStream" uid="uid://yec481yga21t" path="res://sfx/laser.wav" id="8_lttc1"]
 
 [sub_resource type="Curve" id="Curve_t4kc0"]
 _data = [Vector2(0, 0.325843), 0.0, 2.05663, 0, 0, Vector2(0.3125, 0.505618), 0.208161, 0.208161, 0, 0, Vector2(1, 0), -0.149247, 0.0, 0, 0]
@@ -18,6 +19,10 @@ colors = PackedColorArray(1, 1, 1, 0.654902, 1, 1, 0, 1, 1, 0.372549, 0, 1, 0.14
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tbr2v"]
 size = Vector2(16, 16)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_4b82u"]
+streams_count = 1
+stream_0/stream = ExtResource("8_lttc1")
 
 [node name="EnemyShip" type="Node2D"]
 script = ExtResource("1_tbr2v")
@@ -57,3 +62,7 @@ collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_tbr2v")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_4b82u")
+volume_db = -3.255
