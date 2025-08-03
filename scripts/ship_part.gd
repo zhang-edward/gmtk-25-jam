@@ -11,6 +11,8 @@ enum ShipPartType {
 @export var ship_part_type: ShipPartType
 @export var direction: ShipManager.ShipPartDirection
 
+@onready var power_particles = $PowerParticles as CPUParticles2D
+
 var _powered: bool = false
 var _highlighted: bool = false
 
@@ -27,3 +29,4 @@ func set_highlight(on: bool) -> void:
 
 func set_powered(on: bool) -> void:
 	_powered = on
+	power_particles.emitting = on

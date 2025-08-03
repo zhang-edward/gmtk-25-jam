@@ -1,6 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://dwk0sdpvr3y0b"]
+[gd_scene load_steps=5 format=3 uid="uid://dfk4lynejx8n0"]
 
-[ext_resource type="Script" uid="uid://c4igijt3w7j8k" path="res://scripts/start.gd" id="1_bodal"]
+[ext_resource type="Script" path="res://scripts/start.gd" id="1_bodal"]
 [ext_resource type="FontFile" uid="uid://cjg2jgen5anq1" path="res://fonts/spaceline.ttf" id="1_jaeev"]
 [ext_resource type="AudioStream" uid="uid://bhf6ebneasq3j" path="res://music/title.ogg" id="2_u80x2"]
 
