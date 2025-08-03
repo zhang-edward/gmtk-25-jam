@@ -6,7 +6,7 @@ enum AsteroidDirection {N, S, E, W}
 
 @onready var spaceship = $Spaceship as Spaceship
 @onready var healthbar = $Healthbar as ProgressBar
-@export var spawn_interval_sec := 2
+@export var spawn_interval_sec := 10
 @export var enemy_ship_scene: PackedScene
 @export var asteroid_scene: PackedScene
 @export var ship_manager: ShipManager
