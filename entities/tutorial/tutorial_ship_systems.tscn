@@ -1,0 +1,36 @@
+[gd_scene load_steps=2 format=3 uid="uid://bhodn37gdgl8c"]
+
+[ext_resource type="Texture2D" uid="uid://0j3je7vbmhw3" path="res://sprites/tutorial/intro.png" id="1_o52sb"]
+
+[node name="TutorialShipSystems" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_o52sb")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 52.0
+offset_top = 282.0
+offset_right = 215.0
+offset_bottom = 380.0
+text = "Shields - for deflecting asteroids and enemy lasers"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 272.0
+offset_top = 296.0
+offset_right = 435.0
+offset_bottom = 350.0
+text = "Turrets - for fighting enemy ships"

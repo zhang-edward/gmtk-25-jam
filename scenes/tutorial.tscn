@@ -1,0 +1,50 @@
+[gd_scene load_steps=11 format=3 uid="uid://biqrsq3tmfwbs"]
+
+[ext_resource type="Script" uid="uid://ca8b4hmy5fgat" path="res://scripts/tutorial.gd" id="1_c13y7"]
+[ext_resource type="PackedScene" uid="uid://cflp2p87jnfjp" path="res://entities/tutorial/tutorial_intro.tscn" id="2_8ho6b"]
+[ext_resource type="PackedScene" uid="uid://yhrnt2ap7b0y" path="res://entities/tutorial/tutorial_connections.tscn" id="3_6yjpi"]
+[ext_resource type="PackedScene" uid="uid://bq5awe1ftkali" path="res://entities/tutorial/tutorial_systems_overview.tscn" id="3_ph3nu"]
+[ext_resource type="PackedScene" uid="uid://bmi5kpxhulbdp" path="res://entities/tutorial/tutorial_asteroids.tscn" id="4_4kmhl"]
+[ext_resource type="PackedScene" uid="uid://bxlrj0uximpo2" path="res://entities/tutorial/tutorial_enemy_ships.tscn" id="5_cq4me"]
+[ext_resource type="PackedScene" uid="uid://dlkn6xwd54bxv" path="res://entities/tutorial/tutorial_health.tscn" id="7_nlqja"]
+[ext_resource type="PackedScene" uid="uid://ci0yr7rp7t04d" path="res://entities/tutorial/tutorial_black_hole.tscn" id="8_0epgs"]
+[ext_resource type="PackedScene" uid="uid://chm8ctikprfr1" path="res://entities/tutorial/tutorial_high_score.tscn" id="9_g2equ"]
+[ext_resource type="AudioStream" uid="uid://c8p6csnp70x1p" path="res://music/tutorial.ogg" id="10_0epgs"]
+
+[node name="Tutorial" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_c13y7")
+
+[node name="Tutorial_Intro" parent="." instance=ExtResource("2_8ho6b")]
+layout_mode = 1
+
+[node name="Tutorial_Connections" parent="." instance=ExtResource("3_6yjpi")]
+layout_mode = 1
+
+[node name="Tutorial_Systems_Overview" parent="." instance=ExtResource("3_ph3nu")]
+layout_mode = 1
+
+[node name="Tutorial_Asteroids" parent="." instance=ExtResource("4_4kmhl")]
+layout_mode = 1
+
+[node name="Tutorial_Enemy_Ships" parent="." instance=ExtResource("5_cq4me")]
+layout_mode = 1
+
+[node name="Tutorial_Health" parent="." instance=ExtResource("7_nlqja")]
+layout_mode = 1
+
+[node name="Tutorial_Black_Hole" parent="." instance=ExtResource("8_0epgs")]
+layout_mode = 1
+
+[node name="Tutorial_HighScore" parent="." instance=ExtResource("9_g2equ")]
+layout_mode = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_0epgs")
+volume_db = -10.0
+autoplay = true

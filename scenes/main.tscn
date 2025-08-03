@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dtt2mj3xdo8bw" path="res://scenes/top_screen.tscn" id="2_ya4ey"]
 [ext_resource type="Script" uid="uid://cx05vl3wa01ap" path="res://scenes/camera_control.gd" id="4_ya4ey"]
 [ext_resource type="Script" uid="uid://dyqthfxohiyaq" path="res://scripts/ship_manager.gd" id="5_tbgi4"]
-[ext_resource type="Script" uid="uid://b7rq04q4t4ngn" path="res://scripts/power_ship_part.gd" id="6_a8y0u"]
+[ext_resource type="Script" path="res://scripts/power_ship_part.gd" id="6_a8y0u"]
 [ext_resource type="Script" uid="uid://bmcm6wisrfwyy" path="res://scripts/ship_debug_ui.gd" id="6_debug"]
 [ext_resource type="Texture2D" uid="uid://crbuu1610d0ow" path="res://sprites/icons.png" id="6_tipki"]
 [ext_resource type="Script" uid="uid://cepbueidsicgu" path="res://scripts/ship_part.gd" id="7_tipki"]

@@ -116,6 +116,7 @@ func handle_self_repair():
 	if repair_expiry_timer != null:
 		repair_expiry_timer.stop()
 	expire_repair_zones()
+	ship_status_changed.emit()
 
 func reset_all_power() -> void:
 	repair_zones_powered = []
@@ -124,7 +125,6 @@ func reset_all_power() -> void:
 	for i in range(turret_powered.size()):
 		turret_powered[i] = false
 	engine_powered = false
-	# ship_status_changed.emit()
 
 func mouse_entered_power_area() -> void:
 	_mouse_inside_power = true
