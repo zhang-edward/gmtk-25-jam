@@ -21,7 +21,7 @@ func set_power(power: int):
 
 func update_power_sprites():
 	for i in range(power_left):
-		power_sprites[i].modulate = Color(1, 1, 0, 1)
+		power_sprites[i].modulate = Color(0, 1, 1, 1)
 
 	for i in range(power_left, power_sprites.size()):
 		power_sprites[i].modulate = Color(0, 0, 0, 1)

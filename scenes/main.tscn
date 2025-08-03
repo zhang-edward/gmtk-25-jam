@@ -115,11 +115,11 @@ random_pitch = 1.1
 streams_count = 1
 stream_0/stream = ExtResource("11_eb6dy")
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_tipki"]
-load_path = "res://.godot/imported/wire.png-7d29d9ae2b38ff3e59810011f565b099.ctex"
-
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_85g3d"]
 load_path = "res://.godot/imported/plug.png-4f5a860c04c2570220e90ef93a4c2a0b.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_tipki"]
+load_path = "res://.godot/imported/wire.png-7d29d9ae2b38ff3e59810011f565b099.ctex"
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_trceg"]
 random_pitch = 1.1
@@ -197,18 +197,18 @@ patch_margin_bottom = 2
 shape = SubResource("RectangleShape2D_o6xl0")
 
 [node name="PowerIcon1" type="AnimatedSprite2D" parent="ShipManager/Power"]
-modulate = Color(1, 1, 0, 1)
+modulate = Color(0, 1, 1, 1)
 z_index = 12
 position = Vector2(0, -11)
 sprite_frames = SubResource("SpriteFrames_choun")
 
 [node name="PowerIcon2" type="AnimatedSprite2D" parent="ShipManager/Power"]
-modulate = Color(1, 1, 0, 1)
+modulate = Color(0, 1, 1, 1)
 z_index = 12
 sprite_frames = SubResource("SpriteFrames_choun")
 
 [node name="PowerIcon3" type="AnimatedSprite2D" parent="ShipManager/Power"]
-modulate = Color(1, 1, 0, 1)
+modulate = Color(0, 1, 1, 1)
 z_index = 12
 position = Vector2(0, 11)
 sprite_frames = SubResource("SpriteFrames_choun")
@@ -854,16 +854,16 @@ error_sound = ExtResource("12_jkv2x")
 plug_ship_part_sound = SubResource("AudioStreamRandomizer_a8y0u")
 metadata/_edit_lock_ = true
 
+[node name="PlugSprite" type="Sprite2D" parent="ShipManager/LoopDrawer"]
+visible = false
+texture = SubResource("CompressedTexture2D_85g3d")
+
 [node name="CurrentLine" type="Line2D" parent="ShipManager/LoopDrawer"]
 width = 3.0
 texture = SubResource("CompressedTexture2D_tipki")
 texture_mode = 2
 joint_mode = 1
 metadata/_edit_lock_ = true
-
-[node name="PlugSprite" type="Sprite2D" parent="ShipManager/LoopDrawer"]
-visible = false
-texture = SubResource("CompressedTexture2D_85g3d")
 
 [node name="PlugAudioPlayer" type="AudioStreamPlayer2D" parent="ShipManager"]
 stream = SubResource("AudioStreamRandomizer_trceg")

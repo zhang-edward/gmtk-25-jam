@@ -37,11 +37,12 @@ func _process(_delta):
 		for ship_part in _ship_parts:
 			ship_part.modulate = Color(1, 0, 0, 1) # Red highlight for too many parts
 	elif can_close_loop:
-		current_line.modulate = Color(1, 1, 0, 1)
+		current_line.modulate = Color(0, 1, 1, 1)
 	else:
-		current_line.modulate = Color(1, 1, 1, 1)
+		current_line.modulate = Color(0.5, 0.5, 0.5, 1)
 
 	plug_sprite.position = get_global_mouse_position()
+	plug_sprite.modulate = current_line.modulate
 
 func start_drawing(pos: Vector2):
 	drawing = true
@@ -82,6 +83,7 @@ func stop_drawing():
 	loop_closed.emit(_ship_parts)
 
 	can_close_loop = false
+
 	plug_sprite.visible = false
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
