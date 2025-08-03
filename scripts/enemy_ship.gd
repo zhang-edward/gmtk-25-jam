@@ -30,22 +30,22 @@ func spawn_from_direction(_direction: TopScreen.EnemyShipDirection):
 	var end_pos
 	match _direction:
 		TopScreen.EnemyShipDirection.NW:
-			start_pos = Vector2(top_left_pos.x, top_left_pos.y)
+			start_pos = Vector2(top_left_pos.x, top_left_pos.y) + Vector2(randf_range(0, -20), randf_range(0, -20))
 			end_pos = Vector2(start_pos.x + 50, start_pos.y + 30)
 		TopScreen.EnemyShipDirection.NE:
-			start_pos = Vector2(top_left_pos.x + TopScreen.VIEWPORT_WIDTH, top_left_pos.y)
+			start_pos = Vector2(top_left_pos.x + TopScreen.VIEWPORT_WIDTH, top_left_pos.y) + Vector2(randf_range(0, 20), randf_range(0, -20))
 			end_pos = Vector2(start_pos.x - 50, top_left_pos.y + 30)
 		TopScreen.EnemyShipDirection.SW:
-			start_pos = Vector2(top_left_pos.x, top_left_pos.y + TopScreen.VIEWPORT_HEIGHT)
+			start_pos = Vector2(top_left_pos.x, top_left_pos.y + TopScreen.VIEWPORT_HEIGHT) + Vector2(randf_range(0, -20), randf_range(0, 20))
 			end_pos = Vector2(start_pos.x + 50, start_pos.y - 30)
 		TopScreen.EnemyShipDirection.SE:
-			start_pos = Vector2(top_left_pos.x + TopScreen.VIEWPORT_WIDTH, top_left_pos.y + TopScreen.VIEWPORT_HEIGHT)
+			start_pos = Vector2(top_left_pos.x + TopScreen.VIEWPORT_WIDTH, top_left_pos.y + TopScreen.VIEWPORT_HEIGHT) + Vector2(randf_range(0, 20), randf_range(0, 20))
 			end_pos = Vector2(start_pos.x - 50, start_pos.y - 30)
 	global_position = start_pos
 	show()
 	var tween = create_tween()
 	tween.set_trans(Tween.TRANS_QUAD)
-	tween.tween_property(self, "global_position", end_pos, 3)
+	tween.tween_property(self, "global_position", end_pos, 5)
 	tween.finished.connect(fire_laser)
 
 	_bob_tween()

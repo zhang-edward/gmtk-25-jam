@@ -21,21 +21,21 @@ func spawn_from_direction(dir: TopScreen.AsteroidDirection):
 	var end_pos
 	match dir:
 		TopScreen.AsteroidDirection.N:
-			start_pos = Vector2(top_left_pos.x + TopScreen.VIEWPORT_WIDTH / 2.0, top_left_pos.y)
+			start_pos = Vector2(top_left_pos.x + TopScreen.VIEWPORT_WIDTH / 2.0, top_left_pos.y) + Vector2(randf_range(-50, 50), -20)
 			end_pos = Vector2(spaceship_pos.x, spaceship_pos.y - 25)
 		TopScreen.AsteroidDirection.S:
-			start_pos = Vector2(top_left_pos.x + TopScreen.VIEWPORT_WIDTH / 2.0, top_left_pos.y + TopScreen.VIEWPORT_HEIGHT)
+			start_pos = Vector2(top_left_pos.x + TopScreen.VIEWPORT_WIDTH / 2.0, top_left_pos.y + TopScreen.VIEWPORT_HEIGHT) + Vector2(randf_range(-20, 20), 20)
 			end_pos = Vector2(spaceship_pos.x, spaceship_pos.y + 25)
 		TopScreen.AsteroidDirection.E:
-			start_pos = Vector2(top_left_pos.x + TopScreen.VIEWPORT_WIDTH, top_left_pos.y + TopScreen.VIEWPORT_HEIGHT / 2.0)
+			start_pos = Vector2(top_left_pos.x + TopScreen.VIEWPORT_WIDTH, top_left_pos.y + TopScreen.VIEWPORT_HEIGHT / 2.0) + Vector2(20, randf_range(-20, 20))
 			end_pos = Vector2(spaceship_pos.x + 25, spaceship_pos.y)
 		TopScreen.AsteroidDirection.W:
-			start_pos = Vector2(top_left_pos.x, top_left_pos.y + TopScreen.VIEWPORT_HEIGHT / 2.0)
+			start_pos = Vector2(top_left_pos.x, top_left_pos.y + TopScreen.VIEWPORT_HEIGHT / 2.0) + Vector2(-20, randf_range(-20, 20))
 			end_pos = Vector2(spaceship_pos.x - 25, spaceship_pos.y)
 	global_position = start_pos
 	show()
 	tween_pos = create_tween()
-	tween_pos.tween_property(self, "global_position", end_pos, 5)
+	tween_pos.tween_property(self, "global_position", end_pos, randi_range(10, 20))
 	
 	var rotation_tween = create_tween()
 	rotation_tween.set_loops()

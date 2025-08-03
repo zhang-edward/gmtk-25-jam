@@ -18,9 +18,9 @@ func on_area_entered(other_area: Area2D):
 		queue_free()
 	elif other_area.get_parent() is Spaceship:
 		var spaceship = other_area.get_parent() as Spaceship
-		spaceship.take_damage(5)
+		spaceship.take_damage(2)
 		queue_free()
 	elif other_area.get_parent() is EnemyShip:
 		var enemy_ship = other_area.get_parent() as EnemyShip
-		enemy_ship.take_damage(40)
+		enemy_ship.take_damage(50)
 		queue_free()

@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://dtt2mj3xdo8bw"]
+[gd_scene load_steps=8 format=3 uid="uid://dtt2mj3xdo8bw"]
 
 [ext_resource type="Script" uid="uid://dtpbvjfgxs3rl" path="res://scripts/top_screen.gd" id="1_ggulp"]
 [ext_resource type="PackedScene" uid="uid://g517drv1ral4" path="res://entities/enemy_ship.tscn" id="2_waoyx"]
 [ext_resource type="PackedScene" uid="uid://bk8w4xnfuw6da" path="res://entities/asteroid.tscn" id="3_pelp5"]
-[ext_resource type="PackedScene" uid="uid://cmdk8fl75lwse" path="res://entities/health_bar.tscn" id="4_gpqrb"]
+[ext_resource type="PackedScene" path="res://entities/health_bar.tscn" id="4_gpqrb"]
 [ext_resource type="PackedScene" uid="uid://jn4bno1d5h3b" path="res://entities/spaceship.tscn" id="5_u6gjo"]
+[ext_resource type="Script" uid="uid://cyl0xnxd3kprj" path="res://scripts/black_hole_label_warning.gd" id="6_u6gjo"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v7odv"]
 bg_color = Color(0, 0, 0, 1)
@@ -43,7 +44,7 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 175.0
+offset_left = 5.0
 offset_top = 150.0
 offset_right = 235.0
 offset_bottom = 155.0
@@ -51,6 +52,8 @@ grow_horizontal = 0
 grow_vertical = 0
 size_flags_horizontal = 8
 size_flags_vertical = 8
+max_value = 200.0
+value = 100.0
 
 [node name="Spaceship" parent="." node_paths=PackedStringArray("top_screen_ref") instance=ExtResource("5_u6gjo")]
 position = Vector2(120, 80)
@@ -70,3 +73,10 @@ initial_velocity_min = 90.4
 initial_velocity_max = 181.31
 scale_amount_min = 0.2
 scale_amount_max = 0.7
+
+[node name="BlackHoleLabelWarning" type="RichTextLabel" parent="."]
+offset_left = 54.0
+offset_right = 140.0
+offset_bottom = 40.0
+text = "100"
+script = ExtResource("6_u6gjo")

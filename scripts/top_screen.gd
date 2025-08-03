@@ -6,7 +6,7 @@ enum AsteroidDirection {N, S, E, W}
 
 @onready var spaceship = $Spaceship as Spaceship
 @onready var healthbar = $Healthbar as ProgressBar
-@export var spawn_interval_sec := 10
+@export var spawn_interval_sec := 2
 @export var enemy_ship_scene: PackedScene
 @export var asteroid_scene: PackedScene
 @export var ship_manager: ShipManager
@@ -15,6 +15,8 @@ var ships_to_direction = {}
 var top_left_pos
 static var VIEWPORT_WIDTH = 240
 static var VIEWPORT_HEIGHT = 160
+
+var black_hole_distance := 1000.0
 
 func _ready() -> void:
 	var timer = Timer.new()
@@ -63,3 +65,13 @@ func generate_asteroid_from_dir(dir: AsteroidDirection):
 
 func on_ship_repaired():
 	healthbar.value += 25
+
+func _process(delta):
+	if ship_manager.engine_powered:
+		black_hole_distance += delta * 25
+	else:
+		black_hole_distance -= delta * 50
+
+	if black_hole_distance < 0:
+		black_hole_distance = 0
+		healthbar.value = 0
