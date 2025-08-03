@@ -1,11 +1,14 @@
-[gd_scene load_steps=11 format=3 uid="uid://jn4bno1d5h3b"]
+[gd_scene load_steps=14 format=3 uid="uid://jn4bno1d5h3b"]
 
 [ext_resource type="Script" uid="uid://dbhxy4uqhdk64" path="res://scripts/spaceship.gd" id="1_7e7db"]
+[ext_resource type="AudioStream" uid="uid://cpc108f48sb0f" path="res://sfx/ship_cut_engine.wav" id="2_x5hi1"]
 [ext_resource type="PackedScene" uid="uid://dlm05mrrl0qx6" path="res://entities/turret.tscn" id="2_x171k"]
+[ext_resource type="AudioStream" uid="uid://cbw68fwfjdir3" path="res://sfx/ship_engine_start.wav" id="3_sglx8"]
 [ext_resource type="Texture2D" uid="uid://c0omnusotcmlt" path="res://sprites/ship_gun.png" id="3_y2u2f"]
 [ext_resource type="Texture2D" uid="uid://cdg57da7uhwse" path="res://sprites/ship.png" id="4_cg41p"]
 [ext_resource type="PackedScene" uid="uid://bcmb1c058f5e1" path="res://entities/shield.tscn" id="4_y2u2f"]
 [ext_resource type="Texture2D" uid="uid://caog82n40e1wi" path="res://sprites/circle-8.png" id="6_cg41p"]
+[ext_resource type="AudioStream" uid="uid://c7xr1iapgcaj2" path="res://sfx/ship_engine.wav" id="7_4qqa7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x171k"]
 size = Vector2(44.5, 50.5)
@@ -22,6 +25,8 @@ colors = PackedColorArray(1, 1, 1, 0.654902, 1, 1, 1, 1, 0, 1, 1, 1, 0.0588235, 
 
 [node name="Spaceship" type="Node2D"]
 script = ExtResource("1_7e7db")
+ship_engine_stop_sound = ExtResource("2_x5hi1")
+ship_engine_start_sound = ExtResource("3_sglx8")
 
 [node name="ShipSprite" type="Sprite2D" parent="."]
 texture = ExtResource("4_cg41p")
@@ -81,9 +86,7 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_x171k")
 
-[node name="ThrusterParticleGroup" type="Node2D" parent="."]
-
-[node name="FlameParticles" type="CPUParticles2D" parent="ThrusterParticleGroup"]
+[node name="FlameParticles" type="CPUParticles2D" parent="."]
 position = Vector2(-28, -4)
 amount = 20
 texture = ExtResource("6_cg41p")
@@ -97,11 +100,8 @@ initial_velocity_max = 17.0
 scale_amount_curve = SubResource("Curve_4qqa7")
 color_ramp = SubResource("Gradient_4qqa7")
 
-[node name="ThrusterParticleGroup2" type="Node2D" parent="."]
-position = Vector2(0, 8)
-
-[node name="FlameParticles" type="CPUParticles2D" parent="ThrusterParticleGroup2"]
-position = Vector2(-28, -4)
+[node name="FlameParticles2" type="CPUParticles2D" parent="."]
+position = Vector2(-28, 4)
 amount = 20
 texture = ExtResource("6_cg41p")
 lifetime = 2.0
@@ -116,3 +116,8 @@ color_ramp = SubResource("Gradient_4qqa7")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_fem5a")
+
+[node name="ShipEngineAudioPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_4qqa7")
+
+[node name="ShipAudioPlayer" type="AudioStreamPlayer2D" parent="."]

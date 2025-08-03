@@ -124,7 +124,7 @@ func reset_all_power() -> void:
 	for i in range(turret_powered.size()):
 		turret_powered[i] = false
 	engine_powered = false
-	ship_status_changed.emit()
+	# ship_status_changed.emit()
 
 func mouse_entered_power_area() -> void:
 	_mouse_inside_power = true

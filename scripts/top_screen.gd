@@ -6,6 +6,8 @@ enum AsteroidDirection {N, S, E, W}
 
 @onready var spaceship = $Spaceship as Spaceship
 @onready var healthbar = $Healthbar as ProgressBar
+@onready var space_particles_fg = $SpaceParticlesFG as SpaceParticles
+@onready var space_particles_bg = $SpaceParticlesBG as SpaceParticles
 @export var spawn_interval_sec := 10
 @export var enemy_ship_scene: PackedScene
 @export var asteroid_scene: PackedScene
@@ -75,3 +77,6 @@ func _process(delta):
 	if black_hole_distance < 0:
 		black_hole_distance = 0
 		healthbar.value = 0
+	
+	space_particles_fg.engine_powered = ship_manager.engine_powered
+	space_particles_bg.engine_powered = ship_manager.engine_powered
