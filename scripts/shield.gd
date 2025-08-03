@@ -36,7 +36,7 @@ func deactivate():
 	area_2d.collision_layer = 0
 
 	var tween = create_tween()
-	tween.tween_property(self, "modulate", Color(1, 1, 1, 0), 0.2)
+	tween.tween_property(self, "modulate", Color(1, 1, 1, 0), 0.5)
 	sprite.play("deactivate")
 	await sprite.animation_finished
 	hide()
@@ -45,7 +45,7 @@ func activate():
 	if health_bar.value > 0:
 		show()
 		var tween = create_tween()
-		tween.tween_property(self, "modulate", Color(1, 1, 1, 1), 0.2)
+		tween.tween_property(self, "modulate", Color(1, 1, 1, 1), 0.5)
 		curr_shield_state = CurrShieldState.ACTIVATED
 		area_2d.collision_layer = 1
 		sprite.play("default")

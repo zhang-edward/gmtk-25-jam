@@ -37,7 +37,7 @@ func fire_laser():
 	if target_ship != null:
 		_turret_target_rotation = sprite.global_position.angle_to_point(target_ship.global_position)
 		var projectile = projectile_scene.instantiate() as Projectile
-		projectile.position = sprite.position
+		projectile.position = sprite.position + (Vector2.RIGHT.rotated(_turret_target_rotation) * 10)
 		projectile.get_node("Sprite2D").frames = laser_animation
 		add_child(projectile)
 		# Prevent hitting own shields
