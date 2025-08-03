@@ -9,12 +9,20 @@ const MIN_DISTANCE_BETWEEN_POINTS: float = 4.0
 var can_close_loop: bool = false
 var drawing: bool = false
 
+@export var start_drawing_sound: AudioStream
+@export var error_sound: AudioStream
+@export var plug_ship_part_sound: AudioStream
+
 @onready var current_line: Line2D = $CurrentLine
 @onready var plug_sprite: Sprite2D = $PlugSprite
 
 var _completed_line: Line2D
 var _ship_parts: Array[ShipPart] = []
 var _wire_end_texture: Texture2D = preload("res://sprites/wire_hole.png")
+
+var plug_audio_player: AudioStreamPlayer2D:
+	get:
+		return get_parent().get_node("PlugAudioPlayer") as AudioStreamPlayer2D
 
 func _ready():
 	plug_sprite.visible = false
@@ -51,6 +59,10 @@ func start_drawing(pos: Vector2):
 	wire_end.z_index = 1
 	wire_end.name = "WireStart"
 	current_line.add_child(wire_end)
+
+	# Play start sound
+	plug_audio_player.stream = start_drawing_sound
+	plug_audio_player.play()
 
 func _add_point_to_line(pos: Vector2):
 	if current_line.points.size() > 0:
@@ -91,6 +103,14 @@ func on_mouse_entered_ship_part(ship_part: ShipPart):
 		return
 	ship_part.set_highlight(true)
 	_ship_parts.append(ship_part)
+
+	if _ship_parts.size() > ShipManager.MAX_POWERED_PARTS:
+		plug_audio_player.stream = error_sound
+		plug_audio_player.play()
+	else:
+		plug_audio_player.stream = plug_ship_part_sound
+		plug_audio_player.play()
+
 
 func confirm_loop():
 	# Erase previous completed line
