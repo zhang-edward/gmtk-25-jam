@@ -90,7 +90,6 @@ func _process(delta):
 
 	score += delta * 100
 	score_label.text = "Score: " + str(score)
-	update_difficulty()
 
 	if black_hole_distance < 0:
 		black_hole_distance = 0
@@ -112,16 +111,18 @@ func _process(delta):
 	space_particles_fg.engine_powered = ship_manager.engine_powered
 	space_particles_bg.engine_powered = ship_manager.engine_powered
 
-func update_difficulty():
-	if score > 1000 and score <= 2500 and difficulty == Difficulty.VERY_EASY:
+func update_difficulty(delta: float):
+	if score > 1000 and score <= 2500:
 		difficulty = Difficulty.EASY
 		spawn_timer.wait_time = 12
-	elif score > 5000 and score <= 8000 and difficulty == Difficulty.EASY:
+	elif score > 5000 and score <= 8000:
 		difficulty = Difficulty.NORMAL
 		spawn_timer.wait_time = 10
-	elif score > 8000 and score <= 14000 and difficulty == Difficulty.NORMAL:
+	elif score > 8000 and score <= 14000:
 		difficulty = Difficulty.HARD
 		spawn_timer.wait_time = 8
-	elif score > 14000 and difficulty == Difficulty.HARD:
+	elif score > 14000 and score <= 30000:
 		difficulty = Difficulty.VERY_HARD
 		spawn_timer.wait_time = 6
+	elif score > 30000:
+		spawn_timer.wait_time -= 0.01 * delta

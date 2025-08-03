@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dtt2mj3xdo8bw" path="res://scenes/top_screen.tscn" id="2_ya4ey"]
 [ext_resource type="Script" uid="uid://cx05vl3wa01ap" path="res://scenes/camera_control.gd" id="4_ya4ey"]
 [ext_resource type="Script" uid="uid://dyqthfxohiyaq" path="res://scripts/ship_manager.gd" id="5_tbgi4"]
-[ext_resource type="Script" path="res://scripts/power_ship_part.gd" id="6_a8y0u"]
+[ext_resource type="Script" uid="uid://b7rq04q4t4ngn" path="res://scripts/power_ship_part.gd" id="6_a8y0u"]
 [ext_resource type="Script" uid="uid://bmcm6wisrfwyy" path="res://scripts/ship_debug_ui.gd" id="6_debug"]
 [ext_resource type="Texture2D" uid="uid://crbuu1610d0ow" path="res://sprites/icons.png" id="6_tipki"]
 [ext_resource type="Script" uid="uid://cepbueidsicgu" path="res://scripts/ship_part.gd" id="7_tipki"]
@@ -45,18 +45,15 @@ blend_mode = 1
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tefeu"]
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_o6xl0"]
-load_path = "res://.godot/imported/icons.png-559b25eaddffa571b999644fc7a08564.ctex"
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ya4ey"]
-atlas = SubResource("CompressedTexture2D_o6xl0")
-region = Rect2(32, 0, 16, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_jbj1t"]
+atlas = ExtResource("6_tipki")
+region = Rect2(48, 16, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_eb6dy"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ya4ey")
+"texture": SubResource("AtlasTexture_jbj1t")
 }],
 "loop": true,
 "name": &"default",
@@ -67,6 +64,9 @@ animations = [{
 interpolation_mode = 2
 offsets = PackedFloat32Array(0, 0.146667, 0.22, 0.546667, 0.62, 0.726667, 0.946667)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0.411765, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_o6xl0"]
+load_path = "res://.godot/imported/icons.png-559b25eaddffa571b999644fc7a08564.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_trceg"]
 atlas = SubResource("CompressedTexture2D_o6xl0")

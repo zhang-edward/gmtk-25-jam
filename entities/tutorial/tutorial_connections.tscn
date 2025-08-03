@@ -1,8 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://yhrnt2ap7b0y"]
+[gd_scene load_steps=6 format=3 uid="uid://yhrnt2ap7b0y"]
 
-[ext_resource type="Script" uid="uid://d04ubd2ilsh3c" path="res://scripts/tutorial_card.gd" id="1_msx71"]
+[ext_resource type="Script" path="res://scripts/tutorial_card.gd" id="1_msx71"]
 [ext_resource type="Texture2D" uid="uid://cawh5rrvs1263" path="res://sprites/tutorial/connections.png" id="1_sa5ae"]
 [ext_resource type="Texture2D" uid="uid://ccbn1v380tiht" path="res://sprites/cursor_none.png" id="2_msx71"]
+[ext_resource type="Texture2D" uid="uid://crbuu1610d0ow" path="res://sprites/icons.png" id="4_6prym"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hyan7"]
+atlas = ExtResource("4_6prym")
+region = Rect2(48, 16, 16, 16)
 
 [node name="Tutorial_Connections" type="Control"]
 layout_mode = 3
@@ -37,6 +42,21 @@ offset_top = 603.0
 offset_right = 50.0
 offset_bottom = 634.0
 text = "Back"
+
+[node name="ShieldIcon4" type="ColorRect" parent="."]
+offset_left = 287.0
+offset_top = 365.0
+offset_right = 314.0
+offset_bottom = 394.0
+color = Color(0.239216, 0.211765, 0.270588, 1)
+
+[node name="ShieldIcon" type="TextureRect" parent="ShieldIcon4"]
+layout_mode = 0
+offset_left = -4.0
+offset_top = -2.0
+offset_right = 27.0
+offset_bottom = 29.0
+texture = SubResource("AtlasTexture_hyan7")
 
 [node name="CursorNone" type="Sprite2D" parent="."]
 position = Vector2(280, 506)
@@ -98,3 +118,53 @@ theme_override_constants/margin_bottom = 5
 layout_mode = 2
 text = "3. Once connected, the system will activate!"
 vertical_alignment = 1
+
+[node name="ShieldIcon" type="ColorRect" parent="."]
+self_modulate = Color(0, 1, 1, 1)
+layout_mode = 0
+offset_left = 287.0
+offset_top = 565.0
+offset_right = 314.0
+offset_bottom = 594.0
+color = Color(0.239216, 0.211765, 0.270588, 1)
+
+[node name="ShieldIcon" type="TextureRect" parent="ShieldIcon"]
+modulate = Color(0, 1, 0.976471, 1)
+layout_mode = 0
+offset_left = -4.0
+offset_top = -2.0
+offset_right = 27.0
+offset_bottom = 29.0
+texture = SubResource("AtlasTexture_hyan7")
+
+[node name="ShieldIcon2" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 108.0
+offset_top = 370.0
+offset_right = 135.0
+offset_bottom = 399.0
+color = Color(0.239216, 0.211765, 0.270588, 1)
+
+[node name="ShieldIcon" type="TextureRect" parent="ShieldIcon2"]
+layout_mode = 0
+offset_left = -4.0
+offset_top = -2.0
+offset_right = 27.0
+offset_bottom = 29.0
+texture = SubResource("AtlasTexture_hyan7")
+
+[node name="ShieldIcon3" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 107.0
+offset_top = 561.0
+offset_right = 134.0
+offset_bottom = 590.0
+color = Color(0.239216, 0.211765, 0.270588, 1)
+
+[node name="ShieldIcon" type="TextureRect" parent="ShieldIcon3"]
+layout_mode = 0
+offset_left = -4.0
+offset_top = -2.0
+offset_right = 27.0
+offset_bottom = 29.0
+texture = SubResource("AtlasTexture_hyan7")

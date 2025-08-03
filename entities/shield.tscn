@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ch48unkhixi5a" path="res://scripts/shield.gd" id="1_x0awu"]
 [ext_resource type="Texture2D" uid="uid://dexy68hkx53fe" path="res://sprites/shield_section_hex.png" id="2_vc80v"]
-[ext_resource type="PackedScene" uid="uid://cmdk8fl75lwse" path="res://entities/health_bar.tscn" id="3_vc80v"]
+[ext_resource type="PackedScene" path="res://entities/health_bar.tscn" id="3_vc80v"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vbvg1"]
 atlas = ExtResource("2_vc80v")

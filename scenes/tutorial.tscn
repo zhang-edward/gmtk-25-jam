@@ -1,6 +1,6 @@
-[gd_scene load_steps=13 format=3 uid="uid://biqrsq3tmfwbs"]
+[gd_scene load_steps=13 format=3 uid="uid://dpb0wiea1a1e5"]
 
-[ext_resource type="Script" uid="uid://ca8b4hmy5fgat" path="res://scripts/tutorial.gd" id="1_c13y7"]
+[ext_resource type="Script" path="res://scripts/tutorial.gd" id="1_c13y7"]
 [ext_resource type="PackedScene" uid="uid://cflp2p87jnfjp" path="res://entities/tutorial/tutorial_intro.tscn" id="2_8ho6b"]
 [ext_resource type="PackedScene" uid="uid://yhrnt2ap7b0y" path="res://entities/tutorial/tutorial_connections.tscn" id="3_6yjpi"]
 [ext_resource type="PackedScene" uid="uid://bq5awe1ftkali" path="res://entities/tutorial/tutorial_systems_overview.tscn" id="3_ph3nu"]

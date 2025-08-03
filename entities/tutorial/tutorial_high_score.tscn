@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://chm8ctikprfr1"]
+[gd_scene load_steps=6 format=3 uid="uid://chm8ctikprfr1"]
 
-[ext_resource type="Script" uid="uid://d04ubd2ilsh3c" path="res://scripts/tutorial_card.gd" id="1_bt3ht"]
+[ext_resource type="Script" path="res://scripts/tutorial_card.gd" id="1_bt3ht"]
 [ext_resource type="Texture2D" uid="uid://dsv8ub6bbnwu0" path="res://sprites/tutorial/score.png" id="1_r041o"]
+[ext_resource type="Texture2D" uid="uid://crbuu1610d0ow" path="res://sprites/icons.png" id="3_20qnr"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r041o"]
 bg_color = Color(0, 0, 0, 0)
@@ -10,6 +11,10 @@ border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 border_color = Color(0, 1, 0, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5hbaa"]
+atlas = ExtResource("3_20qnr")
+region = Rect2(48, 16, 16, 16)
 
 [node name="Tutorial_HighScore" type="Control"]
 layout_mode = 3
@@ -63,3 +68,64 @@ offset_top = 3.0
 offset_right = 112.0
 offset_bottom = 33.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_r041o")
+
+[node name="ShieldIcon4" type="ColorRect" parent="."]
+offset_left = 288.0
+offset_top = 567.0
+offset_right = 315.0
+offset_bottom = 596.0
+color = Color(0.239216, 0.211765, 0.270588, 1)
+
+[node name="ShieldIcon" type="TextureRect" parent="ShieldIcon4"]
+layout_mode = 0
+offset_left = -4.0
+offset_top = -2.0
+offset_right = 27.0
+offset_bottom = 29.0
+texture = SubResource("AtlasTexture_5hbaa")
+
+[node name="ShieldIcon5" type="ColorRect" parent="."]
+offset_left = 288.0
+offset_top = 367.0
+offset_right = 315.0
+offset_bottom = 396.0
+color = Color(0.239216, 0.211765, 0.270588, 1)
+
+[node name="ShieldIcon" type="TextureRect" parent="ShieldIcon5"]
+layout_mode = 0
+offset_left = -4.0
+offset_top = -2.0
+offset_right = 27.0
+offset_bottom = 29.0
+texture = SubResource("AtlasTexture_5hbaa")
+
+[node name="ShieldIcon6" type="ColorRect" parent="."]
+modulate = Color(0, 1, 1, 1)
+offset_left = 108.0
+offset_top = 371.0
+offset_right = 135.0
+offset_bottom = 400.0
+color = Color(0.239216, 0.211765, 0.270588, 1)
+
+[node name="ShieldIcon" type="TextureRect" parent="ShieldIcon6"]
+layout_mode = 0
+offset_left = -4.0
+offset_top = -2.0
+offset_right = 27.0
+offset_bottom = 29.0
+texture = SubResource("AtlasTexture_5hbaa")
+
+[node name="ShieldIcon7" type="ColorRect" parent="."]
+offset_left = 107.0
+offset_top = 563.0
+offset_right = 134.0
+offset_bottom = 592.0
+color = Color(0.239216, 0.211765, 0.270588, 1)
+
+[node name="ShieldIcon" type="TextureRect" parent="ShieldIcon7"]
+layout_mode = 0
+offset_left = -4.0
+offset_top = -2.0
+offset_right = 27.0
+offset_bottom = 29.0
+texture = SubResource("AtlasTexture_5hbaa")
