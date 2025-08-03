@@ -1,23 +1,24 @@
-[gd_scene load_steps=3 format=3 uid="uid://bge2rcppyovkc"]
+[gd_scene load_steps=4 format=3 uid="uid://bge2rcppyovkc"]
 
 [ext_resource type="Script" uid="uid://dbpudj4g1rfyh" path="res://scripts/projectile.gd" id="1_jfshl"]
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_46mfb"]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_46mfb"]
-size = Vector2(10, 1)
+size = Vector2(6, 4)
 
 [node name="Projectile" type="Node2D"]
 script = ExtResource("1_jfshl")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_right = 10.0
-offset_bottom = 1.0
-color = Color(1, 0.397701, 0.329255, 1)
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(3, 0)
+sprite_frames = SubResource("SpriteFrames_46mfb")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 4
 collision_mask = 25
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(5, 0.5)
+position = Vector2(3, 0)
 shape = SubResource("RectangleShape2D_46mfb")
 debug_color = Color(0.983715, 0, 0.350436, 0.42)

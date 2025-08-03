@@ -3,6 +3,7 @@ extends Node2D
 
 @export var projectile_scene: PackedScene
 @export var textures: Array[Texture2D]
+@export var laser_animation: SpriteFrames
 
 @onready var sprite = $Sprite2D as Sprite2D
 @onready var turret_sprite = %TurretSprite as Sprite2D
@@ -54,6 +55,7 @@ func fire_laser():
 	if firing_timer != null:
 		firing_timer.queue_free()
 	var projectile = projectile_scene.instantiate() as Projectile
+	projectile.get_node("Sprite2D").frames = laser_animation
 	top_screen.add_child(projectile)
 	(projectile.area_2d as Area2D).set_collision_mask_value(5, false)
 	projectile.global_position = Vector2(global_position.x, global_position.y)

@@ -13,7 +13,6 @@ extends Node2D
 @onready var se_turret = $SETurret as Turret
 
 @export var top_screen_ref: TopScreen
-
 @export var ship_engine_stop_sound: AudioStream
 @export var ship_engine_start_sound: AudioStream
 

@@ -1,14 +1,45 @@
-[gd_scene load_steps=5 format=3 uid="uid://dlm05mrrl0qx6"]
+[gd_scene load_steps=10 format=3 uid="uid://dlm05mrrl0qx6"]
 
 [ext_resource type="Script" uid="uid://dxjda4ossfua4" path="res://scripts/turret.gd" id="1_x4r7f"]
 [ext_resource type="PackedScene" uid="uid://bge2rcppyovkc" path="res://entities/projectile.tscn" id="2_odw4x"]
 [ext_resource type="AudioStream" uid="uid://bvqjvvwex34ip" path="res://sfx/shoot_boom.wav" id="3_megvq"]
+[ext_resource type="Texture2D" uid="uid://ba35231lxoj35" path="res://sprites/laser_big.png" id="4_sqsi6"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_megvq"]
 streams_count = 1
 stream_0/stream = ExtResource("3_megvq")
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_okpcs"]
+atlas = ExtResource("4_sqsi6")
+region = Rect2(0, 0, 32, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gvi4s"]
+atlas = ExtResource("4_sqsi6")
+region = Rect2(32, 0, 32, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sbs5h"]
+atlas = ExtResource("4_sqsi6")
+region = Rect2(64, 0, 32, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bf2a4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_okpcs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gvi4s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sbs5h")
+}],
+"loop": false,
+"name": &"default",
+"speed": 20.0
+}]
+
 [node name="Turret" type="Node2D"]
 script = ExtResource("1_x4r7f")
 projectile_scene = ExtResource("2_odw4x")
 shoot_sound = SubResource("AudioStreamRandomizer_megvq")
+laser_animation = SubResource("SpriteFrames_bf2a4")

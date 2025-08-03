@@ -4,12 +4,13 @@ extends Node2D
 @onready var area_2d = $Area2D
 var fire_tween: Tween
 
-func fire_towards(target: Vector2):
+func fire_towards(target: Vector2, time = 0.5) -> void:
 	var direction = target - global_position
 	rotation = direction.angle()
 	fire_tween = create_tween()
-	fire_tween.tween_property(self, "global_position", target, 0.5)
+	fire_tween.tween_property(self, "global_position", target, time)
 	area_2d.area_entered.connect(on_area_entered)
+	$Sprite2D.play()
 
 func on_area_entered(other_area: Area2D):
 	if other_area.get_parent() is Shield:
