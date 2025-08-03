@@ -3,14 +3,22 @@ extends Node2D
 
 enum EnemyShipDirection {NW, NE, SW, SE}
 enum AsteroidDirection {N, S, E, W}
+enum Difficulty {
+	VERY_EASY,
+	EASY,
+	NORMAL,
+	HARD,
+	VERY_HARD
+}
 
 @onready var spaceship = $Spaceship as Spaceship
 @onready var healthbar = $Healthbar as ProgressBar
 @onready var space_particles_fg = $SpaceParticlesFG as SpaceParticles
 @onready var space_particles_bg = $SpaceParticlesBG as SpaceParticles
 @onready var effects_audio_player = $EffectsAudioPlayer as AudioStreamPlayer2D
+@onready var score_label = $Score as RichTextLabel
 
-@export var spawn_interval_sec := 10
+@export var spawn_interval_sec := 14
 @export var enemy_ship_scene: PackedScene
 @export var asteroid_scene: PackedScene
 @export var ship_manager: ShipManager
@@ -21,13 +29,16 @@ static var VIEWPORT_WIDTH = 240
 static var VIEWPORT_HEIGHT = 160
 
 var black_hole_distance := 1000.0
+var score := 0
+var difficulty := Difficulty.VERY_EASY
+var spawn_timer: Timer
 
 func _ready() -> void:
-	var timer = Timer.new()
-	timer.wait_time = spawn_interval_sec
-	timer.autostart = true
-	timer.timeout.connect(generate_random_event)
-	add_child(timer)
+	spawn_timer = Timer.new()
+	spawn_timer.wait_time = spawn_interval_sec
+	spawn_timer.autostart = true
+	spawn_timer.timeout.connect(generate_random_event)
+	add_child(spawn_timer)
 	healthbar.value = 100
 	top_left_pos = Vector2(position.x, position.y)
 	ship_manager.ship_status_changed.connect(on_ship_status_changed)
@@ -76,6 +87,10 @@ func _process(delta):
 	else:
 		black_hole_distance -= delta * 100
 
+	score += delta * 100
+	score_label.text = "Score: " + str(score)
+	update_difficulty()
+
 	if black_hole_distance < 0:
 		black_hole_distance = 0
 		CameraControl.instance.shake_camera(3.0, 1)
@@ -90,7 +105,23 @@ func _process(delta):
 		tween.tween_property(fade, "modulate:a", 1.0, 2.0)
 
 		await tween.finished
+		PlayerVariables.score = score
 		get_tree().change_scene_to_file("res://scenes/game_over.tscn")
 
 	space_particles_fg.engine_powered = ship_manager.engine_powered
 	space_particles_bg.engine_powered = ship_manager.engine_powered
+
+func update_difficulty():
+	if score > 1000 and score <= 2500 and difficulty == Difficulty.VERY_EASY:
+		difficulty = Difficulty.EASY
+		spawn_timer.wait_time = 12
+	elif score > 5000 and score <= 8000 and difficulty == Difficulty.EASY:
+		difficulty = Difficulty.NORMAL
+		spawn_timer.wait_time = 10
+	elif score > 8000 and score <= 14000 and difficulty == Difficulty.NORMAL:
+		difficulty = Difficulty.HARD
+		spawn_timer.wait_time = 7
+	elif score > 14000 and difficulty == Difficulty.HARD:
+		difficulty = Difficulty.VERY_HARD
+		spawn_timer.wait_time = 3
+
