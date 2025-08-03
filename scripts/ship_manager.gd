@@ -16,6 +16,8 @@ enum ShipPartDirection {
 var shield_powered: Array[bool] = [false, false, false, false]
 var turret_powered: Array[bool] = [false, false, false, false]
 var repair_zones_powered = []
+var engine_powered: bool = false
+
 @onready var all_repair_zones = [
 	$RepairZone,
 	$RepairZone2,
@@ -74,7 +76,8 @@ func _process(_delta: float) -> void:
 	for ship_part in _ship_parts:
 		if ship_part.ship_part_type == ShipPart.ShipPartType.SHIELD and shield_powered[ship_part.direction] or \
 		   ship_part.ship_part_type == ShipPart.ShipPartType.TURRET and turret_powered[ship_part.direction] or \
-			 ship_part.ship_part_type == ShipPart.ShipPartType.REPAIR_ZONE and repair_zones_powered.has(ship_part):
+			 ship_part.ship_part_type == ShipPart.ShipPartType.REPAIR_ZONE and repair_zones_powered.has(ship_part) or \
+			 ship_part.ship_part_type == ShipPart.ShipPartType.ENGINE and engine_powered:
 			ship_part.set_powered(true)
 		else:
 			ship_part.set_powered(false)
@@ -103,6 +106,9 @@ func on_ship_part_powered(ship_part: ShipPart) -> void:
 	elif ship_part.ship_part_type == ShipPart.ShipPartType.REPAIR_ZONE:
 		print("Repair Zone powered!")
 		repair_zones_powered.append(ship_part)
+	elif ship_part.ship_part_type == ShipPart.ShipPartType.ENGINE:
+		print("Engine powered!")
+		engine_powered = true
 
 func handle_self_repair():
 	_loop_drawer.erase_all_lines()
@@ -117,7 +123,8 @@ func reset_all_power() -> void:
 		shield_powered[i] = false
 	for i in range(turret_powered.size()):
 		turret_powered[i] = false
-	ship_status_changed.emit()
+	engine_powered = false
+	# ship_status_changed.emit()
 
 func mouse_entered_power_area() -> void:
 	_mouse_inside_power = true
@@ -139,7 +146,7 @@ func init_random_repair_zones():
 			repair_expiry_timer.queue_free()
 		repair_expiry_timer = Timer.new()
 		repair_expiry_timer.autostart = true
-		repair_expiry_timer.wait_time = 4
+		repair_expiry_timer.wait_time = 7
 		repair_expiry_timer.one_shot = true
 		repair_expiry_timer.timeout.connect(expire_repair_zones)
 		add_child(repair_expiry_timer)

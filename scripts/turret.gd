@@ -4,6 +4,7 @@ extends Node2D
 @export var projectile_scene: PackedScene
 @export var direction: TopScreen.EnemyShipDirection
 @export var shoot_sound: AudioStream
+@export var laser_animation: SpriteFrames
 
 @onready var sprite = $TurretSprite as Sprite2D
 
@@ -36,12 +37,13 @@ func fire_laser():
 	if target_ship != null:
 		_turret_target_rotation = sprite.global_position.angle_to_point(target_ship.global_position)
 		var projectile = projectile_scene.instantiate() as Projectile
-		projectile.position = sprite.position
+		projectile.position = sprite.position + (Vector2.RIGHT.rotated(_turret_target_rotation) * 10)
+		projectile.get_node("Sprite2D").frames = laser_animation
 		add_child(projectile)
 		# Prevent hitting own shields
 		(projectile.area_2d as Area2D).set_collision_mask_value(1, false)
 		(projectile.area_2d as Area2D).set_collision_mask_value(4, false)
-		projectile.fire_towards(target_ship.global_position)
+		projectile.fire_towards(target_ship.global_position, 0.2)
 
 		# Play shooting sound
 		var audio_player = get_parent().get_node("AudioStreamPlayer2D") as AudioStreamPlayer2D

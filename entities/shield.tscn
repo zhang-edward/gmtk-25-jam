@@ -1,8 +1,70 @@
-[gd_scene load_steps=5 format=3 uid="uid://bcmb1c058f5e1"]
+[gd_scene load_steps=13 format=3 uid="uid://bcmb1c058f5e1"]
 
 [ext_resource type="Script" uid="uid://ch48unkhixi5a" path="res://scripts/shield.gd" id="1_x0awu"]
-[ext_resource type="Texture2D" uid="uid://222fsuqpxusb" path="res://sprites/shield-section.png" id="2_vc80v"]
-[ext_resource type="PackedScene" uid="uid://cmdk8fl75lwse" path="res://entities/health_bar.tscn" id="3_vc80v"]
+[ext_resource type="Texture2D" uid="uid://dexy68hkx53fe" path="res://sprites/shield_section_hex.png" id="2_vc80v"]
+[ext_resource type="PackedScene" path="res://entities/health_bar.tscn" id="3_vc80v"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vbvg1"]
+atlas = ExtResource("2_vc80v")
+region = Rect2(216, 0, 72, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a8ffi"]
+atlas = ExtResource("2_vc80v")
+region = Rect2(144, 0, 72, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_th2go"]
+atlas = ExtResource("2_vc80v")
+region = Rect2(72, 0, 72, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vc80v"]
+atlas = ExtResource("2_vc80v")
+region = Rect2(0, 0, 72, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ee70q"]
+atlas = ExtResource("2_vc80v")
+region = Rect2(72, 0, 72, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7i456"]
+atlas = ExtResource("2_vc80v")
+region = Rect2(144, 0, 72, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yibs7"]
+atlas = ExtResource("2_vc80v")
+region = Rect2(216, 0, 72, 72)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vbvg1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vbvg1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a8ffi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_th2go")
+}],
+"loop": false,
+"name": &"deactivate",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vc80v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ee70q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7i456")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yibs7")
+}],
+"loop": false,
+"name": &"default",
+"speed": 20.0
+}]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vc80v"]
 bg_color = Color(0.266667, 0.411765, 0.666667, 1)
@@ -10,15 +72,20 @@ bg_color = Color(0.266667, 0.411765, 0.666667, 1)
 [node name="Shield" type="Node2D"]
 script = ExtResource("1_x0awu")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.392157)
-texture = ExtResource("2_vc80v")
+position = Vector2(2.5, -2.5)
+scale = Vector2(0.763889, 0.763889)
+sprite_frames = SubResource("SpriteFrames_vbvg1")
+animation = &"deactivate"
+frame = 2
+frame_progress = 1.0
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_mask = 6
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
-polygon = PackedVector2Array(-25, -30, -9, -29, 7, -21, 20, -8, 27, 5, 30, 16, 30, 24, -25, 24)
+polygon = PackedVector2Array(-24, -23, -10, -23, 3, -17, 15, -2, 21, 9, 25, 18, 26, 24, -25, 24)
 
 [node name="Healthbar" parent="." instance=ExtResource("3_vc80v")]
 offset_left = -21.0

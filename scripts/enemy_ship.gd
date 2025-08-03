@@ -3,6 +3,8 @@ extends Node2D
 
 @export var projectile_scene: PackedScene
 @export var textures: Array[Texture2D]
+@export var laser_animation: SpriteFrames
+@export var explosion_animation: SpriteFrames
 
 @onready var sprite = $Sprite2D as Sprite2D
 @onready var turret_sprite = %TurretSprite as Sprite2D
@@ -13,6 +15,8 @@ var top_screen: TopScreen
 var direction: TopScreen.EnemyShipDirection
 
 var _turret_target_rotation: float = 0.0
+
+var effect_scene: PackedScene = preload("res://core/effect.tscn")
 
 func _ready() -> void:
 	hide()
@@ -30,22 +34,22 @@ func spawn_from_direction(_direction: TopScreen.EnemyShipDirection):
 	var end_pos
 	match _direction:
 		TopScreen.EnemyShipDirection.NW:
-			start_pos = Vector2(top_left_pos.x, top_left_pos.y)
+			start_pos = Vector2(top_left_pos.x, top_left_pos.y) + Vector2(randf_range(0, -20), randf_range(0, -20))
 			end_pos = Vector2(start_pos.x + 50, start_pos.y + 30)
 		TopScreen.EnemyShipDirection.NE:
-			start_pos = Vector2(top_left_pos.x + TopScreen.VIEWPORT_WIDTH, top_left_pos.y)
+			start_pos = Vector2(top_left_pos.x + TopScreen.VIEWPORT_WIDTH, top_left_pos.y) + Vector2(randf_range(0, 20), randf_range(0, -20))
 			end_pos = Vector2(start_pos.x - 50, top_left_pos.y + 30)
 		TopScreen.EnemyShipDirection.SW:
-			start_pos = Vector2(top_left_pos.x, top_left_pos.y + TopScreen.VIEWPORT_HEIGHT)
+			start_pos = Vector2(top_left_pos.x, top_left_pos.y + TopScreen.VIEWPORT_HEIGHT) + Vector2(randf_range(0, -20), randf_range(0, 20))
 			end_pos = Vector2(start_pos.x + 50, start_pos.y - 30)
 		TopScreen.EnemyShipDirection.SE:
-			start_pos = Vector2(top_left_pos.x + TopScreen.VIEWPORT_WIDTH, top_left_pos.y + TopScreen.VIEWPORT_HEIGHT)
+			start_pos = Vector2(top_left_pos.x + TopScreen.VIEWPORT_WIDTH, top_left_pos.y + TopScreen.VIEWPORT_HEIGHT) + Vector2(randf_range(0, 20), randf_range(0, 20))
 			end_pos = Vector2(start_pos.x - 50, start_pos.y - 30)
 	global_position = start_pos
 	show()
 	var tween = create_tween()
 	tween.set_trans(Tween.TRANS_QUAD)
-	tween.tween_property(self, "global_position", end_pos, 3)
+	tween.tween_property(self, "global_position", end_pos, 5)
 	tween.finished.connect(fire_laser)
 
 	_bob_tween()
@@ -54,6 +58,7 @@ func fire_laser():
 	if firing_timer != null:
 		firing_timer.queue_free()
 	var projectile = projectile_scene.instantiate() as Projectile
+	projectile.get_node("Sprite2D").frames = laser_animation
 	top_screen.add_child(projectile)
 	(projectile.area_2d as Area2D).set_collision_mask_value(5, false)
 	projectile.global_position = Vector2(global_position.x, global_position.y)
@@ -72,6 +77,14 @@ func take_damage(amt: int):
 	if health_bar.value == 0:
 		top_screen.ships_to_direction.erase(direction)
 		queue_free()
+
+		var effect = effect_scene.instantiate()
+		effect.sprite_frames = explosion_animation
+		get_parent().add_child(effect)
+		effect.position = position
+		effect.play()
+		CameraControl.instance.shake_camera(1.0, 0.1)
+
 
 func _bob_tween():
 	var initial_position = sprite.position

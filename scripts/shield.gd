@@ -9,7 +9,7 @@ enum CurrShieldState {
 
 @export var scale_override = Vector2(1, 1)
 @onready var health_bar = $Healthbar as ProgressBar
-@onready var sprite = $Sprite2D as Sprite2D
+@onready var sprite = $Sprite2D as AnimatedSprite2D
 @onready var area_2d = $Area2D as Area2D
 
 var curr_shield_state: CurrShieldState = CurrShieldState.CHARGING
@@ -32,15 +32,23 @@ func charge_shield():
 		health_bar.value += 25
 	
 func deactivate():
-	hide()
 	curr_shield_state = CurrShieldState.CHARGING
 	area_2d.collision_layer = 0
+
+	var tween = create_tween()
+	tween.tween_property(self, "modulate", Color(1, 1, 1, 0), 0.5)
+	sprite.play("deactivate")
+	await sprite.animation_finished
+	hide()
 
 func activate():
 	if health_bar.value > 0:
 		show()
+		var tween = create_tween()
+		tween.tween_property(self, "modulate", Color(1, 1, 1, 1), 0.5)
 		curr_shield_state = CurrShieldState.ACTIVATED
 		area_2d.collision_layer = 1
+		sprite.play("default")
 
 func take_damage(damage: int):
 	health_bar.value -= damage
