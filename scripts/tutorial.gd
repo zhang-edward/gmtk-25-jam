@@ -10,6 +10,7 @@ var curr_tutorial_index := 0
 	$Tutorial_Asteroids,
 	$Tutorial_Enemy_Ships,
 	$Tutorial_Health,
+	$Tutorial_Repairs,
 	$Tutorial_Black_Hole,
 	$Tutorial_HighScore
 ]
