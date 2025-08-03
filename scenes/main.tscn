@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://c4pv8emq2w6hy"]
+[gd_scene load_steps=26 format=3 uid="uid://c4pv8emq2w6hy"]
 
 [ext_resource type="Script" uid="uid://vy0s6q4ywn7k" path="res://scripts/game_manager.gd" id="1_tefeu"]
 [ext_resource type="Script" uid="uid://k7cvadgfe155" path="res://scripts/loop_drawer.gd" id="2_o6xl0"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://bmcm6wisrfwyy" path="res://scripts/ship_debug_ui.gd" id="6_debug"]
 [ext_resource type="Script" uid="uid://cepbueidsicgu" path="res://scripts/ship_part.gd" id="7_tipki"]
 [ext_resource type="PackedScene" uid="uid://bdg43d8d5b7ty" path="res://entities/wire_occluder.tscn" id="8_ya4ey"]
+[ext_resource type="AudioStream" uid="uid://ceqrc5tha6ldp" path="res://music/in_game.ogg" id="9_85g3d"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_tbgi4"]
 load_path = "res://.godot/imported/ship_silhouette.png-88a5cd8ae829aff431db1f3c4a27a3fa.ctex"
@@ -780,3 +781,8 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 5
 text = "Spawn Asteroid E"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_85g3d")
+volume_db = -10.0
+autoplay = true
