@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://cdg57da7uhwse" path="res://sprites/ship.png" id="4_cg41p"]
 [ext_resource type="PackedScene" uid="uid://bcmb1c058f5e1" path="res://entities/shield.tscn" id="4_y2u2f"]
 [ext_resource type="Texture2D" uid="uid://caog82n40e1wi" path="res://sprites/circle-8.png" id="6_cg41p"]
-[ext_resource type="AudioStream" uid="uid://c7xr1iapgcaj2" path="res://sfx/ship_engine.wav" id="7_4qqa7"]
+[ext_resource type="AudioStream" uid="uid://fm8ywrl06wgp" path="res://sfx/ship_engine.ogg" id="9_x5hi1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x171k"]
 size = Vector2(44.5, 50.5)
@@ -118,7 +118,7 @@ color_ramp = SubResource("Gradient_4qqa7")
 stream = SubResource("AudioStreamRandomizer_fem5a")
 
 [node name="ShipEngineAudioPlayer" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("7_4qqa7")
+stream = ExtResource("9_x5hi1")
 volume_db = 6.558
 
 [node name="ShipAudioPlayer" type="AudioStreamPlayer2D" parent="."]
