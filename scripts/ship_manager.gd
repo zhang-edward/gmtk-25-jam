@@ -116,6 +116,7 @@ func handle_self_repair():
 	if repair_expiry_timer != null:
 		repair_expiry_timer.stop()
 	expire_repair_zones()
+	ship_status_changed.emit()
 
 func reset_all_power() -> void:
 	repair_zones_powered = []
@@ -124,7 +125,6 @@ func reset_all_power() -> void:
 	for i in range(turret_powered.size()):
 		turret_powered[i] = false
 	engine_powered = false
-	# ship_status_changed.emit()
 
 func mouse_entered_power_area() -> void:
 	_mouse_inside_power = true
@@ -136,7 +136,6 @@ func mouse_exited_power_area() -> void:
 
 func init_random_repair_zones():
 	if top_screen.healthbar.value < top_screen.healthbar.max_value:
-		print("Generating repair zones...")
 		var repair_zones_to_select = all_repair_zones
 		repair_zones_to_select.shuffle()
 		for i in range(0, 3):
@@ -151,11 +150,9 @@ func init_random_repair_zones():
 		repair_expiry_timer.timeout.connect(expire_repair_zones)
 		add_child(repair_expiry_timer)
 	else:
-		print("Full HP, checking again in 5-8s")
 		init_gen_repair_zone_timer()
 
 func expire_repair_zones():
-	print("Repair zones expired!")
 	repair_zones_powered = []
 	for zone in all_repair_zones:
 		zone.hide()
