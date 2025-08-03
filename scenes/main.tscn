@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://c4pv8emq2w6hy"]
+[gd_scene load_steps=38 format=3 uid="uid://c4pv8emq2w6hy"]
 
 [ext_resource type="Script" uid="uid://vy0s6q4ywn7k" path="res://scripts/game_manager.gd" id="1_tefeu"]
 [ext_resource type="Script" uid="uid://k7cvadgfe155" path="res://scripts/loop_drawer.gd" id="2_o6xl0"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://cepbueidsicgu" path="res://scripts/ship_part.gd" id="7_tipki"]
 [ext_resource type="PackedScene" uid="uid://bdg43d8d5b7ty" path="res://entities/wire_occluder.tscn" id="8_ya4ey"]
 [ext_resource type="AudioStream" uid="uid://ceqrc5tha6ldp" path="res://music/in_game.ogg" id="9_85g3d"]
+[ext_resource type="Texture2D" uid="uid://s0p6unfflipn" path="res://sprites/particles/electric_part.png" id="9_jkv2x"]
 [ext_resource type="AudioStream" uid="uid://cj20fbsr27nfv" path="res://sfx/plug_start.wav" id="11_a8y0u"]
 [ext_resource type="AudioStream" uid="uid://crup0abfj4v23" path="res://sfx/plug.wav" id="11_eb6dy"]
 [ext_resource type="AudioStream" uid="uid://b1ccs1e355pwf" path="res://sfx/plug_error.wav" id="12_jkv2x"]
@@ -61,6 +62,11 @@ animations = [{
 "name": &"default",
 "speed": 5.0
 }]
+
+[sub_resource type="Gradient" id="Gradient_jkv2x"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.146667, 0.22, 0.546667, 0.62, 0.726667, 0.946667)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0.411765, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_trceg"]
 atlas = SubResource("CompressedTexture2D_o6xl0")
@@ -150,9 +156,9 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -120.0
-offset_right = 120.0
-offset_bottom = 160.0
+offset_left = -141.0
+offset_right = 141.0
+offset_bottom = 171.0
 grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 2
@@ -283,6 +289,24 @@ shape = SubResource("RectangleShape2D_tefeu")
 z_index = 10
 sprite_frames = SubResource("SpriteFrames_eb6dy")
 
+[node name="PowerParticles" type="CPUParticles2D" parent="ShipManager/Shield_NE"]
+z_index = 20
+amount = 4
+texture = ExtResource("9_jkv2x")
+speed_scale = 2.0
+lifetime_randomness = 0.35
+emission_shape = 3
+emission_rect_extents = Vector2(12, 12)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 2.0
+angular_velocity_min = -1.0
+angular_velocity_max = 1.0
+scale_amount_min = 0.4
+scale_amount_max = 0.8
+color_ramp = SubResource("Gradient_jkv2x")
+
 [node name="Shield_NW" type="StaticBody2D" parent="ShipManager"]
 position = Vector2(-60, -48)
 input_pickable = true
@@ -315,6 +339,24 @@ shape = SubResource("RectangleShape2D_tefeu")
 [node name="ShipPartIcon" type="AnimatedSprite2D" parent="ShipManager/Shield_NW"]
 z_index = 10
 sprite_frames = SubResource("SpriteFrames_eb6dy")
+
+[node name="PowerParticles" type="CPUParticles2D" parent="ShipManager/Shield_NW"]
+z_index = 20
+amount = 4
+texture = ExtResource("9_jkv2x")
+speed_scale = 2.0
+lifetime_randomness = 0.35
+emission_shape = 3
+emission_rect_extents = Vector2(12, 12)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 2.0
+angular_velocity_min = -1.0
+angular_velocity_max = 1.0
+scale_amount_min = 0.4
+scale_amount_max = 0.8
+color_ramp = SubResource("Gradient_jkv2x")
 
 [node name="Shield_SE" type="StaticBody2D" parent="ShipManager"]
 position = Vector2(30, 50)
@@ -350,6 +392,24 @@ shape = SubResource("RectangleShape2D_tefeu")
 z_index = 10
 sprite_frames = SubResource("SpriteFrames_eb6dy")
 
+[node name="PowerParticles" type="CPUParticles2D" parent="ShipManager/Shield_SE"]
+z_index = 20
+amount = 4
+texture = ExtResource("9_jkv2x")
+speed_scale = 2.0
+lifetime_randomness = 0.35
+emission_shape = 3
+emission_rect_extents = Vector2(12, 12)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 2.0
+angular_velocity_min = -1.0
+angular_velocity_max = 1.0
+scale_amount_min = 0.4
+scale_amount_max = 0.8
+color_ramp = SubResource("Gradient_jkv2x")
+
 [node name="Shield_SW" type="StaticBody2D" parent="ShipManager"]
 position = Vector2(-60, 48)
 input_pickable = true
@@ -383,6 +443,24 @@ shape = SubResource("RectangleShape2D_tefeu")
 [node name="ShipPartIcon" type="AnimatedSprite2D" parent="ShipManager/Shield_SW"]
 z_index = 10
 sprite_frames = SubResource("SpriteFrames_eb6dy")
+
+[node name="PowerParticles" type="CPUParticles2D" parent="ShipManager/Shield_SW"]
+z_index = 20
+amount = 4
+texture = ExtResource("9_jkv2x")
+speed_scale = 2.0
+lifetime_randomness = 0.35
+emission_shape = 3
+emission_rect_extents = Vector2(12, 12)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 2.0
+angular_velocity_min = -1.0
+angular_velocity_max = 1.0
+scale_amount_min = 0.4
+scale_amount_max = 0.8
+color_ramp = SubResource("Gradient_jkv2x")
 
 [node name="Turret_NE" type="StaticBody2D" parent="ShipManager"]
 position = Vector2(50, -35)
@@ -419,6 +497,24 @@ shape = SubResource("RectangleShape2D_tefeu")
 z_index = 10
 sprite_frames = SubResource("SpriteFrames_o6xl0")
 
+[node name="PowerParticles" type="CPUParticles2D" parent="ShipManager/Turret_NE"]
+z_index = 20
+amount = 4
+texture = ExtResource("9_jkv2x")
+speed_scale = 2.0
+lifetime_randomness = 0.35
+emission_shape = 3
+emission_rect_extents = Vector2(12, 12)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 2.0
+angular_velocity_min = -1.0
+angular_velocity_max = 1.0
+scale_amount_min = 0.4
+scale_amount_max = 0.8
+color_ramp = SubResource("Gradient_jkv2x")
+
 [node name="Turret_NW" type="StaticBody2D" parent="ShipManager"]
 position = Vector2(-45, -30)
 input_pickable = true
@@ -453,6 +549,24 @@ shape = SubResource("RectangleShape2D_tefeu")
 z_index = 10
 position = Vector2(-1, 1)
 sprite_frames = SubResource("SpriteFrames_o6xl0")
+
+[node name="PowerParticles" type="CPUParticles2D" parent="ShipManager/Turret_NW"]
+z_index = 20
+amount = 4
+texture = ExtResource("9_jkv2x")
+speed_scale = 2.0
+lifetime_randomness = 0.35
+emission_shape = 3
+emission_rect_extents = Vector2(12, 12)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 2.0
+angular_velocity_min = -1.0
+angular_velocity_max = 1.0
+scale_amount_min = 0.4
+scale_amount_max = 0.8
+color_ramp = SubResource("Gradient_jkv2x")
 
 [node name="Turrent_SE" type="StaticBody2D" parent="ShipManager"]
 position = Vector2(50, 35)
@@ -489,6 +603,24 @@ shape = SubResource("RectangleShape2D_tefeu")
 z_index = 10
 sprite_frames = SubResource("SpriteFrames_o6xl0")
 
+[node name="PowerParticles" type="CPUParticles2D" parent="ShipManager/Turrent_SE"]
+z_index = 20
+amount = 4
+texture = ExtResource("9_jkv2x")
+speed_scale = 2.0
+lifetime_randomness = 0.35
+emission_shape = 3
+emission_rect_extents = Vector2(12, 12)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 2.0
+angular_velocity_min = -1.0
+angular_velocity_max = 1.0
+scale_amount_min = 0.4
+scale_amount_max = 0.8
+color_ramp = SubResource("Gradient_jkv2x")
+
 [node name="Turrent_SW" type="StaticBody2D" parent="ShipManager"]
 position = Vector2(-45, 30)
 input_pickable = true
@@ -524,8 +656,26 @@ shape = SubResource("RectangleShape2D_tefeu")
 z_index = 10
 sprite_frames = SubResource("SpriteFrames_o6xl0")
 
+[node name="PowerParticles" type="CPUParticles2D" parent="ShipManager/Turrent_SW"]
+z_index = 20
+amount = 4
+texture = ExtResource("9_jkv2x")
+speed_scale = 2.0
+lifetime_randomness = 0.35
+emission_shape = 3
+emission_rect_extents = Vector2(12, 12)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 2.0
+angular_velocity_min = -1.0
+angular_velocity_max = 1.0
+scale_amount_min = 0.4
+scale_amount_max = 0.8
+color_ramp = SubResource("Gradient_jkv2x")
+
 [node name="Engine" type="StaticBody2D" parent="ShipManager"]
-position = Vector2(-15, 0)
+position = Vector2(-16, 1)
 input_pickable = true
 script = ExtResource("7_tipki")
 ship_part_type = 3
@@ -566,6 +716,24 @@ shape = SubResource("RectangleShape2D_tipki")
 z_index = 10
 sprite_frames = SubResource("SpriteFrames_ya4ey")
 
+[node name="PowerParticles" type="CPUParticles2D" parent="ShipManager/Engine"]
+z_index = 20
+amount = 5
+texture = ExtResource("9_jkv2x")
+speed_scale = 2.0
+lifetime_randomness = 0.35
+emission_shape = 3
+emission_rect_extents = Vector2(12, 24)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 2.0
+angular_velocity_min = -1.0
+angular_velocity_max = 1.0
+scale_amount_min = 0.4
+scale_amount_max = 0.8
+color_ramp = SubResource("Gradient_jkv2x")
+
 [node name="RepairZone" type="StaticBody2D" parent="ShipManager"]
 visible = false
 position = Vector2(42, 0)
@@ -600,6 +768,24 @@ shape = SubResource("RectangleShape2D_tefeu")
 [node name="ShipPartIcon" type="AnimatedSprite2D" parent="ShipManager/RepairZone"]
 z_index = 10
 sprite_frames = SubResource("SpriteFrames_muem4")
+
+[node name="PowerParticles" type="CPUParticles2D" parent="ShipManager/RepairZone"]
+z_index = 20
+amount = 5
+texture = ExtResource("9_jkv2x")
+speed_scale = 2.0
+lifetime_randomness = 0.35
+emission_shape = 3
+emission_rect_extents = Vector2(12, 24)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 2.0
+angular_velocity_min = -1.0
+angular_velocity_max = 1.0
+scale_amount_min = 0.4
+scale_amount_max = 0.8
+color_ramp = SubResource("Gradient_jkv2x")
 
 [node name="RepairZone2" type="StaticBody2D" parent="ShipManager"]
 visible = false
@@ -636,6 +822,24 @@ shape = SubResource("RectangleShape2D_tefeu")
 z_index = 10
 sprite_frames = SubResource("SpriteFrames_muem4")
 
+[node name="PowerParticles" type="CPUParticles2D" parent="ShipManager/RepairZone2"]
+z_index = 20
+amount = 5
+texture = ExtResource("9_jkv2x")
+speed_scale = 2.0
+lifetime_randomness = 0.35
+emission_shape = 3
+emission_rect_extents = Vector2(12, 24)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 2.0
+angular_velocity_min = -1.0
+angular_velocity_max = 1.0
+scale_amount_min = 0.4
+scale_amount_max = 0.8
+color_ramp = SubResource("Gradient_jkv2x")
+
 [node name="RepairZone3" type="StaticBody2D" parent="ShipManager"]
 visible = false
 position = Vector2(0, 40)
@@ -670,6 +874,24 @@ shape = SubResource("RectangleShape2D_tefeu")
 [node name="ShipPartIcon" type="AnimatedSprite2D" parent="ShipManager/RepairZone3"]
 z_index = 10
 sprite_frames = SubResource("SpriteFrames_muem4")
+
+[node name="PowerParticles" type="CPUParticles2D" parent="ShipManager/RepairZone3"]
+z_index = 20
+amount = 5
+texture = ExtResource("9_jkv2x")
+speed_scale = 2.0
+lifetime_randomness = 0.35
+emission_shape = 3
+emission_rect_extents = Vector2(12, 24)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 2.0
+angular_velocity_min = -1.0
+angular_velocity_max = 1.0
+scale_amount_min = 0.4
+scale_amount_max = 0.8
+color_ramp = SubResource("Gradient_jkv2x")
 
 [node name="RepairZone4" type="StaticBody2D" parent="ShipManager"]
 visible = false
@@ -706,6 +928,24 @@ shape = SubResource("RectangleShape2D_tefeu")
 z_index = 10
 sprite_frames = SubResource("SpriteFrames_muem4")
 
+[node name="PowerParticles" type="CPUParticles2D" parent="ShipManager/RepairZone4"]
+z_index = 20
+amount = 5
+texture = ExtResource("9_jkv2x")
+speed_scale = 2.0
+lifetime_randomness = 0.35
+emission_shape = 3
+emission_rect_extents = Vector2(12, 24)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 2.0
+angular_velocity_min = -1.0
+angular_velocity_max = 1.0
+scale_amount_min = 0.4
+scale_amount_max = 0.8
+color_ramp = SubResource("Gradient_jkv2x")
+
 [node name="RepairZone5" type="StaticBody2D" parent="ShipManager"]
 visible = false
 position = Vector2(-30, -60)
@@ -740,6 +980,24 @@ shape = SubResource("RectangleShape2D_tefeu")
 [node name="ShipPartIcon" type="AnimatedSprite2D" parent="ShipManager/RepairZone5"]
 z_index = 10
 sprite_frames = SubResource("SpriteFrames_muem4")
+
+[node name="PowerParticles" type="CPUParticles2D" parent="ShipManager/RepairZone5"]
+z_index = 20
+amount = 5
+texture = ExtResource("9_jkv2x")
+speed_scale = 2.0
+lifetime_randomness = 0.35
+emission_shape = 3
+emission_rect_extents = Vector2(12, 24)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 2.0
+angular_velocity_min = -1.0
+angular_velocity_max = 1.0
+scale_amount_min = 0.4
+scale_amount_max = 0.8
+color_ramp = SubResource("Gradient_jkv2x")
 
 [node name="RepairZone6" type="StaticBody2D" parent="ShipManager"]
 visible = false
@@ -776,6 +1034,24 @@ shape = SubResource("RectangleShape2D_tefeu")
 z_index = 10
 sprite_frames = SubResource("SpriteFrames_muem4")
 
+[node name="PowerParticles" type="CPUParticles2D" parent="ShipManager/RepairZone6"]
+z_index = 20
+amount = 5
+texture = ExtResource("9_jkv2x")
+speed_scale = 2.0
+lifetime_randomness = 0.35
+emission_shape = 3
+emission_rect_extents = Vector2(12, 24)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 2.0
+angular_velocity_min = -1.0
+angular_velocity_max = 1.0
+scale_amount_min = 0.4
+scale_amount_max = 0.8
+color_ramp = SubResource("Gradient_jkv2x")
+
 [node name="RepairZone7" type="StaticBody2D" parent="ShipManager"]
 visible = false
 position = Vector2(70, 15)
@@ -811,6 +1087,24 @@ shape = SubResource("RectangleShape2D_tefeu")
 z_index = 10
 sprite_frames = SubResource("SpriteFrames_muem4")
 
+[node name="PowerParticles" type="CPUParticles2D" parent="ShipManager/RepairZone7"]
+z_index = 20
+amount = 5
+texture = ExtResource("9_jkv2x")
+speed_scale = 2.0
+lifetime_randomness = 0.35
+emission_shape = 3
+emission_rect_extents = Vector2(12, 24)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 2.0
+angular_velocity_min = -1.0
+angular_velocity_max = 1.0
+scale_amount_min = 0.4
+scale_amount_max = 0.8
+color_ramp = SubResource("Gradient_jkv2x")
+
 [node name="RepairZone8" type="StaticBody2D" parent="ShipManager"]
 visible = false
 position = Vector2(70, -15)
@@ -845,6 +1139,24 @@ shape = SubResource("RectangleShape2D_tefeu")
 [node name="ShipPartIcon" type="AnimatedSprite2D" parent="ShipManager/RepairZone8"]
 z_index = 10
 sprite_frames = SubResource("SpriteFrames_muem4")
+
+[node name="PowerParticles" type="CPUParticles2D" parent="ShipManager/RepairZone8"]
+z_index = 20
+amount = 5
+texture = ExtResource("9_jkv2x")
+speed_scale = 2.0
+lifetime_randomness = 0.35
+emission_shape = 3
+emission_rect_extents = Vector2(12, 24)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 2.0
+angular_velocity_min = -1.0
+angular_velocity_max = 1.0
+scale_amount_min = 0.4
+scale_amount_max = 0.8
+color_ramp = SubResource("Gradient_jkv2x")
 
 [node name="LoopDrawer" type="Node2D" parent="ShipManager"]
 position = Vector2(0, -80)

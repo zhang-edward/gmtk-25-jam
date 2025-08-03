@@ -18,4 +18,4 @@ func _process(_delta):
 	var green_blue = max(0.0, 1.0 - red_intensity * 1.5) # Fade out green/blue faster
 	var color_hex = Color(1.0, green_blue, green_blue).to_html()
 	
-	text = "[color=#%s]POWER ON ENGINES! Event horizon in %s[/color]" % [color_hex, str(round(distance) / 100)]
+	text = "[color=#%s]<<< Event horizon in %s  \t\t<<< POWER ON ENGINES![/color]" % [color_hex, str(round(distance) / 100)]

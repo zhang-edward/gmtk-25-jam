@@ -20,6 +20,7 @@ var _completed_line: Line2D
 var _ship_parts: Array[ShipPart] = []
 var _wire_end_texture: Texture2D = preload("res://sprites/wire_hole.png")
 
+
 var plug_audio_player: AudioStreamPlayer2D:
 	get:
 		return get_parent().get_node("PlugAudioPlayer") as AudioStreamPlayer2D
@@ -131,6 +132,7 @@ func confirm_loop():
 	wire_end.position = _completed_line.points[-1]
 	wire_end.z_index = 1
 	_completed_line.add_child(wire_end)
+
 
 func erase_all_lines():
 	if _completed_line:

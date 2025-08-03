@@ -124,4 +124,3 @@ func update_difficulty():
 	elif score > 14000 and difficulty == Difficulty.HARD:
 		difficulty = Difficulty.VERY_HARD
 		spawn_timer.wait_time = 3
-
