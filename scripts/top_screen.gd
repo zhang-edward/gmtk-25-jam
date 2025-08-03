@@ -120,7 +120,7 @@ func update_difficulty():
 		spawn_timer.wait_time = 10
 	elif score > 8000 and score <= 14000 and difficulty == Difficulty.NORMAL:
 		difficulty = Difficulty.HARD
-		spawn_timer.wait_time = 7
+		spawn_timer.wait_time = 8
 	elif score > 14000 and difficulty == Difficulty.HARD:
 		difficulty = Difficulty.VERY_HARD
-		spawn_timer.wait_time = 3
+		spawn_timer.wait_time = 6
