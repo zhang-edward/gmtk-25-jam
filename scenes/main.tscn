@@ -4,8 +4,8 @@
 [ext_resource type="Script" uid="uid://k7cvadgfe155" path="res://scripts/loop_drawer.gd" id="2_o6xl0"]
 [ext_resource type="PackedScene" uid="uid://dtt2mj3xdo8bw" path="res://scenes/top_screen.tscn" id="2_ya4ey"]
 [ext_resource type="Script" uid="uid://cx05vl3wa01ap" path="res://scenes/camera_control.gd" id="4_ya4ey"]
-[ext_resource type="Script" uid="uid://ddiogh2nu387t" path="res://scripts/highlight_on_hover.gd" id="5_eb6dy"]
 [ext_resource type="Script" uid="uid://dyqthfxohiyaq" path="res://scripts/ship_manager.gd" id="5_tbgi4"]
+[ext_resource type="Script" uid="uid://b7rq04q4t4ngn" path="res://scripts/power_ship_part.gd" id="6_a8y0u"]
 [ext_resource type="Script" uid="uid://bmcm6wisrfwyy" path="res://scripts/ship_debug_ui.gd" id="6_debug"]
 [ext_resource type="Texture2D" uid="uid://crbuu1610d0ow" path="res://sprites/icons.png" id="6_tipki"]
 [ext_resource type="Script" uid="uid://cepbueidsicgu" path="res://scripts/ship_part.gd" id="7_tipki"]
@@ -24,18 +24,15 @@ load_path = "res://.godot/imported/9patch_ship_part.png-09cd0a38b6dad02a5c2e3366
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o6xl0"]
 size = Vector2(24.2042, 44)
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_o6xl0"]
-load_path = "res://.godot/imported/icons.png-559b25eaddffa571b999644fc7a08564.ctex"
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_85g3d"]
-atlas = SubResource("CompressedTexture2D_o6xl0")
-region = Rect2(0, 16, 16, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_jkv2x"]
+atlas = ExtResource("6_tipki")
+region = Rect2(32, 16, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_choun"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_85g3d")
+"texture": SubResource("AtlasTexture_jkv2x")
 }],
 "loop": true,
 "name": &"default",
@@ -46,6 +43,9 @@ animations = [{
 blend_mode = 1
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tefeu"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_o6xl0"]
+load_path = "res://.godot/imported/icons.png-559b25eaddffa571b999644fc7a08564.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ya4ey"]
 atlas = SubResource("CompressedTexture2D_o6xl0")
@@ -95,15 +95,15 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_jbj1t"]
-atlas = SubResource("CompressedTexture2D_o6xl0")
-region = Rect2(16, 0, 16, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_a8y0u"]
+atlas = ExtResource("6_tipki")
+region = Rect2(16, 16, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_muem4"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_jbj1t")
+"texture": SubResource("AtlasTexture_a8y0u")
 }],
 "loop": true,
 "name": &"default",
@@ -172,7 +172,7 @@ unique_name_in_owner = true
 position = Vector2(14, 0)
 scale = Vector2(0.991565, 1)
 input_pickable = true
-script = ExtResource("5_eb6dy")
+script = ExtResource("6_a8y0u")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="ShipManager/Power"]
 anchors_preset = 8
@@ -196,12 +196,45 @@ patch_margin_bottom = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShipManager/Power"]
 shape = SubResource("RectangleShape2D_o6xl0")
 
-[node name="ShipPartIcon" type="AnimatedSprite2D" parent="ShipManager/Power"]
+[node name="PowerIcon1" type="AnimatedSprite2D" parent="ShipManager/Power"]
 modulate = Color(1, 1, 0, 1)
-z_index = 10
+z_index = 12
+position = Vector2(0, -11)
 sprite_frames = SubResource("SpriteFrames_choun")
 
+[node name="PowerIcon2" type="AnimatedSprite2D" parent="ShipManager/Power"]
+modulate = Color(1, 1, 0, 1)
+z_index = 12
+sprite_frames = SubResource("SpriteFrames_choun")
+
+[node name="PowerIcon3" type="AnimatedSprite2D" parent="ShipManager/Power"]
+modulate = Color(1, 1, 0, 1)
+z_index = 12
+position = Vector2(0, 11)
+sprite_frames = SubResource("SpriteFrames_choun")
+
+[node name="WireOccluder" parent="ShipManager/Power" instance=ExtResource("8_ya4ey")]
+
+[node name="ColorRect" parent="ShipManager/Power/WireOccluder" index="0"]
+offset_left = -4.0
+offset_top = -17.0
+offset_right = 4.0
+offset_bottom = 17.0
+
+[node name="ColorRect2" parent="ShipManager/Power/WireOccluder" index="1"]
+offset_left = -3.0
+offset_top = -16.0
+offset_right = 3.0
+offset_bottom = 16.0
+
+[node name="CollisionShape2D" parent="ShipManager/Power/WireOccluder" index="2"]
+visible = false
+
+[node name="ColorRect3" parent="ShipManager/Power/WireOccluder" index="3"]
+visible = false
+
 [node name="HighlightRect" type="ColorRect" parent="ShipManager/Power"]
+z_index = 11
 material = SubResource("CanvasItemMaterial_trceg")
 anchors_preset = 8
 anchor_left = 0.5
@@ -869,4 +902,5 @@ stream = ExtResource("9_85g3d")
 volume_db = -10.0
 autoplay = true
 
+[editable path="ShipManager/Power/WireOccluder"]
 [editable path="ShipManager/Engine/WireOccluder"]

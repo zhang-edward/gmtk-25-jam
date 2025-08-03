@@ -97,6 +97,8 @@ func reset_current_line():
 		ship_part.set_highlight(false)
 	_ship_parts.clear()
 
+	%Power.set_power(ShipManager.MAX_POWERED_PARTS - _ship_parts.size())
+
 
 func on_mouse_entered_ship_part(ship_part: ShipPart):
 	if not drawing or ship_part in _ship_parts:
@@ -111,6 +113,7 @@ func on_mouse_entered_ship_part(ship_part: ShipPart):
 		plug_audio_player.stream = plug_ship_part_sound
 		plug_audio_player.play()
 
+	%Power.set_power(ShipManager.MAX_POWERED_PARTS - _ship_parts.size())
 
 func confirm_loop():
 	# Erase previous completed line
