@@ -4,8 +4,7 @@ extends PhysicsBody2D
 enum ShipPartType {
 	SHIELD,
 	TURRET,
-	ENGINE,
-	LIFE_SUPPORT
+	REPAIR_ZONE
 }
 
 @export var ship_part_type: ShipPartType
