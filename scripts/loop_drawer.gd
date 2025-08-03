@@ -9,12 +9,20 @@ const MIN_DISTANCE_BETWEEN_POINTS: float = 4.0
 var can_close_loop: bool = false
 var drawing: bool = false
 
+@export var start_drawing_sound: AudioStream
+@export var error_sound: AudioStream
+@export var plug_ship_part_sound: AudioStream
+
 @onready var current_line: Line2D = $CurrentLine
 @onready var plug_sprite: Sprite2D = $PlugSprite
 
 var _completed_line: Line2D
 var _ship_parts: Array[ShipPart] = []
 var _wire_end_texture: Texture2D = preload("res://sprites/wire_hole.png")
+
+var plug_audio_player: AudioStreamPlayer2D:
+	get:
+		return get_parent().get_node("PlugAudioPlayer") as AudioStreamPlayer2D
 
 func _ready():
 	plug_sprite.visible = false
@@ -29,11 +37,12 @@ func _process(_delta):
 		for ship_part in _ship_parts:
 			ship_part.modulate = Color(1, 0, 0, 1) # Red highlight for too many parts
 	elif can_close_loop:
-		current_line.modulate = Color(1, 1, 0, 1)
+		current_line.modulate = Color(0, 1, 1, 1)
 	else:
-		current_line.modulate = Color(1, 1, 1, 1)
+		current_line.modulate = Color(0.5, 0.5, 0.5, 1)
 
 	plug_sprite.position = get_global_mouse_position()
+	plug_sprite.modulate = current_line.modulate
 
 func start_drawing(pos: Vector2):
 	drawing = true
@@ -51,6 +60,10 @@ func start_drawing(pos: Vector2):
 	wire_end.z_index = 1
 	wire_end.name = "WireStart"
 	current_line.add_child(wire_end)
+
+	# Play start sound
+	plug_audio_player.stream = start_drawing_sound
+	plug_audio_player.play()
 
 func _add_point_to_line(pos: Vector2):
 	if current_line.points.size() > 0:
@@ -70,6 +83,7 @@ func stop_drawing():
 	loop_closed.emit(_ship_parts)
 
 	can_close_loop = false
+
 	plug_sprite.visible = false
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
@@ -85,12 +99,23 @@ func reset_current_line():
 		ship_part.set_highlight(false)
 	_ship_parts.clear()
 
+	%Power.set_power(ShipManager.MAX_POWERED_PARTS - _ship_parts.size())
+
 
 func on_mouse_entered_ship_part(ship_part: ShipPart):
 	if not drawing or ship_part in _ship_parts:
 		return
 	ship_part.set_highlight(true)
 	_ship_parts.append(ship_part)
+
+	if _ship_parts.size() > ShipManager.MAX_POWERED_PARTS:
+		plug_audio_player.stream = error_sound
+		plug_audio_player.play()
+	else:
+		plug_audio_player.stream = plug_ship_part_sound
+		plug_audio_player.play()
+
+	%Power.set_power(ShipManager.MAX_POWERED_PARTS - _ship_parts.size())
 
 func confirm_loop():
 	# Erase previous completed line
