@@ -70,7 +70,7 @@ func on_area_entered(other_area: Area2D):
 
 	elif other_area.get_parent() is Spaceship:
 		var spaceship = other_area.get_parent() as Spaceship
-		spaceship.take_damage(25)
+		spaceship.take_damage(12)
 
 		var explosion = asteroid_explosion_scene.instantiate() as Node2D
 		explosion.global_position = position

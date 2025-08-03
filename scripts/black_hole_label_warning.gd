@@ -6,7 +6,7 @@ func _process(_delta):
 	var distance = top_screen.black_hole_distance
 	
 	# Hide label when black hole is far away
-	if distance > 1000:
+	if distance > 2000:
 		visible = false
 		return
 	else:

@@ -18,7 +18,7 @@ enum Difficulty {
 @onready var effects_audio_player = $EffectsAudioPlayer as AudioStreamPlayer2D
 @onready var score_label = $Score as RichTextLabel
 
-@export var spawn_interval_sec := 14
+@export var spawn_interval_sec := 10
 @export var enemy_ship_scene: PackedScene
 @export var asteroid_scene: PackedScene
 @export var ship_manager: ShipManager
@@ -45,10 +45,27 @@ func _ready() -> void:
 	ship_manager.ship_repaired.connect(on_ship_repaired)
 
 func generate_random_event():
+	print("spawn timer: ", spawn_timer.wait_time)
+	var num_events = 1
+	if score < 6000:
+		num_events = 1
+	elif score < 12000:
+		num_events = randi_range(1, 2)
+	elif score < 24000:
+		num_events = randi_range(1, 3)
+	else:
+		num_events = randi_range(2, 4)
+
+	print("========== generating events: ", num_events)
+
+	for i in range(num_events):
+		generate_event()
+
+func generate_event():
 	var rand_num = randi_range(0, 1)
 	if rand_num == 0:
 		generate_enemy_ship()
-	else:
+	elif rand_num == 1:
 		generate_asteroid()
 
 func generate_enemy_ship():
@@ -91,6 +108,8 @@ func _process(delta):
 	score += delta * 100
 	score_label.text = "Score: " + str(score)
 
+	update_difficulty(delta)
+
 	if black_hole_distance < 0:
 		black_hole_distance = 0
 		CameraControl.instance.shake_camera(3.0, 1)
@@ -112,17 +131,13 @@ func _process(delta):
 	space_particles_bg.engine_powered = ship_manager.engine_powered
 
 func update_difficulty(delta: float):
-	if score > 1000 and score <= 2500:
-		difficulty = Difficulty.EASY
-		spawn_timer.wait_time = 12
-	elif score > 5000 and score <= 8000:
-		difficulty = Difficulty.NORMAL
-		spawn_timer.wait_time = 10
-	elif score > 8000 and score <= 14000:
-		difficulty = Difficulty.HARD
-		spawn_timer.wait_time = 8
-	elif score > 14000 and score <= 30000:
-		difficulty = Difficulty.VERY_HARD
-		spawn_timer.wait_time = 6
-	elif score > 30000:
+# 	if score <= 2500:
+# 		spawn_timer.wait_time = 10
+# 	elif score > 5000 and score <= 8000:
+# 		spawn_timer.wait_time = 10
+# 	elif score > 8000 and score <= 14000:
+# 		spawn_timer.wait_time = 9
+# 	elif score > 14000 and score <= 30000:
+# 		spawn_timer.wait_time = 8
+	if score > 40000:
 		spawn_timer.wait_time -= 0.01 * delta
