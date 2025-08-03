@@ -8,7 +8,9 @@ enum AsteroidDirection {N, S, E, W}
 @onready var healthbar = $Healthbar as ProgressBar
 @onready var space_particles_fg = $SpaceParticlesFG as SpaceParticles
 @onready var space_particles_bg = $SpaceParticlesBG as SpaceParticles
-@export var spawn_interval_sec := 1
+@onready var effects_audio_player = $EffectsAudioPlayer as AudioStreamPlayer2D
+
+@export var spawn_interval_sec := 10
 @export var enemy_ship_scene: PackedScene
 @export var asteroid_scene: PackedScene
 @export var ship_manager: ShipManager
@@ -70,13 +72,25 @@ func on_ship_repaired():
 
 func _process(delta):
 	if ship_manager.engine_powered:
-		black_hole_distance += delta * 25
+		black_hole_distance = min(black_hole_distance + delta * 25, 3000.0)
 	else:
-		black_hole_distance -= delta * 50
+		black_hole_distance -= delta * 100
 
 	if black_hole_distance < 0:
 		black_hole_distance = 0
-		healthbar.value = 0
-	
+		CameraControl.instance.shake_camera(3.0, 1)
+
+		# Fade scene to black
+		var fade = ColorRect.new()
+		fade.color = Color.BLACK
+		fade.size = get_viewport().size
+		add_child(fade)
+		fade.modulate.a = 0.0
+		var tween = create_tween()
+		tween.tween_property(fade, "modulate:a", 1.0, 2.0)
+
+		await tween.finished
+		get_tree().change_scene_to_file("res://scenes/game_over.tscn")
+
 	space_particles_fg.engine_powered = ship_manager.engine_powered
 	space_particles_bg.engine_powered = ship_manager.engine_powered
