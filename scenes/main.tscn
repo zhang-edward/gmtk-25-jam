@@ -124,9 +124,10 @@ grow_vertical = 0
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
-[node name="ShipManager" type="Node2D" parent="."]
+[node name="ShipManager" type="Node2D" parent="." node_paths=PackedStringArray("top_screen")]
 position = Vector2(0, 80)
 script = ExtResource("5_tbgi4")
+top_screen = NodePath("../TopScreen")
 
 [node name="ShipSilhouette" type="Sprite2D" parent="ShipManager"]
 position = Vector2(-10, 0)
@@ -461,7 +462,7 @@ visible = false
 position = Vector2(35, 0)
 input_pickable = true
 script = ExtResource("7_tipki")
-ship_part_type = 3
+ship_part_type = 2
 
 [node name="NinePatchRect" type="NinePatchRect" parent="ShipManager/RepairZone"]
 anchors_preset = 8
@@ -496,7 +497,7 @@ visible = false
 position = Vector2(-45, 0)
 input_pickable = true
 script = ExtResource("7_tipki")
-ship_part_type = 3
+ship_part_type = 2
 
 [node name="NinePatchRect" type="NinePatchRect" parent="ShipManager/RepairZone2"]
 anchors_preset = 8
@@ -531,7 +532,7 @@ visible = false
 position = Vector2(0, 40)
 input_pickable = true
 script = ExtResource("7_tipki")
-ship_part_type = 3
+ship_part_type = 2
 
 [node name="NinePatchRect" type="NinePatchRect" parent="ShipManager/RepairZone3"]
 anchors_preset = 8
@@ -566,7 +567,7 @@ visible = false
 position = Vector2(0, -40)
 input_pickable = true
 script = ExtResource("7_tipki")
-ship_part_type = 3
+ship_part_type = 2
 
 [node name="NinePatchRect" type="NinePatchRect" parent="ShipManager/RepairZone4"]
 anchors_preset = 8
@@ -601,7 +602,7 @@ visible = false
 position = Vector2(-30, -60)
 input_pickable = true
 script = ExtResource("7_tipki")
-ship_part_type = 3
+ship_part_type = 2
 
 [node name="NinePatchRect" type="NinePatchRect" parent="ShipManager/RepairZone5"]
 anchors_preset = 8
@@ -636,7 +637,7 @@ visible = false
 position = Vector2(-30, 60)
 input_pickable = true
 script = ExtResource("7_tipki")
-ship_part_type = 3
+ship_part_type = 2
 
 [node name="NinePatchRect" type="NinePatchRect" parent="ShipManager/RepairZone6"]
 anchors_preset = 8
@@ -671,7 +672,7 @@ visible = false
 position = Vector2(70, 15)
 input_pickable = true
 script = ExtResource("7_tipki")
-ship_part_type = 3
+ship_part_type = 2
 
 [node name="NinePatchRect" type="NinePatchRect" parent="ShipManager/RepairZone7"]
 anchors_preset = 8
@@ -706,7 +707,7 @@ visible = false
 position = Vector2(70, -15)
 input_pickable = true
 script = ExtResource("7_tipki")
-ship_part_type = 3
+ship_part_type = 2
 
 [node name="NinePatchRect" type="NinePatchRect" parent="ShipManager/RepairZone8"]
 anchors_preset = 8
@@ -753,6 +754,7 @@ visible = false
 texture = SubResource("CompressedTexture2D_85g3d")
 
 [node name="SpawnAsteroidW" type="Button" parent="."]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -766,6 +768,7 @@ theme_override_font_sizes/font_size = 5
 text = "Spawn Asteroid W"
 
 [node name="SpawnAsteroidE" type="Button" parent="."]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

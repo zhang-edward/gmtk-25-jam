@@ -106,3 +106,8 @@ func confirm_loop():
 	wire_end.position = _completed_line.points[-1]
 	wire_end.z_index = 1
 	_completed_line.add_child(wire_end)
+
+func erase_all_lines():
+	if _completed_line:
+		_completed_line.queue_free()
+	reset_current_line()

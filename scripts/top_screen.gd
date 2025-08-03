@@ -6,7 +6,7 @@ enum AsteroidDirection { N, S, E, W }
 
 @onready var spaceship = $Spaceship as Spaceship
 @onready var healthbar = $Healthbar as ProgressBar
-@export var spawn_interval_sec := 15
+@export var spawn_interval_sec := 10
 @export var enemy_ship_scene: PackedScene
 @export var asteroid_scene: PackedScene
 @export var ship_manager: ShipManager
@@ -22,9 +22,10 @@ func _ready() -> void:
 	timer.autostart = true
 	timer.timeout.connect(generate_random_event)
 	add_child(timer)
-	healthbar.value = 100
+	healthbar.value = 50
 	top_left_pos = Vector2(position.x, position.y)
 	ship_manager.ship_status_changed.connect(on_ship_status_changed)
+	ship_manager.ship_repaired.connect(on_ship_repaired)
 
 func generate_random_event():
 	var rand_num = randi_range(0, 1)
@@ -59,3 +60,6 @@ func generate_asteroid_from_dir(dir: AsteroidDirection):
 	asteroid.top_screen = self
 	add_child(asteroid)
 	asteroid.spawn_from_direction(dir)
+
+func on_ship_repaired():
+	healthbar.value += 25
