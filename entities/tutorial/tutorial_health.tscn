@@ -45,6 +45,7 @@ width = 2.0
 default_color = Color(0, 1, 0, 1)
 
 [node name="RichTextLabel2" type="RichTextLabel" parent="."]
+layout_mode = 0
 offset_left = 34.0
 offset_top = 241.0
 offset_right = 265.0
@@ -52,6 +53,7 @@ offset_bottom = 317.0
 text = "Taking lasers and un-deflected asteroids will decrease your hull integrity"
 
 [node name="RichTextLabel3" type="RichTextLabel" parent="."]
+layout_mode = 0
 offset_left = 315.0
 offset_top = 282.0
 offset_right = 466.0

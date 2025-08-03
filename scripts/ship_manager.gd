@@ -4,7 +4,7 @@ extends Node2D
 const MAX_POWERED_PARTS: int = 3
 
 signal ship_status_changed()
-signal ship_repaired()
+signal ship_repaired(num_repairs)
 
 enum ShipPartDirection {
 	NW = 0,
@@ -90,11 +90,10 @@ func on_loop_closed(powered_ship_parts: Array[ShipPart]) -> void:
 		reset_all_power()
 		for ship_part in powered_ship_parts:
 			on_ship_part_powered(ship_part)
-		if repair_zones_powered.size() == 3:
+		if repair_zones_powered.size() > 0:
 			handle_self_repair()
-		else:
-			ship_status_changed.emit()
-			_loop_drawer.confirm_loop()
+		ship_status_changed.emit()
+		_loop_drawer.confirm_loop()
 			
 func on_ship_part_powered(ship_part: ShipPart) -> void:
 	if ship_part.ship_part_type == ShipPart.ShipPartType.SHIELD:
@@ -111,12 +110,9 @@ func on_ship_part_powered(ship_part: ShipPart) -> void:
 		engine_powered = true
 
 func handle_self_repair():
-	_loop_drawer.erase_all_lines()
-	ship_repaired.emit()
-	if repair_expiry_timer != null:
-		repair_expiry_timer.stop()
-	expire_repair_zones()
-	ship_status_changed.emit()
+	for zone in repair_zones_powered:
+		zone.hide()
+	ship_repaired.emit(repair_zones_powered.size())
 
 func reset_all_power() -> void:
 	repair_zones_powered = []
@@ -151,11 +147,9 @@ func init_random_repair_zones():
 		repair_expiry_timer.timeout.connect(expire_repair_zones)
 		add_child(repair_expiry_timer)
 	else:
-		print("Full HP, checking again in 5-8s")
 		init_gen_repair_zone_timer()
 
 func expire_repair_zones():
-	print("Repair zones expired!")
 	repair_zones_powered = []
 	for zone in all_repair_zones:
 		zone.hide()
@@ -165,7 +159,7 @@ func init_gen_repair_zone_timer():
 	if gen_repair_zone_timer != null and is_instance_valid(gen_repair_zone_timer):
 		gen_repair_zone_timer.queue_free()
 	gen_repair_zone_timer = Timer.new()
-	gen_repair_zone_timer.wait_time = randi_range(5, 8)
+	gen_repair_zone_timer.wait_time = randi_range(4, 8)
 	gen_repair_zone_timer.autostart = true
 	gen_repair_zone_timer.one_shot = true
 	gen_repair_zone_timer.timeout.connect(init_random_repair_zones)

@@ -78,8 +78,9 @@ func generate_asteroid_from_dir(dir: AsteroidDirection):
 	add_child(asteroid)
 	asteroid.spawn_from_direction(dir)
 
-func on_ship_repaired():
-	healthbar.value += 25
+func on_ship_repaired(num_repair_zones):
+	var amt_healed = num_repair_zones * 10
+	healthbar.value += amt_healed
 
 func _process(delta):
 	if ship_manager.engine_powered:

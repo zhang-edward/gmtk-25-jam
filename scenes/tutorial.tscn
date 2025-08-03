@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://biqrsq3tmfwbs"]
+[gd_scene load_steps=13 format=3 uid="uid://biqrsq3tmfwbs"]
 
 [ext_resource type="Script" uid="uid://ca8b4hmy5fgat" path="res://scripts/tutorial.gd" id="1_c13y7"]
 [ext_resource type="PackedScene" uid="uid://cflp2p87jnfjp" path="res://entities/tutorial/tutorial_intro.tscn" id="2_8ho6b"]
@@ -8,8 +8,11 @@
 [ext_resource type="PackedScene" uid="uid://bxlrj0uximpo2" path="res://entities/tutorial/tutorial_enemy_ships.tscn" id="5_cq4me"]
 [ext_resource type="PackedScene" uid="uid://dlkn6xwd54bxv" path="res://entities/tutorial/tutorial_health.tscn" id="7_nlqja"]
 [ext_resource type="PackedScene" uid="uid://ci0yr7rp7t04d" path="res://entities/tutorial/tutorial_black_hole.tscn" id="8_0epgs"]
+[ext_resource type="PackedScene" uid="uid://byq5gsfhi4tb0" path="res://entities/tutorial/tutorial_repairs.tscn" id="8_g2equ"]
 [ext_resource type="PackedScene" uid="uid://chm8ctikprfr1" path="res://entities/tutorial/tutorial_high_score.tscn" id="9_g2equ"]
 [ext_resource type="AudioStream" uid="uid://c8p6csnp70x1p" path="res://music/tutorial.ogg" id="10_0epgs"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0epgs"]
 
 [node name="Tutorial" type="Control"]
 layout_mode = 3
@@ -19,6 +22,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_c13y7")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0epgs")
 
 [node name="Tutorial_Intro" parent="." instance=ExtResource("2_8ho6b")]
 layout_mode = 1
@@ -36,6 +48,9 @@ layout_mode = 1
 layout_mode = 1
 
 [node name="Tutorial_Health" parent="." instance=ExtResource("7_nlqja")]
+layout_mode = 1
+
+[node name="Tutorial_Repairs" parent="." instance=ExtResource("8_g2equ")]
 layout_mode = 1
 
 [node name="Tutorial_Black_Hole" parent="." instance=ExtResource("8_0epgs")]
