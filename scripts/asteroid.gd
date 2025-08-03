@@ -4,6 +4,8 @@ extends Node2D
 @export var textures: Array[Texture2D]
 @onready var sprite = $Sprite2D as Sprite2D
 @onready var area_2d = $Area2D as Area2D
+
+var asteroid_explosion_scene: PackedScene = preload("res://entities/asteroid_explosion.tscn")
 var top_screen: TopScreen
 var tween_pos: Tween
 var curr_direction
@@ -46,11 +48,35 @@ func spawn_from_direction(dir: TopScreen.AsteroidDirection):
 func on_area_entered(other_area: Area2D):
 	if other_area.get_parent() is Shield:
 		if are_required_shields_activated():
-			print("Asteroid deflected!")
+			tween_pos.stop()
+			tween_pos = create_tween()
+			# Generate off-screen position based on current direction
+			var off_screen_pos: Vector2
+			var top_left_pos = top_screen.top_left_pos
+			match curr_direction:
+				TopScreen.AsteroidDirection.N:
+					off_screen_pos = Vector2(global_position.x + randf_range(-100, 100), top_left_pos.y - 100)
+				TopScreen.AsteroidDirection.S:
+					off_screen_pos = Vector2(global_position.x + randf_range(-100, 100), top_left_pos.y + TopScreen.VIEWPORT_HEIGHT + 100)
+				TopScreen.AsteroidDirection.E:
+					off_screen_pos = Vector2(top_left_pos.x + TopScreen.VIEWPORT_WIDTH + 100, global_position.y + randf_range(-100, 100))
+				TopScreen.AsteroidDirection.W:
+					off_screen_pos = Vector2(top_left_pos.x - 100, global_position.y + randf_range(-100, 100))
+			tween_pos.tween_property(self, "global_position", off_screen_pos, 2.0)
+			await tween_pos.finished
 			queue_free()
 	elif other_area.get_parent() is Spaceship:
 		var spaceship = other_area.get_parent() as Spaceship
 		spaceship.take_damage(25)
+
+		var explosion = asteroid_explosion_scene.instantiate() as Node2D
+		explosion.global_position = position
+		get_parent().add_child(explosion)
+		for child in explosion.get_children():
+			var particle = child as CPUParticles2D
+			particle.emitting = true
+		CameraControl.instance.shake_camera(2.0, 0.3)
+
 		queue_free()
 
 func are_required_shields_activated():

@@ -4,6 +4,7 @@ extends Node2D
 @export var projectile_scene: PackedScene
 @export var textures: Array[Texture2D]
 @export var laser_animation: SpriteFrames
+@export var explosion_animation: SpriteFrames
 
 @onready var sprite = $Sprite2D as Sprite2D
 @onready var turret_sprite = %TurretSprite as Sprite2D
@@ -14,6 +15,8 @@ var top_screen: TopScreen
 var direction: TopScreen.EnemyShipDirection
 
 var _turret_target_rotation: float = 0.0
+
+var effect_scene: PackedScene = preload("res://core/effect.tscn")
 
 func _ready() -> void:
 	hide()
@@ -74,6 +77,14 @@ func take_damage(amt: int):
 	if health_bar.value == 0:
 		top_screen.ships_to_direction.erase(direction)
 		queue_free()
+
+		var effect = effect_scene.instantiate()
+		effect.sprite_frames = explosion_animation
+		get_parent().add_child(effect)
+		effect.position = position
+		effect.play()
+		CameraControl.instance.shake_camera(1.0, 0.1)
+
 
 func _bob_tween():
 	var initial_position = sprite.position

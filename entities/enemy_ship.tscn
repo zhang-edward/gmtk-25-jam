@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://g517drv1ral4"]
+[gd_scene load_steps=23 format=3 uid="uid://g517drv1ral4"]
 
 [ext_resource type="PackedScene" path="res://entities/health_bar.tscn" id="1_0dh01"]
 [ext_resource type="Script" uid="uid://chwg3kmdwblyl" path="res://scripts/enemy_ship.gd" id="1_tbr2v"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://caog82n40e1wi" path="res://sprites/circle-8.png" id="4_pbn3c"]
 [ext_resource type="Texture2D" uid="uid://c2u5uv4m5djgi" path="res://sprites/laser.png" id="5_4b82u"]
 [ext_resource type="Texture2D" uid="uid://dmbk5jx7lkwh4" path="res://sprites/enemies/enemy_turret_1.png" id="5_pbn3c"]
+[ext_resource type="Texture2D" uid="uid://yn5poehwmu07" path="res://sprites/explosion.png" id="6_8jy0j"]
 [ext_resource type="AudioStream" uid="uid://yec481yga21t" path="res://sfx/laser.wav" id="8_lttc1"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_8jy0j"]
@@ -19,6 +20,56 @@ animations = [{
 "loop": true,
 "name": &"default",
 "speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ks6kh"]
+atlas = ExtResource("6_8jy0j")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yo6fp"]
+atlas = ExtResource("6_8jy0j")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8cuvy"]
+atlas = ExtResource("6_8jy0j")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_erjg0"]
+atlas = ExtResource("6_8jy0j")
+region = Rect2(192, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_68177"]
+atlas = ExtResource("6_8jy0j")
+region = Rect2(240, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_83y38"]
+atlas = ExtResource("6_8jy0j")
+region = Rect2(288, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ug1y8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ks6kh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yo6fp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8cuvy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_erjg0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_68177")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_83y38")
+}],
+"loop": false,
+"name": &"default",
+"speed": 20.0
 }]
 
 [sub_resource type="Curve" id="Curve_t4kc0"]
@@ -41,6 +92,7 @@ script = ExtResource("1_tbr2v")
 projectile_scene = ExtResource("2_q6noe")
 textures = Array[Texture2D]([ExtResource("3_t4kc0"), ExtResource("4_81f0o")])
 laser_animation = SubResource("SpriteFrames_8jy0j")
+explosion_animation = SubResource("SpriteFrames_ug1y8")
 
 [node name="Healthbar" parent="." instance=ExtResource("1_0dh01")]
 offset_left = -13.0

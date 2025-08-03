@@ -85,7 +85,7 @@ frame_progress = 1.0
 collision_mask = 6
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
-polygon = PackedVector2Array(-25, -30, -9, -29, 7, -21, 20, -8, 27, 5, 30, 16, 30, 24, -25, 24)
+polygon = PackedVector2Array(-24, -23, -10, -23, 3, -17, 15, -2, 21, 9, 25, 18, 26, 24, -25, 24)
 
 [node name="Healthbar" parent="." instance=ExtResource("3_vc80v")]
 offset_left = -21.0

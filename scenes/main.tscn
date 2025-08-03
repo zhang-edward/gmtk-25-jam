@@ -1,8 +1,9 @@
-[gd_scene load_steps=30 format=3 uid="uid://c4pv8emq2w6hy"]
+[gd_scene load_steps=31 format=3 uid="uid://c4pv8emq2w6hy"]
 
 [ext_resource type="Script" uid="uid://vy0s6q4ywn7k" path="res://scripts/game_manager.gd" id="1_tefeu"]
 [ext_resource type="Script" uid="uid://k7cvadgfe155" path="res://scripts/loop_drawer.gd" id="2_o6xl0"]
 [ext_resource type="PackedScene" uid="uid://dtt2mj3xdo8bw" path="res://scenes/top_screen.tscn" id="2_ya4ey"]
+[ext_resource type="Script" uid="uid://cx05vl3wa01ap" path="res://scenes/camera_control.gd" id="4_ya4ey"]
 [ext_resource type="Script" uid="uid://ddiogh2nu387t" path="res://scripts/highlight_on_hover.gd" id="5_eb6dy"]
 [ext_resource type="Script" uid="uid://dyqthfxohiyaq" path="res://scripts/ship_manager.gd" id="5_tbgi4"]
 [ext_resource type="Script" uid="uid://bmcm6wisrfwyy" path="res://scripts/ship_debug_ui.gd" id="6_debug"]
@@ -127,8 +128,8 @@ script = ExtResource("6_debug")
 ship_manager = NodePath("../../ShipManager")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-visible = false
 zoom = Vector2(2, 2)
+script = ExtResource("4_ya4ey")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchors_preset = 7
