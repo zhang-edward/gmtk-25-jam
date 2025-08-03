@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dtt2mj3xdo8bw"]
+[gd_scene load_steps=10 format=3 uid="uid://dtt2mj3xdo8bw"]
 
 [ext_resource type="Script" uid="uid://dtpbvjfgxs3rl" path="res://scripts/top_screen.gd" id="1_ggulp"]
 [ext_resource type="PackedScene" uid="uid://g517drv1ral4" path="res://entities/enemy_ship.tscn" id="2_waoyx"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" path="res://entities/health_bar.tscn" id="4_gpqrb"]
 [ext_resource type="PackedScene" uid="uid://jn4bno1d5h3b" path="res://entities/spaceship.tscn" id="5_u6gjo"]
 [ext_resource type="Script" uid="uid://cyl0xnxd3kprj" path="res://scripts/black_hole_label_warning.gd" id="6_u6gjo"]
+[ext_resource type="FontFile" uid="uid://bmmk220jnjalp" path="res://fonts/fipps.otf" id="7_cudyh"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v7odv"]
 bg_color = Color(0, 0, 0, 1)
@@ -78,10 +79,15 @@ scale_amount_max = 0.7
 script = ExtResource("4_bke16")
 
 [node name="BlackHoleLabelWarning" type="RichTextLabel" parent="."]
-offset_left = 54.0
-offset_right = 140.0
-offset_bottom = 40.0
-text = "100"
+offset_left = 5.0
+offset_top = 137.0
+offset_right = 772.0
+offset_bottom = 197.0
+scale = Vector2(0.3, 0.3)
+theme_override_fonts/normal_font = ExtResource("7_cudyh")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[shake]100"
 script = ExtResource("6_u6gjo")
 
 [node name="EffectsAudioPlayer" type="AudioStreamPlayer2D" parent="."]
