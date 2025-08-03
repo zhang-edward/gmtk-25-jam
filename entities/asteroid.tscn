@@ -1,8 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://bk8w4xnfuw6da"]
+[gd_scene load_steps=7 format=3 uid="uid://bk8w4xnfuw6da"]
 
 [ext_resource type="Script" uid="uid://qx53ie0if3kc" path="res://scripts/asteroid.gd" id="1_ur7k4"]
 [ext_resource type="Texture2D" uid="uid://wb8lwrynxah7" path="res://sprites/asteroid.png" id="2_ur7k4"]
 [ext_resource type="Texture2D" uid="uid://cte08l3nbnddw" path="res://sprites/asteroid_2.png" id="3_mu8y0"]
+[ext_resource type="AudioStream" uid="uid://5dqd1o1dj3uo" path="res://sfx/asteroid_impact.wav" id="4_gsoxu"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_d1jn8"]
+streams_count = 1
+stream_0/stream = ExtResource("4_gsoxu")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rfs68"]
 radius = 9.05539
@@ -10,6 +15,7 @@ radius = 9.05539
 [node name="Asteroid" type="Node2D"]
 script = ExtResource("1_ur7k4")
 textures = Array[Texture2D]([ExtResource("2_ur7k4"), ExtResource("3_mu8y0")])
+impact_sound = SubResource("AudioStreamRandomizer_d1jn8")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_ur7k4")

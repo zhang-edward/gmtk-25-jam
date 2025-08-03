@@ -83,3 +83,5 @@ offset_right = 140.0
 offset_bottom = 40.0
 text = "100"
 script = ExtResource("6_u6gjo")
+
+[node name="EffectsAudioPlayer" type="AudioStreamPlayer2D" parent="."]

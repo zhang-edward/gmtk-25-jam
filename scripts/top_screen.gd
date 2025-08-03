@@ -8,6 +8,8 @@ enum AsteroidDirection {N, S, E, W}
 @onready var healthbar = $Healthbar as ProgressBar
 @onready var space_particles_fg = $SpaceParticlesFG as SpaceParticles
 @onready var space_particles_bg = $SpaceParticlesBG as SpaceParticles
+@onready var effects_audio_player = $EffectsAudioPlayer as AudioStreamPlayer2D
+
 @export var spawn_interval_sec := 1
 @export var enemy_ship_scene: PackedScene
 @export var asteroid_scene: PackedScene

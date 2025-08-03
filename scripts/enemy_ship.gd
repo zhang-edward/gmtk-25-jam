@@ -5,6 +5,7 @@ extends Node2D
 @export var textures: Array[Texture2D]
 @export var laser_animation: SpriteFrames
 @export var explosion_animation: SpriteFrames
+@export var explosion_sound: AudioStream
 
 @onready var sprite = $Sprite2D as Sprite2D
 @onready var turret_sprite = %TurretSprite as Sprite2D
@@ -76,7 +77,6 @@ func take_damage(amt: int):
 	health_bar.value -= amt
 	if health_bar.value == 0:
 		top_screen.ships_to_direction.erase(direction)
-		queue_free()
 
 		var effect = effect_scene.instantiate()
 		effect.sprite_frames = explosion_animation
@@ -84,6 +84,11 @@ func take_damage(amt: int):
 		effect.position = position
 		effect.play()
 		CameraControl.instance.shake_camera(1.0, 0.1)
+
+		top_screen.effects_audio_player.stream = explosion_sound
+		top_screen.effects_audio_player.play()
+
+		queue_free()
 
 
 func _bob_tween():

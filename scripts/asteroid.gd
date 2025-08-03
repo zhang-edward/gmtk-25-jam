@@ -2,6 +2,8 @@ class_name Asteroid
 extends Node2D
 
 @export var textures: Array[Texture2D]
+@export var impact_sound: AudioStream
+
 @onready var sprite = $Sprite2D as Sprite2D
 @onready var area_2d = $Area2D as Area2D
 
@@ -65,6 +67,7 @@ func on_area_entered(other_area: Area2D):
 			tween_pos.tween_property(self, "global_position", off_screen_pos, 2.0)
 			await tween_pos.finished
 			queue_free()
+
 	elif other_area.get_parent() is Spaceship:
 		var spaceship = other_area.get_parent() as Spaceship
 		spaceship.take_damage(25)
@@ -77,6 +80,8 @@ func on_area_entered(other_area: Area2D):
 			particle.emitting = true
 		CameraControl.instance.shake_camera(2.0, 0.3)
 
+		top_screen.effects_audio_player.stream = impact_sound
+		top_screen.effects_audio_player.play()
 		queue_free()
 
 func are_required_shields_activated():
