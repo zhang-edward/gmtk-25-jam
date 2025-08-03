@@ -62,3 +62,5 @@ func set_turret_firing_state(turret_activation_arr):
 
 func take_damage(damage: int):
 	top_screen_ref.healthbar.value -= damage
+	if top_screen_ref.healthbar.value == 0:
+		get_tree().change_scene_to_file("res://scenes/game_over.tscn")

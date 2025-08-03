@@ -1,0 +1,59 @@
+[gd_scene load_steps=5 format=3 uid="uid://dwk0sdpvr3y0b"]
+
+[ext_resource type="Script" uid="uid://c4igijt3w7j8k" path="res://scripts/start.gd" id="1_bodal"]
+[ext_resource type="FontFile" uid="uid://cjg2jgen5anq1" path="res://fonts/spaceline.ttf" id="1_jaeev"]
+[ext_resource type="AudioStream" uid="uid://bhf6ebneasq3j" path="res://music/title.ogg" id="2_u80x2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ewcy1"]
+bg_color = Color(0, 0, 0, 1)
+
+[node name="Start" type="Node2D"]
+script = ExtResource("1_bodal")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="Panel" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ewcy1")
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -147.5
+offset_top = -170.0
+offset_right = 147.5
+offset_bottom = 67.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_jaeev")
+theme_override_font_sizes/font_size = 60
+text = "Cosmic
+Circuit
+Command"
+
+[node name="Button" type="Button" parent="CanvasLayer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -23.0
+offset_top = -140.0
+offset_right = 23.0
+offset_bottom = -109.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("1_jaeev")
+text = "Start"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_u80x2")
+volume_db = -10.0
+autoplay = true
