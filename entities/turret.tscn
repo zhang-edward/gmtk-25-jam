@@ -1,8 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://ccvesh57mibxl"]
+[gd_scene load_steps=5 format=3 uid="uid://dlm05mrrl0qx6"]
 
 [ext_resource type="Script" uid="uid://dxjda4ossfua4" path="res://scripts/turret.gd" id="1_x4r7f"]
 [ext_resource type="PackedScene" uid="uid://bge2rcppyovkc" path="res://entities/projectile.tscn" id="2_odw4x"]
+[ext_resource type="AudioStream" uid="uid://bvqjvvwex34ip" path="res://sfx/shoot_boom.wav" id="3_megvq"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_megvq"]
+streams_count = 1
+stream_0/stream = ExtResource("3_megvq")
 
 [node name="Turret" type="Node2D"]
 script = ExtResource("1_x4r7f")
 projectile_scene = ExtResource("2_odw4x")
+shoot_sound = SubResource("AudioStreamRandomizer_megvq")

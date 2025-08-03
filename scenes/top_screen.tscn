@@ -1,9 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://cp4quj1xdmxj4"]
+[gd_scene load_steps=7 format=3 uid="uid://dtt2mj3xdo8bw"]
 
 [ext_resource type="Script" uid="uid://dtpbvjfgxs3rl" path="res://scripts/top_screen.gd" id="1_ggulp"]
 [ext_resource type="PackedScene" uid="uid://g517drv1ral4" path="res://entities/enemy_ship.tscn" id="2_waoyx"]
 [ext_resource type="PackedScene" uid="uid://bk8w4xnfuw6da" path="res://entities/asteroid.tscn" id="3_pelp5"]
-[ext_resource type="PackedScene" uid="uid://cmdk8fl75lwse" path="res://entities/health_bar.tscn" id="4_gpqrb"]
+[ext_resource type="PackedScene" path="res://entities/health_bar.tscn" id="4_gpqrb"]
 [ext_resource type="PackedScene" uid="uid://jn4bno1d5h3b" path="res://entities/spaceship.tscn" id="5_u6gjo"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v7odv"]
@@ -20,6 +20,22 @@ offset_bottom = 160.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_v7odv")
+
+[node name="SpaceParticlesBG" type="CPUParticles2D" parent="."]
+position = Vector2(240, 80)
+amount = 100
+lifetime = 5.0
+preprocess = 1.0
+speed_scale = 2.0
+emission_shape = 3
+emission_rect_extents = Vector2(0, 80)
+direction = Vector2(-1, 0)
+spread = 0.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 90.4
+initial_velocity_max = 181.31
+scale_amount_min = 0.1
+scale_amount_max = 0.5
 
 [node name="Healthbar" parent="." instance=ExtResource("4_gpqrb")]
 anchors_preset = 3
@@ -39,3 +55,18 @@ size_flags_vertical = 8
 [node name="Spaceship" parent="." node_paths=PackedStringArray("top_screen_ref") instance=ExtResource("5_u6gjo")]
 position = Vector2(120, 80)
 top_screen_ref = NodePath("..")
+
+[node name="SpaceParticlesFG" type="CPUParticles2D" parent="."]
+position = Vector2(240, 80)
+amount = 100
+lifetime = 5.0
+preprocess = 5.0
+emission_shape = 3
+emission_rect_extents = Vector2(0, 80)
+direction = Vector2(-1, 0)
+spread = 0.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 90.4
+initial_velocity_max = 181.31
+scale_amount_min = 0.2
+scale_amount_max = 0.7

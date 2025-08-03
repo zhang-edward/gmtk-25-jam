@@ -1,6 +1,7 @@
 class_name Asteroid
 extends Node2D
 
+@export var textures: Array[Texture2D]
 @onready var sprite = $Sprite2D as Sprite2D
 @onready var area_2d = $Area2D as Area2D
 var top_screen: TopScreen
@@ -12,6 +13,7 @@ func _ready() -> void:
 	area_2d.area_entered.connect(on_area_entered)
 
 func spawn_from_direction(dir: TopScreen.AsteroidDirection):
+	sprite.texture = textures.pick_random()
 	curr_direction = dir
 	var spaceship_pos = top_screen.spaceship.global_position
 	var top_left_pos = top_screen.top_left_pos
@@ -34,7 +36,13 @@ func spawn_from_direction(dir: TopScreen.AsteroidDirection):
 	show()
 	tween_pos = create_tween()
 	tween_pos.tween_property(self, "global_position", end_pos, 5)
+	
+	var rotation_tween = create_tween()
+	rotation_tween.set_loops()
+	var rotation_speed = randf_range(0.5, 3.0)
+	rotation_tween.tween_method(func(angle): sprite.rotation = angle, 0.0, TAU, rotation_speed)
 
+	
 func on_area_entered(other_area: Area2D):
 	if other_area.get_parent() is Shield:
 		if are_required_shields_activated():
