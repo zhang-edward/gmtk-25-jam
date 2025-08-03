@@ -18,7 +18,9 @@ enemy_ship_scene = ExtResource("2_waoyx")
 asteroid_scene = ExtResource("3_pelp5")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
-offset_right = 240.0
+offset_left = -23.0
+offset_top = -20.0
+offset_right = 263.0
 offset_bottom = 160.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -86,7 +88,7 @@ scale = Vector2(0.3, 0.3)
 theme_override_fonts/normal_font = ExtResource("7_cudyh")
 theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
-text = "[shake]100"
+text = "[shake]<-- 100"
 scroll_active = false
 horizontal_alignment = 1
 script = ExtResource("6_u6gjo")
@@ -109,3 +111,12 @@ text = "Score: 0"
 fit_content = true
 
 [node name="EffectsAudioPlayer" type="AudioStreamPlayer2D" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2

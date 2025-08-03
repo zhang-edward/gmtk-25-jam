@@ -66,7 +66,7 @@ animations = [{
 [sub_resource type="Gradient" id="Gradient_jkv2x"]
 interpolation_mode = 2
 offsets = PackedFloat32Array(0, 0.146667, 0.22, 0.546667, 0.62, 0.726667, 0.946667)
-colors = PackedColorArray(0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 0.411765, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0.411765, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_trceg"]
 atlas = SubResource("CompressedTexture2D_o6xl0")
@@ -156,9 +156,9 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -120.0
-offset_right = 120.0
-offset_bottom = 160.0
+offset_left = -141.0
+offset_right = 141.0
+offset_bottom = 171.0
 grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 2
